@@ -439,3 +439,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# MICS restricted data - do not commit raw survey files
+*.sav
+*.dta
+data/raw/
