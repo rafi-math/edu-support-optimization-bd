@@ -5,3 +5,9 @@ This file records where AI tools helped during the project. The human researcher
 | Date | Task | Tool | What AI helped with | What I checked or changed | Status |
 | --- | --- | --- | --- | --- | --- |
 | 2026-10-16 | Repository setup and data loading | Qwen | Suggested `.gitignore` rules, AI log format, and Google Colab code to load `fs.sav` | I reviewed the instructions, applied them in GitHub/Colab, and checked that raw `.sav` files are not committed | Done |
+
+# AI Use Log
+
+| Date | Tool | Task | What AI helped with | Human check / edit | Status |
+|---|---|---|---|---|---|
+| 2026-10-16 | Qwen / Cursor | Project setup and Colab data inspection | Repo structure, README draft, pandas code suggestions | Reviewed MICS constraints, checked output, corrected age-standardization plan | Complete |
