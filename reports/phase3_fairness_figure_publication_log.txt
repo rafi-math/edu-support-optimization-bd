@@ -27,10 +27,8 @@ CAPTURE WOBBLE DIAGNOSTICS
 Seaborn context applied: paper.
 
 SAVED FILES
-  E:\Children Project\edu-support-optimization-bd\results\figures\phase3_fairness_curves_publication.png (808625 bytes)
-  E:\Children Project\edu-support-optimization-bd\results\figures\phase3_fairness_curves_publication.pdf (37307 bytes)
-  E:\Children Project\edu-support-optimization-bd\results\figures\phase3_fairness_curves_publication.svg (143925 bytes)
+  E:\Children Project\edu-support-optimization-bd\results\figures\phase3_fairness_curves_publication.png (834601 bytes)
+  E:\Children Project\edu-support-optimization-bd\results\figures\phase3_fairness_curves_publication.pdf (36058 bytes)
+  E:\Children Project\edu-support-optimization-bd\results\figures\phase3_fairness_curves_publication.svg (142016 bytes)
 
-SEND BACK
-Paste this log and attach the PNG. Keep the PDF/SVG for the paper.
-Do not send data/processed/chattogram_rural_phase3_optimization_input.csv.
+NEXT: open the PNG locally and check panels C and D before republishing.

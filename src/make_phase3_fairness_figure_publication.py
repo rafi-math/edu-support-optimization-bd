@@ -50,16 +50,9 @@ def main():
     c = pd.read_csv(CURVES, low_memory=False)
 
     need = [
-        "curve",
-        "x_floor",
-        "x_share",
-        "young_floor",
-        "girls_floor",
-        "obj_unweighted",
-        "obj_drop_vs_raw",
-        "observed_oos_captured",
-        "capture_drop_vs_raw",
-        "girls_share",
+        "curve", "x_floor", "x_share", "young_floor", "girls_floor",
+        "obj_unweighted", "obj_drop_vs_raw", "observed_oos_captured",
+        "capture_drop_vs_raw", "girls_share",
     ]
 
     missing = [k for k in need if k not in c.columns]
@@ -90,22 +83,14 @@ def main():
     p(f"  y=423: obj={obj_raw_y423:.6f}, captured OOS={cap_raw_y423}")
 
     checks = [
-        (
-            "g0 first obj links to y=0 baseline",
-            abs(float(g0["obj_unweighted"].iloc[0]) - obj_raw_y0) <= 1e-6,
-        ),
-        (
-            "g0 first capture links to y=0 baseline",
-            int(g0["observed_oos_captured"].iloc[0]) == cap_raw_y0,
-        ),
-        (
-            "g423 first obj links to y=423 baseline",
-            abs(float(g423["obj_unweighted"].iloc[0]) - obj_raw_y423) <= 1e-6,
-        ),
-        (
-            "g423 first capture links to y=423 baseline",
-            int(g423["observed_oos_captured"].iloc[0]) == cap_raw_y423,
-        ),
+        ("g0 first obj links to y=0 baseline",
+         abs(float(g0["obj_unweighted"].iloc[0]) - obj_raw_y0) <= 1e-6),
+        ("g0 first capture links to y=0 baseline",
+         int(g0["observed_oos_captured"].iloc[0]) == cap_raw_y0),
+        ("g423 first obj links to y=423 baseline",
+         abs(float(g423["obj_unweighted"].iloc[0]) - obj_raw_y423) <= 1e-6),
+        ("g423 first capture links to y=423 baseline",
+         int(g423["observed_oos_captured"].iloc[0]) == cap_raw_y423),
     ]
 
     p("")
@@ -131,7 +116,6 @@ def main():
     p("")
     p("OBJECTIVE MONOTONICITY CHECKS")
     mono_fail = False
-
     for name, arr in [
         ("young objective drop", young_obj_drop),
         ("girls objective drop at y=0", g0_obj_drop),
@@ -153,35 +137,31 @@ def main():
         ("girls capture drop at y=423", g423_cap_drop),
     ]:
         bad = int((np.diff(arr) < -1e-9).sum())
-        p(
-            f"  {name}: {bad} decrease(s) -> "
-            f"{'smooth' if bad == 0 else 'non-monotone; evaluation metric only'}"
-        )
+        p(f"  {name}: {bad} decrease(s) -> "
+          f"{'smooth' if bad == 0 else 'non-monotone; evaluation metric only'}")
 
-    plt.rcParams.update(
-        {
-            "figure.dpi": 160,
-            "savefig.dpi": 600,
-            "font.family": "sans-serif",
-            "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans"],
-            "axes.titlesize": 10,
-            "axes.labelsize": 9,
-            "xtick.labelsize": 8,
-            "ytick.labelsize": 8,
-            "legend.fontsize": 8,
-            "axes.linewidth": 0.8,
-            "axes.grid": True,
-            "grid.alpha": 0.25,
-            "grid.linestyle": "--",
-            "grid.linewidth": 0.5,
-            "lines.linewidth": 1.8,
-            "lines.markersize": 5,
-            "axes.spines.top": False,
-            "axes.spines.right": False,
-            "xtick.direction": "out",
-            "ytick.direction": "out",
-        }
-    )
+    plt.rcParams.update({
+        "figure.dpi": 160,
+        "savefig.dpi": 600,
+        "font.family": "sans-serif",
+        "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans"],
+        "axes.titlesize": 10,
+        "axes.labelsize": 9,
+        "xtick.labelsize": 8,
+        "ytick.labelsize": 8,
+        "legend.fontsize": 7.5,
+        "axes.linewidth": 0.8,
+        "axes.grid": True,
+        "grid.alpha": 0.25,
+        "grid.linestyle": "--",
+        "grid.linewidth": 0.5,
+        "lines.linewidth": 1.8,
+        "lines.markersize": 5,
+        "axes.spines.top": False,
+        "axes.spines.right": False,
+        "xtick.direction": "out",
+        "ytick.direction": "out",
+    })
 
     if HAVE_SEABORN:
         sns.set_context("paper", font_scale=1.05)
@@ -201,19 +181,15 @@ def main():
     # Panel A: young floor, objective cost.
     ax = axs[0, 0]
     ax.plot(young_x, young_obj_drop, marker="o", color=BLUE)
-
     prop_idx = int(np.argmin(np.abs(young_x - 0.579452)))
     ax.annotate(
         f"proportional young floor\n"
         f"{young_x[prop_idx] * 100:.1f}%, cost {young_obj_drop[prop_idx]:.1f}",
         xy=(young_x[prop_idx], young_obj_drop[prop_idx]),
-        xytext=(-95, -28),
-        textcoords="offset points",
-        fontsize=7,
-        color=GRAY,
+        xytext=(-95, -28), textcoords="offset points",
+        fontsize=7, color=GRAY,
         arrowprops=dict(arrowstyle="->", color=GRAY, linewidth=0.8),
     )
-
     ax.set_xlabel("Selected share aged < 13")
     ax.set_ylabel("Objective drop vs raw")
     ax.set_title("A. Cost of age coverage")
@@ -222,98 +198,66 @@ def main():
     # Panel B: young floor, observed capture cost.
     ax = axs[0, 1]
     ax.plot(young_x, young_cap_drop, marker="s", color=ORANGE)
-
     ax.annotate(
         f"proportional young floor\n"
         f"loss {young_cap_drop[prop_idx]:.0f} observed OOS",
         xy=(young_x[prop_idx], young_cap_drop[prop_idx]),
-        xytext=(-105, -25),
-        textcoords="offset points",
-        fontsize=7,
-        color=GRAY,
+        xytext=(-105, -25), textcoords="offset points",
+        fontsize=7, color=GRAY,
         arrowprops=dict(arrowstyle="->", color=GRAY, linewidth=0.8),
     )
-
     ax.set_xlabel("Selected share aged < 13")
     ax.set_ylabel("Observed OOS not captured")
     ax.set_title("B. Reach cost of age coverage")
 
     # Panel C: girls floor, incremental objective cost.
+    # Reference lines go into the legend, not as rotated in-plot text.
     ax = axs[1, 0]
-    ax.plot(g0_x, g0_obj_drop, marker="o", color=BLUE, label="No young floor")
-    ax.plot(
-        g423_x,
-        g423_obj_drop,
-        marker="^",
-        linestyle="--",
-        color=GREEN,
-        label="Proportional young floor",
-    )
-
-    ax.axvline(0.374415, color=GRAY, linestyle=":", linewidth=0.8)
-    ax.axvline(0.502740, color=GRAY, linestyle="--", linewidth=0.8)
-
-    ax.text(
-        0.374415,
-        ax.get_ylim()[1] * 0.03,
-        "OOS-pool\nparity",
-        rotation=90,
-        va="bottom",
-        ha="right",
-        fontsize=6.5,
-        color=GRAY,
-    )
-    ax.text(
-        0.502740,
-        ax.get_ylim()[1] * 0.03,
-        "population\nparity",
-        rotation=90,
-        va="bottom",
-        ha="left",
-        fontsize=6.5,
-        color=GRAY,
-    )
-
+    ln0, = ax.plot(g0_x, g0_obj_drop, marker="o", color=BLUE)
+    ln423, = ax.plot(g423_x, g423_obj_drop, marker="^", linestyle="--", color=GREEN)
+    vl_pool = ax.axvline(0.374415, color=GRAY, linestyle=":", linewidth=0.8)
+    vl_pop = ax.axvline(0.502740, color=GRAY, linestyle="--", linewidth=0.8)
     ax.set_xlabel("Selected share girls")
     ax.set_ylabel("Incremental objective drop")
     ax.set_title("C. Cost of gender coverage")
-    ax.legend(frameon=False, loc="upper left")
+    ax.legend(
+        handles=[ln0, ln423, vl_pool, vl_pop],
+        labels=[
+            "No young floor",
+            "Proportional young floor",
+            "OOS-pool parity (37.4%)",
+            "Population parity (50.3%)",
+        ],
+        frameon=False, loc="upper left",
+    )
     ax.set_ylim(bottom=0)
 
     # Panel D: girls floor, incremental observed capture cost.
     ax = axs[1, 1]
-    ax.plot(g0_x, g0_cap_drop, marker="o", color=BLUE, label="No young floor")
-    ax.plot(
-        g423_x,
-        g423_cap_drop,
-        marker="^",
-        linestyle="--",
-        color=GREEN,
-        label="Proportional young floor",
-    )
-
-    ax.axvline(0.374415, color=GRAY, linestyle=":", linewidth=0.8)
-    ax.axvline(0.502740, color=GRAY, linestyle="--", linewidth=0.8)
-
+    ln0d, = ax.plot(g0_x, g0_cap_drop, marker="o", color=BLUE)
+    ln423d, = ax.plot(g423_x, g423_cap_drop, marker="^", linestyle="--", color=GREEN)
+    vl_pool_d = ax.axvline(0.374415, color=GRAY, linestyle=":", linewidth=0.8)
+    vl_pop_d = ax.axvline(0.502740, color=GRAY, linestyle="--", linewidth=0.8)
     ax.set_xlabel("Selected share girls")
     ax.set_ylabel("Incremental observed OOS not captured")
     ax.set_title("D. Reach cost of gender coverage")
-    ax.legend(frameon=False, loc="upper left")
+    ax.legend(
+        handles=[ln0d, ln423d, vl_pool_d, vl_pop_d],
+        labels=[
+            "No young floor",
+            "Proportional young floor",
+            "OOS-pool parity (37.4%)",
+            "Population parity (50.3%)",
+        ],
+        frameon=False, loc="upper left",
+    )
 
     fig.suptitle(
-        "Price of fairness constraints, rural Chattogram ages 6–17",
-        fontsize=11,
-        fontweight="bold",
+        "Price of fairness constraints, rural Chattogram ages 6-17",
+        fontsize=11, fontweight="bold",
     )
 
-    fig.text(
-        0.01,
-        0.004,
-        "K = 730. Objective = sum of out-of-fold risk scores. "
-        "Observed out-of-school counts are evaluation only.",
-        fontsize=7,
-        color=GRAY,
-    )
+    # No in-figure footer line: the HTML page carries that caption.
 
     fig.savefig(PNG, dpi=600, bbox_inches="tight")
     fig.savefig(PDF, bbox_inches="tight")
@@ -326,12 +270,9 @@ def main():
         p(f"  {f.resolve()} ({os.path.getsize(f)} bytes)")
 
     p("")
-    p("SEND BACK")
-    p("Paste this log and attach the PNG. Keep the PDF/SVG for the paper.")
-    p("Do not send data/processed/chattogram_rural_phase3_optimization_input.csv.")
+    p("NEXT: open the PNG locally and check panels C and D before republishing.")
 
     LOG.write_text("\n".join(lines), encoding="utf-8")
-
     p("")
     p(f"LOG SAVED: {LOG.resolve()}")
 
