@@ -1,0 +1,109 @@
+================================================================================
+RAW PROVENANCE CHECK V3
+================================================================================
+RAW FILE: E:\Children Project\edu-support-optimization-bd\data\raw\fs.sav
+PHASE 2 FILE: E:\Children Project\edu-support-optimization-bd\data\processed\chattogram_rural_phase2_input.csv
+RAW SHAPE: (40617, 268)
+PHASE 2 SHAPE: (4891, 15)
+MISSING RAW COLUMNS: none
+MISSING PHASE 2 COLUMNS: none
+
+CANDIDATE FILTER COUNTS
+--------------------------------------------------------------------------------
+Phase 2 rows: 4891
+A_rural_Chattogram_age6_17_valid_CB7: 4891
+B_A_plus_FS17_completed: 4863
+C_A_plus_positive_fsweight: 4863
+D_B_plus_positive_fsweight: 4863
+
+POSITIONAL COMPARISONS
+--------------------------------------------------------------------------------
+
+CANDIDATE: A_rural_Chattogram_age6_17_valid_CB7
+--------------------------------------------------------------------------------
+Raw candidate rows: 4891
+Phase 2 rows: 4891
+Length match: True
+age: 4891/4891 (100.00%)
+_band: 4891/4891 (100.00%)
+female: 4891/4891 (100.00%)
+Out_of_School: 4891/4891 (100.00%)
+_group vs PSU: 4891/4891 (100.00%)
+_group vs HH1: 4891/4891 (100.00%)
+FSWEIGHT vs fsweight zero->NaN: 1846/4891 (37.74%)
+FSWEIGHT vs fshweight zero->NaN: 4891/4891 (100.00%)
+FSWEIGHT vs fsweight raw: 1818/4891 (37.17%)
+FSWEIGHT vs fshweight raw: 4863/4891 (99.43%)
+wealth_q vs windex5 zero->NaN: 4891/4891 (100.00%)
+wealth_q vs windex5 raw: 4863/4891 (99.43%)
+mom_edu vs melevel raw: 4891/4891 (100.00%)
+mom_edu vs melevel 9->0: 4891/4891 (100.00%)
+mom_edu vs melevel 9/NaN->0: 4891/4891 (100.00%)
+mom_edu vs melevel NaN->0: 4891/4891 (100.00%)
+eth_minor vs ethnicity other: 4891/4891 (100.00%)
+disabled vs fsdisability has difficulty: 4891/4891 (100.00%)
+worked vs CL1A: 4891/4891 (100.00%)
+worked vs CL1X: 4447/4891 (90.92%)
+worked vs CL1A or CL1X: 4743/4891 (96.97%)
+books_missing vs PR3 none: 285/4891 (5.83%)
+books_missing vs PR3 none, NaN->1: 1906/4891 (38.97%)
+books_missing vs PR3 none, NaN->0: 285/4891 (5.83%)
+worked vs CL3 > 0: 357/4891 (7.30%)
+wealth_q vs windex5r zero->NaN: 3527/4891 (72.11%)
+wealth_q vs windex5u zero->NaN: 28/4891 (0.57%)
+
+GROUP SET CHECKS
+_group_PSU unique count: 421
+Phase _group unique count: 421
+_group_PSU exact set match: True
+_group_HH1 unique count: 421
+Phase _group unique count: 421
+_group_HH1 exact set match: True
+
+CANDIDATE: B_A_plus_FS17_completed
+--------------------------------------------------------------------------------
+Raw candidate rows: 4863
+Phase 2 rows: 4891
+Length match: False
+Skipping positional comparison because lengths differ.
+
+CANDIDATE: C_A_plus_positive_fsweight
+--------------------------------------------------------------------------------
+Raw candidate rows: 4863
+Phase 2 rows: 4891
+Length match: False
+Skipping positional comparison because lengths differ.
+
+CANDIDATE: D_B_plus_positive_fsweight
+--------------------------------------------------------------------------------
+Raw candidate rows: 4863
+Phase 2 rows: 4891
+Length match: False
+Skipping positional comparison because lengths differ.
+
+VERDICT
+--------------------------------------------------------------------------------
+PROVENANCE STATUS: PASS
+Passing candidate filters:
+- A_rural_Chattogram_age6_17_valid_CB7
+
+Interpretation: the Phase 2 file appears to be traceable to raw fs.sav under one of the candidate filters above, with row order preserved.
+
+BEST WEIGHT CANDIDATE
+Best match: FSWEIGHT vs fshweight zero->NaN
+In candidate: A_rural_Chattogram_age6_17_valid_CB7
+Match: 100.00%
+
+TRANSFORMATION RULES STILL NEEDING CONFIRMATION
+- A_rural_Chattogram_age6_17_valid_CB7 | wealth_q vs windex5 raw: 99.43%
+- A_rural_Chattogram_age6_17_valid_CB7 | worked vs CL1X: 90.92%
+- A_rural_Chattogram_age6_17_valid_CB7 | worked vs CL1A or CL1X: 96.97%
+- A_rural_Chattogram_age6_17_valid_CB7 | worked vs CL3 > 0: 7.30%
+- A_rural_Chattogram_age6_17_valid_CB7 | books_missing vs PR3 none: 5.83%
+- A_rural_Chattogram_age6_17_valid_CB7 | books_missing vs PR3 none, NaN->1: 38.97%
+- A_rural_Chattogram_age6_17_valid_CB7 | books_missing vs PR3 none, NaN->0: 5.83%
+
+NEXT ACTION AFTER YOU SEND THIS REPORT
+--------------------------------------------------------------------------------
+If PASS: attach original HH1/HH2/LN/PSU IDs to Phase 2, document the weight rule, decide how to handle zero-weight rows, then run the optimization dry run.
+If PARTIAL/FAIL: rebuild the Phase 2 input from raw fs.sav with original IDs and verified transformations before final modeling.

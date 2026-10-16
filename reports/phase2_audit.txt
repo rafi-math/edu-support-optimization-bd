@@ -1,0 +1,260 @@
+================================================================================
+PHASE 2 INPUT AUDIT
+================================================================================
+PATH: E:\Children Project\edu-support-optimization-bd\data\processed\chattogram_rural_phase2_input.csv
+SHAPE: (4891, 15)
+MISSING EXPECTED COLUMNS: none
+EXTRA COLUMNS: none
+
+DUPLICATES AND ID CHECK
+--------------------------------------------------------------------------------
+Full duplicate rows: 0
+sid missing: 0
+sid unique: 4891
+sid duplicate entries: 0
+sid min/max: 0 / 4890
+sid looks like a reset integer index: True
+WARNING: sid is probably not an original MICS identifier.
+This file can still be used for a local dry run, but final reproducibility needs original IDs.
+
+AGE CHECK
+--------------------------------------------------------------------------------
+age missing: 0
+age min/max: 6 / 17
+rows with age outside 6-17: 0
+age == 9 count: 380
+Note: age 9 is a valid child age. Do not recode it as missing.
+
+age value counts:
+age
+6.0     394
+7.0     469
+8.0     421
+9.0     380
+10.0    380
+11.0    380
+12.0    409
+13.0    411
+14.0    420
+15.0    400
+16.0    427
+17.0    400
+
+AGE BAND CHECK
+--------------------------------------------------------------------------------
+_band value counts:
+_band
+6-9      1664
+13-15    1231
+10-12    1169
+16-17     827
+
+BINARY AND TARGET CHECKS
+--------------------------------------------------------------------------------
+female: missing=0, unique=[0.0, 1.0]
+female
+0.0    2433
+1.0    2458
+
+eth_minor: missing=0, unique=[0.0, 1.0]
+eth_minor
+0.0    4267
+1.0     624
+
+disabled: missing=28, unique=[0.0, 1.0]
+disabled
+0.0    4489
+1.0     374
+NaN      28
+
+worked: missing=2, unique=[0.0, 1.0]
+worked
+0.0    4511
+1.0     378
+NaN       2
+
+books_missing: missing=0, unique=[0, 1]
+books_missing
+0    3270
+1    1621
+
+Out_of_School: missing=0, unique=[0, 1]
+Out_of_School
+0    4244
+1     647
+
+ORDINAL CHECKS
+--------------------------------------------------------------------------------
+wealth_q: missing=28, min=1, max=5
+wealth_q
+1.0    1390
+2.0     767
+3.0    1066
+4.0     941
+5.0     699
+NaN      28
+
+mom_edu: missing=0, min=0, max=3
+mom_edu
+0.0    1479
+1.0    1259
+2.0    1917
+3.0     236
+
+wealth_q == 0 count: 0
+In raw MICS wealth index, 0 can mean missing/unclassified. Flag if present.
+
+RISK SCORE CHECKS
+--------------------------------------------------------------------------------
+risk_score missing: 0
+risk_score min/max: 0.000674779 / 0.803227
+risk_score outside [0, 1]: 0
+risk_std missing: 0
+risk_std non-finite: 0
+risk_std min/max: -1.99767 / 5.45221
+Note: risk_std appears to be a standardized score, so negative values are expected.
+
+WEIGHT CHECKS
+--------------------------------------------------------------------------------
+FSWEIGHT missing: 28
+FSWEIGHT <= 0: 0
+FSWEIGHT min/max: 0.140975 / 2.77818
+FSWEIGHT sum: 5149.89
+
+FSWEIGHT unique sample:
+[0.1824376  0.24019997 0.16680009 0.92877321 0.19902283 0.22263571
+ 0.24585173 0.30416697 0.26121747 0.26904938 0.17271522 0.20914264
+ 0.14097451 0.17540995 0.15512074 0.18215649 0.20233988 0.18113314
+ 0.19564956 0.22019547]
+
+Rows usable for weighted rate: 4863
+Weighted out-of-school rate: 0.133995
+Unweighted out-of-school rate: 0.132284
+Unweighted out-of-school count: 647
+
+GROUP / PSU CANDIDATE CHECK
+--------------------------------------------------------------------------------
+_group missing: 0
+_group unique: 421
+_group min/max: 311 / 860
+
+_group value counts, first 20:
+_group
+485.0    17
+558.0    17
+575.0    17
+737.0    17
+738.0    17
+800.0    17
+807.0    17
+368.0    16
+477.0    16
+494.0    16
+497.0    16
+564.0    16
+587.0    16
+663.0    16
+675.0    16
+784.0    16
+799.0    16
+847.0    16
+348.0    15
+371.0    15
+CANDIDATE PASS: _group has many repeated values and may be PSU.
+This still needs confirmation against the raw fs.sav PSU variable.
+
+MISSING VALUE SUMMARY
+--------------------------------------------------------------------------------
+sid               0
+risk_score        0
+risk_std          0
+female            0
+age               0
+_band             0
+wealth_q         28
+mom_edu           0
+eth_minor         0
+disabled         28
+worked            2
+books_missing     0
+Out_of_School     0
+FSWEIGHT         28
+_group            0
+
+MISSING OVERLAP
+--------------------------------------------------------------------------------
+FSWEIGHT missing: 28
+wealth_q missing: 28
+disabled missing: 28
+worked missing: 2
+
+FSWEIGHT missing and wealth_q missing: 28
+FSWEIGHT missing and disabled missing: 28
+FSWEIGHT missing and worked missing: 0
+wealth_q missing and disabled missing: 28
+Rows missing any critical optimization field: 28
+
+CODED-MISSING SCAN
+--------------------------------------------------------------------------------
+sid: {9: 1, 99: 1, 999: 1}  # sid values can be valid if unique
+age: {9: 380}  # age 9 is valid
+
+WEIGHTED SEGMENT SUMMARY
+--------------------------------------------------------------------------------
+
+By _band:
+group  n_all  n_oos  unweighted_rate  weighted_n_all  weighted_n_oos  weighted_rate
+10-12   1169     71         0.060736     1230.386553       75.663597       0.061496
+13-15   1231    230         0.186840     1278.645218      237.042851       0.185386
+16-17    827    312         0.377267      904.233072      343.007357       0.379335
+  6-9   1664     34         0.020433     1736.625207       34.347007       0.019778
+
+By female:
+ group  n_all  n_oos  unweighted_rate  weighted_n_all  weighted_n_oos  weighted_rate
+   0.0   2433    405         0.166461     2558.033724      428.093452       0.167353
+   1.0   2458    242         0.098454     2591.856326      261.967359       0.101073
+
+By disabled:
+ group  n_all  n_oos  unweighted_rate  weighted_n_all  weighted_n_oos  weighted_rate
+   0.0   4489    589         0.131210     4619.555812      619.457827       0.134095
+   1.0    374     52         0.139037      530.334238       70.602984       0.133129
+   NaN     28      6         0.214286             NaN             NaN            NaN
+
+By worked:
+ group  n_all  n_oos  unweighted_rate  weighted_n_all  weighted_n_oos  weighted_rate
+   0.0   4511    536         0.118821     4863.675819      602.083178       0.123792
+   1.0    378    111         0.293651      283.940500       87.977633       0.309845
+   NaN      2      0         0.000000        2.273731        0.000000       0.000000
+
+By books_missing:
+ group  n_all  n_oos  unweighted_rate  weighted_n_all  weighted_n_oos  weighted_rate
+     0   3270    231         0.070642     3394.236296      237.123366       0.069861
+     1   1621    416         0.256632     1755.653754      452.937445       0.257988
+
+By wealth_q:
+ group  n_all  n_oos  unweighted_rate  weighted_n_all  weighted_n_oos  weighted_rate
+   1.0   1390    246         0.176978     1047.397514      198.781194       0.189786
+   2.0    767    131         0.170795      869.567553      155.735454       0.179095
+   3.0   1066    138         0.129456     1248.439112      177.667802       0.142312
+   4.0    941     80         0.085016     1113.060924       94.790119       0.085162
+   5.0    699     46         0.065808      871.424947       63.086242       0.072394
+   NaN     28      6         0.214286             NaN             NaN            NaN
+
+VERDICT
+--------------------------------------------------------------------------------
+STRUCTURAL STATUS: PASS
+
+WARNINGS
+- FSWEIGHT missing in 28 rows.
+- sid is synthetic/reset index, not original MICS traceability.
+- HH6 and HH7 are absent, so rural Chattogram filtering cannot be verified from this CSV alone.
+
+FINAL OPTIMIZATION READY: NO
+Blockers:
+- missing FSWEIGHT
+- no original MICS IDs
+- geography provenance not present in file
+
+LOCAL DRY RUN READY: YES, after the next cleaning/provenance step
+
+END OF AUDIT

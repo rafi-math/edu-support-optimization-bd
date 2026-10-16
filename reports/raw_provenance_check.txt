@@ -1,0 +1,9 @@
+================================================================================
+RAW PROVENANCE CHECK
+================================================================================
+RAW FILE: E:\Children Project\edu-support-optimization-bd\data\raw\fs.sav
+RAW SHAPE: (40617, 268)
+MISSING REQUIRED RAW COLUMNS: ['FSWEIGHT']
+
+Cannot complete full provenance check because required raw columns are missing.
+Send this report back.

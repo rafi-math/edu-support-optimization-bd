@@ -1,0 +1,86 @@
+================================================================================
+PHASE 3 FAIRNESS GRID (SciPy HiGHS, proven optimal, interrupt-safe)
+================================================================================
+INPUT: E:\Children Project\edu-support-optimization-bd\data\processed\chattogram_rural_phase3_optimization_input.csv
+Input shape: (4861, 31); missing columns: none
+
+SETUP
+--------------------------------------------------------------------------------
+n=4861, K=730, observed OOS=641, weighted OOS mass=1470.9555
+young floor grid=[0, 73, 146, 243, 423], proportional young=423
+girls floor grid=[0, 146, 292, 367], proportional girls=367
+solver: mip_rel_gap=0.0, mip_abs_gap=1e-12, time_limit=60.0s
+
+SELF-CHECK (SciPy objective vs in-script greedy reference, girls=0)
+--------------------------------------------------------------------------------
+Gate is on SUM OBJ (the objective). Capture is a tie diagnostic only.
+Expected greedy objectives (must match earlier greedy report):
+  unweighted y0/y73/y423 = 325.663745 / 318.084313 / 222.022851
+  weighted   y0/y73/y423 = 835.475663 / 833.698418 / 656.653056
+unweighted y_min=0: greedy_obj=325.663744984 cap=332 | scipy_obj=325.663744984 cap=332 [same] | proven=True -> OK
+unweighted y_min=73: greedy_obj=318.084313348 cap=320 | scipy_obj=318.084313348 cap=319 [DIFFERS by -1 (tie in obj)] | proven=True -> OK
+unweighted y_min=423: greedy_obj=222.022850863 cap=219 | scipy_obj=222.022850863 cap=219 [same] | proven=True -> OK
+weighted y_min=0: greedy_obj=835.475662724 cap=289 | scipy_obj=835.475662724 cap=289 [same] | proven=True -> OK
+weighted y_min=73: greedy_obj=833.698417523 cap=290 | scipy_obj=833.698417523 cap=290 [same] | proven=True -> OK
+weighted y_min=423: greedy_obj=656.653056335 cap=202 | scipy_obj=656.653056335 cap=202 [same] | proven=True -> OK
+SELF-CHECK: PASS
+
+Saved grid (aggregate only): E:\Children Project\edu-support-optimization-bd\results\phase3_fairness_grid.csv
+Cells present: 40/40
+Cells proven optimal: 40/40
+
+PIVOT 1 - unweighted: observed OOS captured
+--------------------------------------------------------------------------------
+girls_floor  0    146  292  367
+young_floor                    
+0            332  332  329  320
+73           319  319  312  313
+146          308  308  302  291
+243          291  291  278  272
+423          219  219  216  213
+
+PIVOT 2 - unweighted: girls share of selected
+--------------------------------------------------------------------------------
+girls_floor     0       146  292     367
+young_floor                             
+0            0.2904  0.2904  0.4  0.5027
+73           0.2507  0.2507  0.4  0.5027
+146          0.2288  0.2288  0.4  0.5027
+243          0.2425  0.2425  0.4  0.5027
+423          0.2342  0.2342  0.4  0.5027
+
+PIVOT 3 - weighted (sensitivity): observed OOS captured
+--------------------------------------------------------------------------------
+girls_floor  0    146  292  367
+young_floor                    
+0            289  289  289  285
+73           290  290  288  280
+146          276  276  268  261
+243          251  251  251  234
+423          202  202  197  193
+
+PIVOT 4 - weighted (sensitivity): girls share of selected
+--------------------------------------------------------------------------------
+girls_floor     0       146  292     367
+young_floor                             
+0            0.3507  0.3507  0.4  0.5027
+73           0.3384  0.3384  0.4  0.5027
+146          0.3205  0.3205  0.4  0.5027
+243          0.3055  0.3055  0.4  0.5027
+423          0.3082  0.3082  0.4  0.5027
+
+PRICE OF THE GIRLS FLOOR (unweighted, young_floor = proportional)
+--------------------------------------------------------------------------------
+ girls_floor  captured_oos  capture_drop_vs_g0  girls_share  poorest_share
+           0           219                   0       0.2342         0.5616
+         146           219                   0       0.2342         0.5616
+         292           216                   3       0.4000         0.5644
+         367           213                   6       0.5027         0.5712
+(baseline at g=0: captured=219)
+
+VERDICT
+--------------------------------------------------------------------------------
+FAIRNESS GRID STATUS: PASS (all cells proven optimal, self-check passed)
+
+SEND BACK: reports/phase3_fairness_grid.txt and results/phase3_fairness_grid.csv.
+Do not send data/processed/chattogram_rural_phase3_optimization_input.csv.

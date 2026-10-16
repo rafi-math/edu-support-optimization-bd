@@ -1,0 +1,284 @@
+================================================================================
+PHASE 3 OPTIMIZATION INPUT BUILD AND AUDIT
+================================================================================
+INPUT: E:\Children Project\edu-support-optimization-bd\data\processed\chattogram_rural_phase3_scored.csv
+OUTPUT: E:\Children Project\edu-support-optimization-bd\data\processed\chattogram_rural_phase3_optimization_input.csv
+REPORT: E:\Children Project\edu-support-optimization-bd\reports\phase3_optimization_input_audit.txt
+
+INPUT CHECK
+--------------------------------------------------------------------------------
+Scored input shape: (4861, 40)
+Rows before modeling_ready filter: 4861
+Rows after modeling_ready filter: 4861
+Missing required input columns: none
+
+CREATE TRACEABLE IDs AND PRIORITY SCORES
+--------------------------------------------------------------------------------
+Added columns:
+- child_uid
+- risk_pct_overall
+- risk_z_within_age
+- risk_pct_within_age
+
+SELECT OPTIMIZATION COLUMNS
+--------------------------------------------------------------------------------
+Output columns: 31
+['child_uid', 'HH1', 'HH2', 'LN', 'PSU', 'stratum', 'HH6', 'HH7', 'HH7A', 'CB3', 'CB7', 'HL4', 'FS17', 'age', '_band', 'female', 'wealth_q', 'mom_edu', 'eth_minor', 'disabled', 'worked', 'books_missing_data', 'no_books', 'Out_of_School', 'child_weight_fsweight', 'normalized_weight_fshweight', 'risk_score_oof', 'risk_pct_overall', 'risk_z_within_age', 'risk_pct_within_age', 'risk_model']
+
+CRITICAL COMPLETENESS CHECK
+--------------------------------------------------------------------------------
+Critical columns present: ['child_uid', 'HH1', 'HH2', 'LN', 'PSU', 'stratum', 'age', '_band', 'female', 'Out_of_School', 'child_weight_fsweight', 'normalized_weight_fshweight', 'risk_score_oof']
+Critical columns absent: none
+
+Missing values in critical columns:
+child_uid                      0
+HH1                            0
+HH2                            0
+LN                             0
+PSU                            0
+stratum                        0
+age                            0
+_band                          0
+female                         0
+Out_of_School                  0
+child_weight_fsweight          0
+normalized_weight_fshweight    0
+risk_score_oof                 0
+
+DUPLICATE AND ID CHECK
+--------------------------------------------------------------------------------
+Rows: 4861
+Unique child_uid: 4861
+Duplicate child_uid: 0
+Full duplicate rows: 0
+Unique PSU: 421
+
+TARGET AND BINARY CHECKS
+--------------------------------------------------------------------------------
+female: missing=0, unique=[0.0, 1.0]
+female
+0.0    2415
+1.0    2446
+
+Out_of_School: missing=0, unique=[0.0, 1.0]
+Out_of_School
+0.0    4220
+1.0     641
+
+Rows with invalid Out_of_School: 0
+Rows with invalid female: 0
+
+AGE CHECK
+--------------------------------------------------------------------------------
+age min/max: 6 / 17
+rows outside 6-17: 0
+age value counts:
+age
+6     394
+7     469
+8     418
+9     376
+10    379
+11    377
+12    403
+13    402
+14    416
+15    400
+16    427
+17    400
+
+_band value counts:
+_band
+6-9      1657
+13-15    1218
+10-12    1159
+16-17     827
+
+WEIGHT CHECKS
+--------------------------------------------------------------------------------
+child_weight_fsweight: missing=0, zero=0, negative=0, positive=4861, min=0.1409745055188872, max=14.28778376699203, sum=10130.566535413529
+normalized_weight_fshweight: missing=0, zero=0, negative=0, positive=4861, min=0.1409745055188872, max=2.778180176915116, sum=5147.616318856961
+
+Effective sample size, child_weight_fsweight: 3142.60
+Effective sample size, normalized_weight_fshweight: 3928.01
+
+RISK SCORE CHECKS
+--------------------------------------------------------------------------------
+risk_score_oof: missing=0, finite=4861/4861
+risk_score_oof min/max: 0.000874 / 0.797609
+risk_score_oof outside [0,1]: 0
+
+risk_pct_overall min/max: 0.000206 / 1.000000
+risk_z_within_age min/max: -2.166211 / 4.058655
+risk_pct_within_age min/max: 0.002132 / 1.000000
+
+risk_score_oof distribution:
+count    4861.000000
+mean        0.132123
+std         0.156807
+min         0.000874
+5%          0.004588
+25%         0.017765
+50%         0.063018
+75%         0.195292
+90%         0.374273
+95%         0.481499
+99%         0.643179
+max         0.797609
+
+WEIGHTED OUT-OF-SCHOOL RATE
+--------------------------------------------------------------------------------
+Unweighted OOS rate: 0.131866
+child_weight_fsweight weighted OOS rate: 0.145200, usable rows=4861
+normalized_weight_fshweight weighted OOS rate: 0.134054, usable rows=4861
+
+TOP SELECTION DIAGNOSTICS
+================================================================================
+
+TOP 15% BY RAW RISK SCORE
+--------------------------------------------------------------------------------
+Requested n_top: 730
+Actual top rows: 730
+n_selected: 730
+selected_share: 0.150175
+total_observed_out_of_school: 641
+captured_observed_out_of_school: 332
+unweighted_capture_rate: 0.517941
+weighted_capture_rate_child_weight: 0.514165
+mean_risk_selected: 0.446115
+mean_risk_not_selected: 0.076637
+
+Composition of selected children:
+
+By _band:
+       selected_count  selected_share_percent  population_count  population_share_percent
+_band                                                                                    
+10-12               1                    0.14              1159                     23.84
+13-15             226                   30.96              1218                     25.06
+16-17             503                   68.90               827                     17.01
+
+By female:
+        selected_count  selected_share_percent  population_count  population_share_percent
+female                                                                                    
+0.0                518                   70.96              2415                     49.68
+1.0                212                   29.04              2446                     50.32
+
+By wealth_q:
+          selected_count  selected_share_percent  population_count  population_share_percent
+wealth_q                                                                                    
+1.0                  306                   41.92              1390                     28.59
+2.0                  177                   24.25               767                     15.78
+3.0                  162                   22.19              1065                     21.91
+4.0                   70                    9.59               940                     19.34
+5.0                   15                    2.05               699                     14.38
+
+By eth_minor:
+           selected_count  selected_share_percent  population_count  population_share_percent
+eth_minor                                                                                    
+0.0                   651                   89.18              4250                     87.43
+1.0                    79                   10.82               611                     12.57
+
+By disabled:
+          selected_count  selected_share_percent  population_count  population_share_percent
+disabled                                                                                    
+0.0                  665                    91.1              4487                     92.31
+1.0                   65                     8.9               374                      7.69
+
+By worked:
+        selected_count  selected_share_percent  population_count  population_share_percent
+worked                                                                                    
+0.0                559                   76.58              4487                     92.31
+1.0                171                   23.42               374                      7.69
+
+Observed out-of-school among selected: 332
+Observed out-of-school rate among selected: 0.454795
+
+TOP 15% BY AGE-STANDARDIZED RISK PERCENTILE
+--------------------------------------------------------------------------------
+Requested n_top: 730
+Actual top rows: 730
+n_selected: 730
+selected_share: 0.150175
+total_observed_out_of_school: 641
+captured_observed_out_of_school: 182
+unweighted_capture_rate: 0.283931
+weighted_capture_rate_child_weight: 0.283976
+mean_risk_selected: 0.249103
+mean_risk_not_selected: 0.111451
+
+Composition of selected children:
+
+By _band:
+       selected_count  selected_share_percent  population_count  population_share_percent
+_band                                                                                    
+10-12             176                   24.11              1159                     23.84
+13-15             183                   25.07              1218                     25.06
+16-17             123                   16.85               827                     17.01
+6-9               248                   33.97              1657                     34.09
+
+By female:
+        selected_count  selected_share_percent  population_count  population_share_percent
+female                                                                                    
+0.0                648                   88.77              2415                     49.68
+1.0                 82                   11.23              2446                     50.32
+
+By wealth_q:
+          selected_count  selected_share_percent  population_count  population_share_percent
+wealth_q                                                                                    
+1.0                  525                   71.92              1390                     28.59
+2.0                  160                   21.92               767                     15.78
+3.0                   45                    6.16              1065                     21.91
+
+By eth_minor:
+           selected_count  selected_share_percent  population_count  population_share_percent
+eth_minor                                                                                    
+0.0                   648                   88.77              4250                     87.43
+1.0                    82                   11.23               611                     12.57
+
+By disabled:
+          selected_count  selected_share_percent  population_count  population_share_percent
+disabled                                                                                    
+0.0                  666                   91.23              4487                     92.31
+1.0                   64                    8.77               374                      7.69
+
+By worked:
+        selected_count  selected_share_percent  population_count  population_share_percent
+worked                                                                                    
+0.0                556                   76.16              4487                     92.31
+1.0                174                   23.84               374                      7.69
+
+Observed out-of-school among selected: 182
+Observed out-of-school rate among selected: 0.249315
+
+RAW VS AGE-STANDARDIZED OVERLAP
+--------------------------------------------------------------------------------
+Top raw count: 730
+Top age-standardized count: 730
+Overlap count: 253
+Overlap share of top raw: 0.346575
+Overlap share of top age-standardized: 0.346575
+
+SAVE OUTPUT
+--------------------------------------------------------------------------------
+Saved optimization input: E:\Children Project\edu-support-optimization-bd\data\processed\chattogram_rural_phase3_optimization_input.csv
+Output shape: (4861, 31)
+Do not commit this file. It contains child-level survey identifiers and scores.
+
+VERDICT
+--------------------------------------------------------------------------------
+OPTIMIZATION INPUT STATUS: PASS
+All critical fields are complete, IDs are unique, weights are positive, and risk scores are finite.
+
+Important interpretation:
+- risk_score_oof is a probability-like out-of-fold score and can be used for expected-reach MILP.
+- risk_z_within_age is a within-age standardized score. It can be negative and is not a probability.
+- risk_pct_within_age is a within-age percentile. It is useful for age-balanced ranking diagnostics.
+- Do not use Out_of_School as a model input or optimization decision variable. It is for evaluation only.
+- child_weight_fsweight is the provisional primary weight. normalized_weight_fshweight is for sensitivity only.
+
+NEXT STEP AFTER THIS REPORT
+--------------------------------------------------------------------------------
+1. Send reports/phase3_optimization_input_audit.txt.
+2. If PASS, install a working MILP solver.
+3. Run a small budgeted selection MILP using risk_score_oof.
+4. Compare raw-risk selection against age-standardized selection and young-floor constraints.

@@ -1,0 +1,106 @@
+y_min,f_min,feasible,solver_rc,total_impact,oos_captured,young_selected,young_oos_captured,girls_selected,girl_share,n_selected,impact_drop_vs_baseline
+0,0,True,"solver: HiGHS
+status: Optimal (1)
+has solution: True
+objective: 329.386434896696
+best bound: 329.3864348966953
+gap: 0.0000%
+time: 0.0518s (cpu 0.0469s)",329.3864,332,2,0,220,0.2997,734,0.0
+0,150,True,"solver: HiGHS
+status: Optimal (1)
+has solution: True
+objective: 329.386434896696
+best bound: 329.38643489669573
+gap: 0.0000%
+time: 1.5605s (cpu 1.5000s)",329.3864,332,2,0,220,0.2997,734,0.0
+0,240,True,"solver: HiGHS
+status: Optimal (1)
+has solution: True
+objective: 329.13595341797964
+best bound: 329.13595341797935
+gap: 0.0000%
+time: 3.1080s (cpu 2.2344s)",329.136,328,1,0,240,0.327,734,0.2505
+0,279,True,"solver: HiGHS
+status: Optimal (1)
+has solution: True
+objective: 327.17683286110116
+best bound: 327.1768328611008
+gap: 0.0000%
+time: 1.4050s (cpu 1.4219s)",327.1768,329,0,0,279,0.3801,734,2.2096
+0,320,True,"solver: HiGHS
+status: Optimal (1)
+has solution: True
+objective: 323.46161846634476
+best bound: 323.46161846634436
+gap: 0.0000%
+time: 1.3463s (cpu 1.3750s)",323.4616,326,0,0,320,0.436,734,5.9248
+0,367,True,"solver: HiGHS
+status: Optimal (1)
+has solution: True
+objective: 317.2764904825493
+best bound: 317.2764904825488
+gap: 0.0000%
+time: 1.3721s (cpu 1.3750s)",317.2765,317,0,0,367,0.5,734,12.1099
+20,0,True,"solver: HiGHS
+status: Optimal (1)
+has solution: True
+objective: 328.55288126536493
+best bound: 328.55288126536465
+gap: 0.0000%
+time: 1.7157s (cpu 1.7188s)",328.5529,329,20,4,210,0.2861,734,0.8336
+40,0,True,"solver: HiGHS
+status: Optimal (1)
+has solution: True
+objective: 326.40083249326676
+best bound: 326.4008324932664
+gap: 0.0000%
+time: 1.9079s (cpu 1.9375s)",326.4008,328,40,9,200,0.2725,734,2.9856
+40,279,True,"solver: HiGHS
+status: Optimal (1)
+has solution: True
+objective: 323.2125898725929
+best bound: 323.2125898725925
+gap: 0.0000%
+time: 2.5034s (cpu 2.4375s)",323.2126,324,40,6,279,0.3801,734,6.1738
+40,367,True,"solver: HiGHS
+status: Optimal (1)
+has solution: True
+objective: 313.67388675839
+best bound: 313.6738867583896
+gap: 0.0000%
+time: 2.2854s (cpu 2.2344s)",313.6739,312,40,4,367,0.5,734,15.7125
+60,0,True,"solver: HiGHS
+status: Optimal (1)
+has solution: True
+objective: 323.7463484037686
+best bound: 323.7463484037682
+gap: 0.0000%
+time: 1.8019s (cpu 1.7969s)",323.7463,323,60,10,192,0.2616,734,5.6401
+80,0,True,"solver: HiGHS
+status: Optimal (1)
+has solution: True
+objective: 320.52808417877714
+best bound: 320.52808417877674
+gap: 0.0000%
+time: 1.8946s (cpu 1.8906s)",320.5281,319,80,11,187,0.2548,734,8.8584
+80,279,True,"solver: HiGHS
+status: Optimal (1)
+has solution: True
+objective: 316.9811221947766
+best bound: 316.9811221947762
+gap: 0.0000%
+time: 2.2556s (cpu 2.2031s)",316.9811,314,80,13,279,0.3801,734,12.4053
+80,367,True,"solver: HiGHS
+status: Optimal (1)
+has solution: True
+objective: 308.0951482244897
+best bound: 308.09514822448944
+gap: 0.0000%
+time: 2.3240s (cpu 2.2812s)",308.0951,309,80,9,367,0.5,734,21.2913
+100,0,True,"solver: HiGHS
+status: Optimal (1)
+has solution: True
+objective: 316.95413962763075
+best bound: 316.9541396276303
+gap: 0.0000%
+time: 1.9253s (cpu 1.9062s)",316.9541,315,100,16,182,0.248,734,12.4323

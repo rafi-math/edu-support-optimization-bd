@@ -1,0 +1,63 @@
+================================================================================
+TRAINING CODE SEARCH
+================================================================================
+ROOT: E:\Children Project\edu-support-optimization-bd
+REPORT: E:\Children Project\edu-support-optimization-bd\reports\training_code_search.txt
+
+This search ignores data folders, reports, results, .venv, .git,
+and the broad audit/check scripts we already ran.
+It looks only for likely model-training, weighting, books-feature,
+risk-score, and Phase 2 export code.
+
+FILES SCANNED: 8
+
+SUMMARY
+--------------------------------------------------------------------------------
+
+src\03_optimization.py
+  risk: 1
+  export: 2
+
+src\04_fairness_sweep.py
+  risk: 1
+  export: 2
+
+src\audit_phase2_input.py
+  risk: 17
+  weight: 18
+  books: 4
+  export: 1
+
+MATCH EXAMPLES
+--------------------------------------------------------------------------------
+[export] src\03_optimization.py:7: DATA = Path("data/processed/chattogram_rural_phase2_input.csv")
+[export] src\03_optimization.py:108: res.to_csv(RESULTS / "phase2_step1_young_floor.csv", index=False)
+[risk] src\03_optimization.py:58: R = df["risk_score"].to_numpy(float)
+[export] src\04_fairness_sweep.py:6: DATA = Path("data/processed/chattogram_rural_phase2_input.csv")
+[export] src\04_fairness_sweep.py:87: full.to_csv(RESULTS / "phase2_fairness_sweep.csv", index=False)
+[risk] src\04_fairness_sweep.py:13: R = df["risk_score"].to_numpy(float)
+[books] src\audit_phase2_input.py:19: "books_missing",
+[books] src\audit_phase2_input.py:41: "books_missing",
+[books] src\audit_phase2_input.py:346: elif col in ["female", "disabled", "worked", "eth_minor", "books_missing"] and 9 in hits:
+[books] src\audit_phase2_input.py:363: "books_missing",
+[export] src\audit_phase2_input.py:70: default="data/processed/chattogram_rural_phase2_input.csv",
+[risk] src\audit_phase2_input.py:9: "risk_score",
+[risk] src\audit_phase2_input.py:10: "risk_std",
+[risk] src\audit_phase2_input.py:27: "risk_score",
+[risk] src\audit_phase2_input.py:28: "risk_std",
+[risk] src\audit_phase2_input.py:208: risk_score = as_num(df["risk_score"])
+[weight] src\audit_phase2_input.py:21: "FSWEIGHT",
+[weight] src\audit_phase2_input.py:32: "FSWEIGHT",
+[weight] src\audit_phase2_input.py:224: weight = as_num(df["FSWEIGHT"])
+[weight] src\audit_phase2_input.py:227: p(f"FSWEIGHT missing: {int(weight.isna().sum())}")
+[weight] src\audit_phase2_input.py:228: p(f"FSWEIGHT <= 0: {int((weight <= 0).sum())}")
+
+HOW TO READ THIS
+--------------------------------------------------------------------------------
+If training matches include sample_weight, the model probably used weights.
+If weight matches show fshweight or the Phase 2 FSWEIGHT column, the risk score
+may need revalidation using raw fsweight.
+If books matches show PR3.isna(), books_missing is a missing-data flag,
+not a no-books flag.
+If no training matches are found, the next step is to copy the model-training
+cells from Google Colab.

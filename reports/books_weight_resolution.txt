@@ -1,0 +1,142 @@
+================================================================================
+BOOKS_MISSING AND WEIGHT RESOLUTION
+================================================================================
+FS FILE: E:\Children Project\edu-support-optimization-bd\data\raw\fs.sav
+HH FILE: E:\Children Project\edu-support-optimization-bd\data\raw\hh.sav
+PHASE 2 FILE: E:\Children Project\edu-support-optimization-bd\data\processed\chattogram_rural_phase2_input.csv
+FS SHAPE: (40617, 20)
+PHASE 2 SHAPE: (4891, 15)
+MISSING FS COLUMNS: none
+MISSING PHASE 2 COLUMNS: none
+
+BASE SAMPLE
+--------------------------------------------------------------------------------
+Rural Chattogram age 6-17 valid CB7 rows: 4891
+Phase 2 rows: 4891
+Length match: True
+
+DETERMINISTIC FIELD CHECKS
+--------------------------------------------------------------------------------
+age: 4891/4891 (100.00%)
+_band: 4891/4891 (100.00%)
+female: 4891/4891 (100.00%)
+Out_of_School: 4891/4891 (100.00%)
+_group vs PSU: 4891/4891 (100.00%)
+wealth_q vs windex5 zero->NaN: 4891/4891 (100.00%)
+mom_edu vs melevel raw: 4891/4891 (100.00%)
+eth_minor vs ethnicity other: 4891/4891 (100.00%)
+disabled vs fsdisability has difficulty: 4891/4891 (100.00%)
+worked vs CL1A: 4891/4891 (100.00%)
+
+BOOKS_MISSING INVESTIGATION
+--------------------------------------------------------------------------------
+PR3 value counts in base:
+PR3
+0.0     2985
+1.0      109
+2.0       79
+3.0       44
+4.0       14
+5.0       10
+6.0        9
+7.0        6
+8.0        1
+10.0      13
+NaN     1621
+
+Phase 2 books_missing value counts:
+books_missing
+0    3270
+1    1621
+
+PR3 missing or 99: 1621
+PR3 valid: 3270
+PR3 == 0 among valid: 2985
+PR3 > 0 among valid: 285
+Phase books_missing == 1: 1621
+Phase books_missing == 0: 3270
+books_missing = PR3 missing or 99: 4891/4891 (100.00%)
+books_missing = PR3 == 0, missing -> NaN: 285/4891 (5.83%)
+books_missing = PR3 == 0, missing -> 0: 285/4891 (5.83%)
+books_missing = PR3 == 0, missing -> 1: 1906/4891 (38.97%)
+books_missing = PR3 in {0, 99}, NaN -> 0: 285/4891 (5.83%)
+books_missing = PR3 missing/99 or PR3 == 0: 1906/4891 (38.97%)
+books_missing = NOT has_books, missing -> NaN: 2985/4891 (61.03%)
+books_missing = NOT has_books, missing -> 0: 2985/4891 (61.03%)
+books_missing = NOT has_books, missing -> 1: 4606/4891 (94.17%)
+books_missing = PR3 missing/9/99: 4891/4891 (100.00%)
+books_missing = PR3 == 0, missing/9/99 -> 1: 1906/4891 (38.97%)
+
+Best books_missing rule:
+books_missing = PR3 missing or 99: 4891/4891 (100.00%)
+
+BOOKS STATUS: A simple PR3 rule reproduces Phase 2 books_missing.
+
+WEIGHT INVESTIGATION
+--------------------------------------------------------------------------------
+base fsweight: missing=0, zero=28, positive=4863, sum=10134.3
+base fshweight: missing=0, zero=28, positive=4863, sum=5149.89
+phase FSWEIGHT: missing=28, zero=0, positive=4863, sum=5149.89
+
+Weighted out-of-school rates in base:
+Unweighted OOS rate: 0.132284
+fsweight-weighted OOS rate: 0.145147, usable rows=4863
+fshweight-weighted OOS rate: 0.133995, usable rows=4863
+
+Effective sample size:
+fsweight ESS: 3144.04
+fshweight ESS: 3929.88
+
+Relationship between fshweight and fsweight:
+fshweight / fsweight where both positive: n=4863, min=0.111111, p25=0.5, median=0.5, p75=1, max=1, mean=0.640533, sd=0.288331
+Correlation between positive fsweight and fshweight: 0.673657
+
+Phase 2 weight column check:
+Phase FSWEIGHT vs fsweight zero->NaN: 1846/4891 (37.74%)
+Phase FSWEIGHT vs fshweight zero->NaN: 4891/4891 (100.00%)
+
+HOUSEHOLD WEIGHT CONTEXT
+--------------------------------------------------------------------------------
+HH SHAPE: (64400, 3)
+MISSING HH COLUMNS: none
+Duplicate household keys in hh.sav: 0
+
+Children per household key in base:
+max children per household in base: 1
+households with more than one base row: 0
+
+Weight ratios against household weight, positive weights only:
+fsweight / hhweight: n=4863, min=0.97766, p25=1.00959, median=1.97635, p75=2.17812, max=8.85178, mean=1.9869, sd=0.992344
+fshweight / hhweight: n=4863, min=0.97766, p25=0.983532, median=0.99232, p75=1.03938, max=1.08906, mean=1.0162, sd=0.0403744
+
+Interpretation:
+- If fshweight / hhweight is tight near 1, fshweight behaves like a household-normalized weight.
+- If fsweight / hhweight is more variable, fsweight may be the child population expansion weight.
+- This is internal evidence, not official codebook verification.
+
+VERDICT
+--------------------------------------------------------------------------------
+Sample provenance: PASS
+Deterministic fields: PASS
+Weight column name: MISLEADING
+The Phase 2 column named FSWEIGHT matches raw fshweight, not raw fsweight.
+Books feature status: PASS
+
+Provisional weight recommendation:
+- Use raw lowercase fsweight as the primary child-level weight if the MICS codebook/project rule confirms it.
+- Treat fshweight as a normalized or household-like weight unless documentation says otherwise.
+- Do not finalize optimization using the current Phase 2 FSWEIGHT column until the weight choice is documented.
+- If the risk scores were trained using the current FSWEIGHT column, retrain or rerun model evaluation after switching to the verified weight.
+
+NEXT STEP AFTER THIS REPORT
+--------------------------------------------------------------------------------
+1. Document the verified books_missing rule.
+2. Decide primary weight: likely fsweight, with fshweight only as sensitivity.
+3. Rebuild a final optimization-ready file with original HH1/HH2/LN/PSU IDs.
+4. Retrain or revalidate risk scores using the verified weight.
+5. Only then run the budgeted selection and fairness sweep.
+
+SEND BACK
+--------------------------------------------------------------------------------
+Send reports/books_weight_resolution.txt.
+Do not send raw child records.

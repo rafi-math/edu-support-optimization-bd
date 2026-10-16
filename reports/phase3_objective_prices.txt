@@ -1,0 +1,79 @@
+======================================================================
+PHASE 3 OBJECTIVE PRICES AND INTERACTION
+======================================================================
+rows=40; proven_optimal True=40
+
+CROSS-CHECK (y, g=0) vs independent greedy reference
+----------------------------------------------------------------------
+unweighted y=0: grid=325.663745 greedy=325.663745 -> OK
+unweighted y=73: grid=318.084313 greedy=318.084313 -> OK
+unweighted y=146: grid=304.270078 greedy=304.270078 -> OK
+unweighted y=243: grid=280.045189 greedy=280.045189 -> OK
+unweighted y=423: grid=222.022851 greedy=222.022851 -> OK
+weighted y=0: grid=835.475663 greedy=835.475663 -> OK
+weighted y=73: grid=833.698418 greedy=833.698418 -> OK
+weighted y=146: grid=817.442884 greedy=817.442884 -> OK
+weighted y=243: grid=777.302153 greedy=777.302153 -> OK
+weighted y=423: grid=656.653056 greedy=656.653056 -> OK
+
+MONOTONICITY INTEGRITY CHECK
+----------------------------------------------------------------------
+unweighted: PASS (non-increasing in both floors)
+weighted: PASS (non-increasing in both floors)
+
+YOUNG PRICE CURVE, unweighted (girls_floor=0)
+----------------------------------------------------------------------
+ young_floor  obj_unweighted  drop_vs_first  drop_per_unit
+           0      325.663745       0.000000            NaN
+          73      318.084313       7.579432       0.103828
+         146      304.270078      21.393667       0.189236
+         243      280.045189      45.618556       0.249741
+         423      222.022851     103.640894       0.322346
+
+GIRLS PRICE CURVE, unweighted (young_floor=0)
+----------------------------------------------------------------------
+ girls_floor  obj_unweighted  drop_vs_first  drop_per_unit
+           0      325.663745       0.000000            NaN
+         146      325.663745       0.000000       0.000000
+         292      322.039208       3.624537       0.024826
+         367      312.749944      12.913801       0.123857
+
+GIRLS PRICE CURVE, unweighted (young_floor=423)
+----------------------------------------------------------------------
+ girls_floor  obj_unweighted  drop_vs_first  drop_per_unit
+           0      222.022851       0.000000            NaN
+         146      222.022851       0.000000       0.000000
+         292      219.226754       2.796097       0.019151
+         367      214.849502       7.173349       0.058363
+
+YOUNG PRICE CURVE, weighted (girls_floor=0)
+----------------------------------------------------------------------
+ young_floor  obj_weighted  drop_vs_first  drop_per_unit
+           0    835.475663       0.000000            NaN
+          73    833.698418       1.777245       0.024346
+         146    817.442884      18.032779       0.222679
+         243    777.302153      58.173510       0.413822
+         423    656.653056     178.822606       0.670273
+
+GIRLS PRICE CURVE, weighted (young_floor=0)
+----------------------------------------------------------------------
+ girls_floor  obj_weighted  drop_vs_first  drop_per_unit
+           0    835.475663       0.000000            NaN
+         146    835.475663       0.000000       0.000000
+         292    833.781196       1.694467       0.011606
+         367    819.244513      16.231150       0.193822
+
+GIRLS PRICE CURVE, weighted (young_floor=423)
+----------------------------------------------------------------------
+ girls_floor  obj_weighted  drop_vs_first  drop_per_unit
+           0    656.653056       0.000000            NaN
+         146    656.653056       0.000000       0.000000
+         292    654.342533       2.310523       0.015826
+         367    646.016677      10.636379       0.111011
+
+2x2 INTERACTION IN OBJECTIVE UNITS
+----------------------------------------------------------------------
+unweighted: young_cost=103.640894 girls_cost=12.913801 both_cost=110.814243 interaction=-5.740452 (subadditive)
+weighted: young_cost=178.822606 girls_cost=16.231150 both_cost=189.458986 interaction=-5.594770 (subadditive)
+
+SEND BACK: reports/phase3_objective_prices.txt

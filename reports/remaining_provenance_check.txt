@@ -1,0 +1,135 @@
+================================================================================
+REMAINING PROVENANCE CHECK
+================================================================================
+FS FILE: E:\Children Project\edu-support-optimization-bd\data\raw\fs.sav
+HH FILE: E:\Children Project\edu-support-optimization-bd\data\raw\hh.sav
+PHASE 2 FILE: E:\Children Project\edu-support-optimization-bd\data\processed\chattogram_rural_phase2_input.csv
+FS SHAPE: (40617, 10)
+PHASE 2 SHAPE: (4891, 15)
+MISSING FS COLUMNS: none
+MISSING PHASE 2 COLUMNS FOR THIS CHECK: ['PR3']
+
+BASE SAMPLE
+--------------------------------------------------------------------------------
+Rural Chattogram age 6-17 valid CB7 rows: 4891
+Phase 2 rows: 4891
+Length match: True
+
+WEIGHT SOURCE CHECK
+--------------------------------------------------------------------------------
+base fsweight: missing=0, zero=28, positive=4863
+base fshweight: missing=0, zero=28, positive=4863
+phase FSWEIGHT: missing=28, zero=0, positive=4863
+
+Crosstab FS17 completed vs fsweight zero in base:
+fsweight_zero   False  True 
+FS17_completed              
+False               0     28
+True             4863      0
+
+Crosstab FS17 completed vs fshweight zero in base:
+fshweight_zero  False  True 
+FS17_completed              
+False               0     28
+True             4863      0
+
+Phase 2 missing-weight rows by FS17:
+phase_FSWEIGHT_missing  False  True 
+FS17                                
+1.0                      4863      0
+4.0                         0     28
+
+HOUSEHOLD-LEVEL WEIGHT STRUCTURE
+--------------------------------------------------------------------------------
+HH SHAPE: (64400, 4)
+MISSING HH COLUMNS: none
+Duplicate household keys in hh.sav: 0
+
+All households in fs.sav
+--------------------------------------------------------------------------------
+Households: 40617
+Households with hhweight available: 40617
+Households with more than one fs.sav row: 0
+Share of households where fshweight is constant: 1.0000
+Share of households where fsweight is constant: 1.0000
+Median max |fshweight - hhweight|: 0.0127297
+Median max |fsweight - hhweight|: 0.316639
+Median |sum(fsweight) - hhweight|: 0.316639
+Median |sum(fshweight) - hhweight|: 0.0127297
+Share households where fshweight equals hhweight closely: 0.0000
+Share households where fsweight equals hhweight closely: 0.0000
+Share households where sum(fsweight) equals hhweight closely: 0.0080
+Share households where sum(fshweight) equals hhweight closely: 0.0114
+
+Ratio summary:
+       ratio_sum_fs_to_hh  ratio_sum_fsh_to_hh  ratio_fs_mean_to_hh_over_n
+count        40617.000000         40617.000000                40617.000000
+mean             1.651739             0.975746                    1.651739
+std              0.885609             0.174610                    0.885609
+min              0.000000             0.000000                    0.000000
+25%              0.997127             0.984397                    0.997127
+50%              1.085030             0.998795                    1.085030
+75%              2.026140             1.016603                    2.026140
+max              9.846491             1.112961                    9.846491
+
+Interpretation guide:
+- If fshweight is constant within household and equals hhweight, fshweight behaves like a household weight.
+- If fsweight varies within household and sum(fsweight) equals hhweight, fsweight behaves like a child-level weight.
+- If both behave like child weights, compare which one sums to plausible population counts and which one the codebook names as final child weight.
+
+Households represented in rural Chattogram base
+--------------------------------------------------------------------------------
+Households: 4891
+Households with hhweight available: 4891
+Households with more than one fs.sav row: 0
+Share of households where fshweight is constant: 1.0000
+Share of households where fsweight is constant: 1.0000
+Median max |fshweight - hhweight|: 0.0192867
+Median max |fsweight - hhweight|: 0.679463
+Median |sum(fsweight) - hhweight|: 0.679463
+Median |sum(fshweight) - hhweight|: 0.0192867
+Share households where fshweight equals hhweight closely: 0.0000
+Share households where fsweight equals hhweight closely: 0.0000
+Share households where sum(fsweight) equals hhweight closely: 0.0000
+Share households where sum(fshweight) equals hhweight closely: 0.0000
+
+Ratio summary:
+       ratio_sum_fs_to_hh  ratio_sum_fsh_to_hh  ratio_fs_mean_to_hh_over_n
+count         4891.000000          4891.000000                 4891.000000
+mean             1.975528             1.010381                    1.975528
+std              1.000791             0.086602                    1.000791
+min              0.000000             0.000000                    0.000000
+25%              1.009587             0.983532                    1.009587
+50%              1.967063             0.992320                    1.967063
+75%              2.178118             1.039382                    2.178118
+max              8.851784             1.089059                    8.851784
+
+Interpretation guide:
+- If fshweight is constant within household and equals hhweight, fshweight behaves like a household weight.
+- If fsweight varies within household and sum(fsweight) equals hhweight, fsweight behaves like a child-level weight.
+- If both behave like child weights, compare which one sums to plausible population counts and which one the codebook names as final child weight.
+
+BOOKS_MISSING CHECK
+--------------------------------------------------------------------------------
+PR3 not available in loaded fs columns.
+
+VERDICT
+--------------------------------------------------------------------------------
+Structural provenance: PASS
+Sample filter: PASS
+Target, age, sex, band, group: PASS
+Weight column name: MISLEADING
+The Phase 2 column named FSWEIGHT matches raw fshweight zero->NaN, not raw fsweight.
+
+Household weight evidence in base households:
+fshweight constant share: 1.0000
+fshweight equals hhweight closely: 0.0000
+sum(fsweight) equals hhweight closely: 0.0000
+
+TENTATIVE WEIGHT FINDING: household evidence is not decisive from this check alone.
+Send the full report; the next step may be to inspect MICS documentation or the original Colab weight-selection code.
+
+SEND BACK
+--------------------------------------------------------------------------------
+Send reports/remaining_provenance_check.txt.
+Do not send raw child records.

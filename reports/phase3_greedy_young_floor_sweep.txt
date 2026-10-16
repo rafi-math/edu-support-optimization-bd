@@ -1,0 +1,181 @@
+================================================================================
+PHASE 3 GREEDY YOUNG-FLOOR SWEEP
+================================================================================
+INPUT: E:\Children Project\edu-support-optimization-bd\data\processed\chattogram_rural_phase3_optimization_input.csv
+REPORT: E:\Children Project\edu-support-optimization-bd\reports\phase3_greedy_young_floor_sweep.txt
+AGGREGATE CSV: E:\Children Project\edu-support-optimization-bd\results\phase3_greedy_young_floor_sweep.csv
+
+Input shape: (4861, 31)
+Missing required columns: none
+
+Missing values in required columns:
+child_uid                0
+age                      0
+_band                    0
+female                   0
+wealth_q                 0
+Out_of_School            0
+child_weight_fsweight    0
+risk_score_oof           0
+PSU                      0
+
+PROBLEM SETUP
+--------------------------------------------------------------------------------
+Modeling-ready rows: 4861
+Selection fraction: 15.00%
+Number to select, K: 730
+Observed out-of-school children: 641
+Unweighted out-of-school rate: 0.131866
+Total child weight: 10130.566535
+Total weighted out-of-school mass: 1470.955495
+Young population, age <= 12: 2816 (57.9305%)
+Girls population: 2446 (50.3189%)
+Poorest quintile population: 1390 (28.5949%)
+Proportional young floor: 423
+Maximum possible young floor: 730
+
+Young-floor scenarios to run:
+[0, 36, 73, 110, 146, 182, 243, 365, 423, 438, 511]
+
+METHOD
+--------------------------------------------------------------------------------
+This is not a PuLP MILP run.
+It is an exact greedy solution for the unit-count young-floor problem.
+It avoids the PuLP 4.0.1 API incompatibility.
+It will be replaced by a true MILP only when constraints become more complex,
+for example real costs, PSU caps, population-weighted budgets, or multiple floors.
+
+RUNNING SCENARIOS
+--------------------------------------------------------------------------------
+max_unweighted_risk, y_min=0: young=1, captured_oos=332, risk_sum=325.6637
+max_unweighted_risk, y_min=36: young=36, captured_oos=328, risk_sum=323.1778
+max_unweighted_risk, y_min=73: young=73, captured_oos=320, risk_sum=318.0843
+max_unweighted_risk, y_min=110: young=110, captured_oos=316, risk_sum=311.5825
+max_unweighted_risk, y_min=146: young=146, captured_oos=308, risk_sum=304.2701
+max_unweighted_risk, y_min=182: young=182, captured_oos=302, risk_sum=295.8298
+max_unweighted_risk, y_min=243: young=243, captured_oos=291, risk_sum=280.0452
+max_unweighted_risk, y_min=365: young=365, captured_oos=254, risk_sum=243.0575
+max_unweighted_risk, y_min=423: young=423, captured_oos=219, risk_sum=222.0229
+max_unweighted_risk, y_min=438: young=438, captured_oos=212, risk_sum=216.2799
+max_unweighted_risk, y_min=511: young=511, captured_oos=183, risk_sum=186.5286
+max_weighted_risk, y_min=0: young=48, captured_oos=289, risk_sum=266.9298
+max_weighted_risk, y_min=36: young=48, captured_oos=289, risk_sum=266.9298
+max_weighted_risk, y_min=73: young=73, captured_oos=290, risk_sum=262.4358
+max_weighted_risk, y_min=110: young=110, captured_oos=282, risk_sum=255.6936
+max_weighted_risk, y_min=146: young=146, captured_oos=276, risk_sum=247.6703
+max_weighted_risk, y_min=182: young=182, captured_oos=269, risk_sum=239.1658
+max_weighted_risk, y_min=243: young=243, captured_oos=251, risk_sum=223.2906
+max_weighted_risk, y_min=365: young=365, captured_oos=216, risk_sum=189.8070
+max_weighted_risk, y_min=423: young=423, captured_oos=202, risk_sum=175.0192
+max_weighted_risk, y_min=438: young=438, captured_oos=197, risk_sum=170.8810
+max_weighted_risk, y_min=511: young=511, captured_oos=163, risk_sum=145.8599
+top_age_standardized_percentile, y_min=0: young=424, captured_oos=182, risk_sum=181.8455
+
+AGGREGATE RESULTS
+--------------------------------------------------------------------------------
+                           rule  y_min               status  selected_n  young_selected  young_share_selected  girls_share_selected  poorest_share_selected  observed_oos_captured  unweighted_capture_rate  weighted_capture_rate  risk_sum_selected  weighted_risk_sum_selected  weighted_population_share_selected
+            max_unweighted_risk      0 Optimal_greedy_exact         730               1              0.001370              0.290411                0.419178                    332                 0.517941               0.514165         325.663745                  681.131836                            0.151079
+            max_unweighted_risk     36 Optimal_greedy_exact         730              36              0.049315              0.267123                0.438356                    328                 0.511700               0.517044         323.177849                  676.128010                            0.151532
+            max_unweighted_risk     73 Optimal_greedy_exact         730              73              0.100000              0.250685                0.467123                    320                 0.499220               0.506882         318.084313                  665.621734                            0.151560
+            max_unweighted_risk    110 Optimal_greedy_exact         730             110              0.150685              0.239726                0.480822                    316                 0.492980               0.500509         311.582519                  654.973475                            0.153053
+            max_unweighted_risk    146 Optimal_greedy_exact         730             146              0.200000              0.228767                0.497260                    308                 0.480499               0.482447         304.270078                  634.317944                            0.151574
+            max_unweighted_risk    182 Optimal_greedy_exact         730             182              0.249315              0.234247                0.500000                    302                 0.471139               0.471560         295.829839                  612.587000                            0.150340
+            max_unweighted_risk    243 Optimal_greedy_exact         730             243              0.332877              0.242466                0.520548                    291                 0.453978               0.463112         280.045189                  585.308762                            0.152381
+            max_unweighted_risk    365 Optimal_greedy_exact         730             365              0.500000              0.230137                0.547945                    254                 0.396256               0.415776         243.057511                  513.318769                            0.153997
+            max_unweighted_risk    423 Optimal_greedy_exact         730             423              0.579452              0.234247                0.561644                    219                 0.341654               0.354059         222.022851                  459.864494                            0.151488
+            max_unweighted_risk    438 Optimal_greedy_exact         730             438              0.600000              0.234247                0.557534                    212                 0.330733               0.340565         216.279934                  449.790713                            0.152325
+            max_unweighted_risk    511 Optimal_greedy_exact         730             511              0.700000              0.235616                0.567123                    183                 0.285491               0.297657         186.528583                  393.646643                            0.156413
+              max_weighted_risk      0 Optimal_greedy_exact         730              48              0.065753              0.350685                0.315068                    289                 0.450858               0.655112         266.929844                  835.475663                            0.246003
+              max_weighted_risk     36 Optimal_greedy_exact         730              48              0.065753              0.350685                0.315068                    289                 0.450858               0.655112         266.929844                  835.475663                            0.246003
+              max_weighted_risk     73 Optimal_greedy_exact         730              73              0.100000              0.338356                0.327397                    290                 0.452418               0.670921         262.435807                  833.698418                            0.251359
+              max_weighted_risk    110 Optimal_greedy_exact         730             110              0.150685              0.326027                0.336986                    282                 0.439938               0.665418         255.693620                  826.880196                            0.255877
+              max_weighted_risk    146 Optimal_greedy_exact         730             146              0.200000              0.320548                0.350685                    276                 0.430577               0.660534         247.670311                  817.442884                            0.262407
+              max_weighted_risk    182 Optimal_greedy_exact         730             182              0.249315              0.315068                0.354795                    269                 0.419657               0.652338         239.165796                  804.945340                            0.267940
+              max_weighted_risk    243 Optimal_greedy_exact         730             243              0.332877              0.305479                0.353425                    251                 0.391576               0.627722         223.290599                  777.302153                            0.273675
+              max_weighted_risk    365 Optimal_greedy_exact         730             365              0.500000              0.305479                0.373973                    216                 0.336973               0.575552         189.807027                  702.576406                            0.279648
+              max_weighted_risk    423 Optimal_greedy_exact         730             423              0.579452              0.308219                0.398630                    202                 0.315133               0.544088         175.019178                  656.653056                            0.275873
+              max_weighted_risk    438 Optimal_greedy_exact         730             438              0.600000              0.310959                0.398630                    197                 0.307332               0.532370         170.881021                  643.622036                            0.275586
+              max_weighted_risk    511 Optimal_greedy_exact         730             511              0.700000              0.324658                0.395890                    163                 0.254290               0.463964         145.859885                  572.961789                            0.275416
+top_age_standardized_percentile      0 Optimal_greedy_exact         730             424              0.580822              0.112329                0.719178                    182                 0.283931               0.283976         181.845465                  393.244825                            0.153083
+
+BAND COMPOSITION
+--------------------------------------------------------------------------------
+                           rule  y_min  band_6-9_share_selected  band_10-12_share_selected  band_13-15_share_selected  band_16-17_share_selected
+            max_unweighted_risk      0                 0.000000                   0.001370                   0.309589                   0.689041
+            max_unweighted_risk     36                 0.000000                   0.049315                   0.291781                   0.658904
+            max_unweighted_risk     73                 0.000000                   0.100000                   0.268493                   0.631507
+            max_unweighted_risk    110                 0.000000                   0.150685                   0.243836                   0.605479
+            max_unweighted_risk    146                 0.000000                   0.200000                   0.221918                   0.578082
+            max_unweighted_risk    182                 0.001370                   0.247945                   0.197260                   0.553425
+            max_unweighted_risk    243                 0.004110                   0.328767                   0.153425                   0.513699
+            max_unweighted_risk    365                 0.023288                   0.476712                   0.095890                   0.404110
+            max_unweighted_risk    423                 0.031507                   0.547945                   0.054795                   0.365753
+            max_unweighted_risk    438                 0.032877                   0.567123                   0.049315                   0.350685
+            max_unweighted_risk    511                 0.065753                   0.634247                   0.034247                   0.265753
+              max_weighted_risk      0                 0.001370                   0.064384                   0.384932                   0.549315
+              max_weighted_risk     36                 0.001370                   0.064384                   0.384932                   0.549315
+              max_weighted_risk     73                 0.002740                   0.097260                   0.369863                   0.530137
+              max_weighted_risk    110                 0.006849                   0.143836                   0.342466                   0.506849
+              max_weighted_risk    146                 0.010959                   0.189041                   0.319178                   0.480822
+              max_weighted_risk    182                 0.020548                   0.228767                   0.300000                   0.450685
+              max_weighted_risk    243                 0.030137                   0.302740                   0.268493                   0.398630
+              max_weighted_risk    365                 0.071233                   0.428767                   0.182192                   0.317808
+              max_weighted_risk    423                 0.093151                   0.486301                   0.150685                   0.269863
+              max_weighted_risk    438                 0.100000                   0.500000                   0.139726                   0.260274
+              max_weighted_risk    511                 0.128767                   0.571233                   0.101370                   0.198630
+top_age_standardized_percentile      0                 0.339726                   0.241096                   0.250685                   0.168493
+
+PRICE OF YOUNG FLOOR, WITHIN EACH RULE
+--------------------------------------------------------------------------------
+                           rule  y_min  young_selected  additional_young_vs_rule_y0  risk_sum_drop_vs_rule_y0  capture_drop_vs_rule_y0  capture_loss_per_additional_young
+            max_unweighted_risk      0               1                          0.0                  0.000000                      0.0                                NaN
+            max_unweighted_risk     36              36                         35.0                  2.485896                      4.0                           0.114286
+            max_unweighted_risk     73              73                         72.0                  7.579432                     12.0                           0.166667
+            max_unweighted_risk    110             110                        109.0                 14.081226                     16.0                           0.146789
+            max_unweighted_risk    146             146                        145.0                 21.393667                     24.0                           0.165517
+            max_unweighted_risk    182             182                        181.0                 29.833906                     30.0                           0.165746
+            max_unweighted_risk    243             243                        242.0                 45.618556                     41.0                           0.169421
+            max_unweighted_risk    365             365                        364.0                 82.606234                     78.0                           0.214286
+            max_unweighted_risk    423             423                        422.0                103.640894                    113.0                           0.267773
+            max_unweighted_risk    438             438                        437.0                109.383811                    120.0                           0.274600
+            max_unweighted_risk    511             511                        510.0                139.135162                    149.0                           0.292157
+              max_weighted_risk      0              48                          0.0                  0.000000                      0.0                                NaN
+              max_weighted_risk     36              48                          0.0                  0.000000                      0.0                                NaN
+              max_weighted_risk     73              73                         25.0                  4.494037                     -1.0                          -0.040000
+              max_weighted_risk    110             110                         62.0                 11.236225                      7.0                           0.112903
+              max_weighted_risk    146             146                         98.0                 19.259533                     13.0                           0.132653
+              max_weighted_risk    182             182                        134.0                 27.764048                     20.0                           0.149254
+              max_weighted_risk    243             243                        195.0                 43.639246                     38.0                           0.194872
+              max_weighted_risk    365             365                        317.0                 77.122817                     73.0                           0.230284
+              max_weighted_risk    423             423                        375.0                 91.910667                     87.0                           0.232000
+              max_weighted_risk    438             438                        390.0                 96.048823                     92.0                           0.235897
+              max_weighted_risk    511             511                        463.0                121.069960                    126.0                           0.272138
+top_age_standardized_percentile      0             424                          0.0                  0.000000                      0.0                                NaN
+
+SAVE AGGREGATE CSV
+--------------------------------------------------------------------------------
+Saved aggregate CSV: E:\Children Project\edu-support-optimization-bd\results\phase3_greedy_young_floor_sweep.csv
+This CSV contains one row per scenario and no child-level identifiers.
+
+VERDICT
+--------------------------------------------------------------------------------
+GREEDY SWEEP STATUS: PASS
+All produced scenarios are exact greedy optima for the unit-count young-floor problem.
+
+IMPORTANT INTERPRETATION
+--------------------------------------------------------------------------------
+- max_unweighted_risk selects children to maximize sum of predicted probabilities.
+- max_weighted_risk selects children to maximize weighted predicted population reach.
+- Observed Out_of_School is used only for evaluation, not as a decision input.
+- y_min=0 is the baseline for each rule.
+- The proportional young floor is about 423 selected children under age 13.
+- If weighted risk captures more observed out-of-school children, it is a stronger allocation rule.
+- If unweighted risk captures more but weighted risk gives better population share, report the trade-off.
+- This sweep does not yet enforce gender, wealth, disability, ethnic-minority, or PSU caps.
+- This sweep is sample-mode: it selects 730 sampled children. Population-weighted budgeting is separate.
+
+SEND BACK
+--------------------------------------------------------------------------------
+Send reports/phase3_greedy_young_floor_sweep.txt.
+You may also send results/phase3_greedy_young_floor_sweep.csv because it is aggregate only.
+Do not send data/processed/chattogram_rural_phase3_optimization_input.csv.

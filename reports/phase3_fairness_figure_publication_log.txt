@@ -1,0 +1,36 @@
+================================================================================
+PHASE 3 PUBLICATION FAIRNESS FIGURE
+================================================================================
+INPUT: E:\Children Project\edu-support-optimization-bd\results\phase3_fairness_curves.csv
+rows=33; missing columns: none
+
+BASELINES
+  y=0:   obj=325.663745, captured OOS=332
+  y=423: obj=222.022851, captured OOS=219
+
+CROSS-LINK CHECKS
+  g0 first obj links to y=0 baseline: OK
+  g0 first capture links to y=0 baseline: OK
+  g423 first obj links to y=423 baseline: OK
+  g423 first capture links to y=423 baseline: OK
+
+OBJECTIVE MONOTONICITY CHECKS
+  young objective drop: PASS
+  girls objective drop at y=0: PASS
+  girls objective drop at y=423: PASS
+
+CAPTURE WOBBLE DIAGNOSTICS
+  young capture drop: 0 decrease(s) -> smooth
+  girls capture drop at y=0: 1 decrease(s) -> non-monotone; evaluation metric only
+  girls capture drop at y=423: 2 decrease(s) -> non-monotone; evaluation metric only
+
+Seaborn context applied: paper.
+
+SAVED FILES
+  E:\Children Project\edu-support-optimization-bd\results\figures\phase3_fairness_curves_publication.png (808625 bytes)
+  E:\Children Project\edu-support-optimization-bd\results\figures\phase3_fairness_curves_publication.pdf (37307 bytes)
+  E:\Children Project\edu-support-optimization-bd\results\figures\phase3_fairness_curves_publication.svg (143925 bytes)
+
+SEND BACK
+Paste this log and attach the PNG. Keep the PDF/SVG for the paper.
+Do not send data/processed/chattogram_rural_phase3_optimization_input.csv.

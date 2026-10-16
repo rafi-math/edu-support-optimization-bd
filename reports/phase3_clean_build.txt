@@ -1,0 +1,203 @@
+================================================================================
+PHASE 3 CLEAN INPUT BUILD
+================================================================================
+RAW FILE: E:\Children Project\edu-support-optimization-bd\data\raw\fs.sav
+OUTPUT FILE: E:\Children Project\edu-support-optimization-bd\data\processed\chattogram_rural_phase3_clean.csv
+REPORT FILE: E:\Children Project\edu-support-optimization-bd\reports\phase3_clean_build.txt
+
+RAW LOAD
+--------------------------------------------------------------------------------
+Raw shape after usecols: (40617, 20)
+Missing required raw columns: none
+
+FILTER
+--------------------------------------------------------------------------------
+Rural rows: 32937
+Chattogram rows: 7489
+Age 6-17 rows: 36405
+Valid CB7 rows: 37925
+Rural Chattogram age 6-17 valid CB7 rows: 4891
+Expected rows from Phase 2 audit: 4891
+Row count matches expected: True
+
+DERIVED FEATURES
+--------------------------------------------------------------------------------
+Derived columns added:
+- age
+- female
+- Out_of_School
+- _band
+- wealth_q
+- mom_edu
+- eth_minor
+- disabled
+- worked
+- books_missing_data
+- no_books
+- child_weight_fsweight
+- normalized_weight_fshweight
+- interview_completed
+- has_positive_child_weight
+- weighted_analysis_eligible
+- core_complete
+- modeling_ready
+
+MISSING VALUES IN DERIVED COLUMNS
+--------------------------------------------------------------------------------
+age                               0
+female                            0
+Out_of_School                     0
+_band                             0
+wealth_q                         28
+mom_edu                           0
+eth_minor                         0
+disabled                         28
+worked                            2
+books_missing_data                0
+no_books                       1621
+child_weight_fsweight             0
+normalized_weight_fshweight       0
+interview_completed               0
+has_positive_child_weight         0
+weighted_analysis_eligible        0
+core_complete                     0
+modeling_ready                    0
+
+BINARY / OUTCOME CHECKS
+--------------------------------------------------------------------------------
+
+female:
+female
+0.0    2433
+1.0    2458
+
+Out_of_School:
+Out_of_School
+0.0    4244
+1.0     647
+
+eth_minor:
+eth_minor
+0.0    4267
+1.0     624
+
+disabled:
+disabled
+0.0    4489
+1.0     374
+NaN      28
+
+worked:
+worked
+0.0    4511
+1.0     378
+NaN       2
+
+books_missing_data:
+books_missing_data
+0.0    3270
+1.0    1621
+
+no_books:
+no_books
+0.0     285
+1.0    2985
+NaN    1621
+
+interview_completed:
+interview_completed
+0.0      28
+1.0    4863
+
+has_positive_child_weight:
+has_positive_child_weight
+0.0      28
+1.0    4863
+
+weighted_analysis_eligible:
+weighted_analysis_eligible
+0.0      28
+1.0    4863
+
+core_complete:
+core_complete
+0.0      30
+1.0    4861
+
+modeling_ready:
+modeling_ready
+0.0      30
+1.0    4861
+
+AGE BAND CHECK
+--------------------------------------------------------------------------------
+_band
+6-9      1664
+13-15    1231
+10-12    1169
+16-17     827
+
+WEIGHT CHECKS
+--------------------------------------------------------------------------------
+child_weight_fsweight: missing=0, zero=28, positive=4863, min=0.0, max=14.28778376699203, sum=10134.265011969335
+normalized_weight_fshweight: missing=0, zero=28, positive=4863, min=0.0, max=2.778180176915116, sum=5149.89005016109
+
+WEIGHTED OUT-OF-SCHOOL RATES
+--------------------------------------------------------------------------------
+Unweighted OOS rate: 0.132284
+child_weight_fsweight weighted OOS rate: 0.145147, usable rows=4863
+normalized_weight_fshweight weighted OOS rate: 0.133995, usable rows=4863
+
+BOOKS FEATURE CHECK
+--------------------------------------------------------------------------------
+PR3 missing or 99: 1621
+PR3 valid: 3270
+no_books == 1 among valid PR3: 2985
+no_books == 0 among valid PR3: 285
+no_books missing: 1621
+books_missing_data == 1: 1621
+books_missing_data == 0: 3270
+
+ELIGIBILITY CHECK
+--------------------------------------------------------------------------------
+Total rows: 4891
+Interview completed FS17 == 1: 4863
+Positive child_weight_fsweight: 4863
+Weighted analysis eligible: 4863
+Core complete: 4861
+Modeling ready: 4861
+
+MODELING READY ROWS BY WEIGHT
+--------------------------------------------------------------------------------
+Modeling ready rows: 4861
+Modeling ready unweighted OOS rate: 0.131866
+Modeling ready child_weight_fsweight OOS rate: 0.145200, usable rows=4861
+Modeling ready normalized_weight_fshweight OOS rate: 0.134054, usable rows=4861
+
+SAVE OUTPUT
+--------------------------------------------------------------------------------
+Saved Phase 3 clean input: E:\Children Project\edu-support-optimization-bd\data\processed\chattogram_rural_phase3_clean.csv
+Output shape: (4891, 38)
+
+IMPORTANT NOTES
+--------------------------------------------------------------------------------
+This file intentionally does not contain risk_score or risk_std.
+The old Phase 2 risk scores are not locally reproducible, so they are not used here.
+child_weight_fsweight is the provisional primary child-level weight.
+normalized_weight_fshweight is retained for sensitivity analysis.
+books_missing_data is a missing-data indicator, not a no-books indicator.
+no_books is the true no-books indicator, but it is missing when PR3 is missing/no response.
+Do not commit this CSV if it contains survey microdata identifiers. Keep it local unless your data policy allows publishing derived microdata.
+
+VERDICT
+--------------------------------------------------------------------------------
+PHASE 3 CLEAN INPUT STATUS: PASS
+Row count matches the verified Phase 2 rural Chattogram sample.
+
+NEXT STEP AFTER THIS REPORT
+--------------------------------------------------------------------------------
+1. Send reports/phase3_clean_build.txt.
+2. If PASS, build a local reproducible risk-scoring script using only modeling_ready rows.
+3. Use grouped cross-validation by PSU.
+4. Compare child_weight_fsweight and normalized_weight_fshweight in evaluation.
+5. Only after that, rebuild the optimization input with verified risk scores and original IDs.

@@ -1,0 +1,71 @@
+======================================================================
+PHASE 3 FINE GIRLS PRICE CURVE (unweighted objective only)
+======================================================================
+n=4861, K=730, observed OOS=641
+young floors=[0, 423], girls grid=[146, 160, 171, 172, 180, 200, 212, 213, 240, 270, 292, 320, 345, 367]
+objective: unweighted sum of risk_score_oof (weighted deferred to codebook check)
+
+YOUNG FLOOR = 0: baseline obj=325.663745, natural girls=212, captured OOS=332, proven=True
+  kink: natural=212, first binding g=213, free up to g=212, tie-driven extra free steps=0
+  integrity (drop==0 for all g<=natural): PASS
+
+YOUNG FLOOR = 423: baseline obj=222.022851, natural girls=171, captured OOS=219, proven=True
+  kink: natural=171, first binding g=172, free up to g=171, tie-driven extra free steps=0
+  integrity (drop==0 for all g<=natural): PASS
+
+Saved fine girls curve (aggregate only): E:\Children Project\edu-support-optimization-bd\results\phase3_girls_curve_fine.csv
+cells=28, proven_optimal True=28
+
+FINE GIRLS PRICE CURVE, unweighted
+----------------------------------------------------------------------
+
+young_floor=0
+ girls_floor  obj_unweighted  drop_vs_g0  girls_share  observed_oos_captured  unweighted_capture_rate  proven_optimal
+         146      325.663745    0.000000       0.2904                    332                   0.5179            True
+         160      325.663745    0.000000       0.2904                    332                   0.5179            True
+         171      325.663745    0.000000       0.2904                    332                   0.5179            True
+         172      325.663745    0.000000       0.2904                    332                   0.5179            True
+         180      325.663745    0.000000       0.2904                    332                   0.5179            True
+         200      325.663745    0.000000       0.2904                    332                   0.5179            True
+         212      325.663745    0.000000       0.2904                    332                   0.5179            True
+         213      325.663143    0.000602       0.2918                    331                   0.5164            True
+         240      325.273170    0.390575       0.3288                    327                   0.5101            True
+         270      323.823148    1.840597       0.3699                    326                   0.5086            True
+         292      322.039208    3.624537       0.4000                    329                   0.5133            True
+         320      319.019975    6.643770       0.4384                    327                   0.5101            True
+         345      315.897558    9.766186       0.4726                    323                   0.5039            True
+         367      312.749944   12.913801       0.5027                    320                   0.4992            True
+
+young_floor=423
+ girls_floor  obj_unweighted  drop_vs_g0  girls_share  observed_oos_captured  unweighted_capture_rate  proven_optimal
+         146      222.022851    0.000000       0.2342                    219                   0.3417            True
+         160      222.022851    0.000000       0.2342                    219                   0.3417            True
+         171      222.022851    0.000000       0.2342                    219                   0.3417            True
+         172      222.022814    0.000037       0.2356                    219                   0.3417            True
+         180      222.002021    0.020830       0.2466                    220                   0.3432            True
+         200      221.847392    0.175459       0.2740                    219                   0.3417            True
+         212      221.671640    0.351211       0.2904                    219                   0.3417            True
+         213      221.654487    0.368364       0.2918                    219                   0.3417            True
+         240      221.112575    0.910276       0.3288                    219                   0.3417            True
+         270      220.156502    1.866349       0.3699                    218                   0.3401            True
+         292      219.226754    2.796097       0.4000                    216                   0.3370            True
+         320      217.838575    4.184276       0.4384                    217                   0.3385            True
+         345      216.356194    5.666657       0.4726                    215                   0.3354            True
+         367      214.849502    7.173349       0.5027                    213                   0.3323            True
+
+KINK SUMMARY
+----------------------------------------------------------------------
+ young_floor  natural_girls  first_binding_girls  free_up_to  tie_driven_free_steps violations
+           0            212                  213         212                      0       none
+         423            171                  172         171                      0       none
+
+VERDICT
+----------------------------------------------------------------------
+FINE GIRLS CURVE STATUS: PASS (kink validated, all cells proven optimal)
+
+Note: a tie_driven_free_steps > 0 means equal-objective sets with more girls
+exist just above the natural count, so the floor stays free a few steps past
+natural+1. That is free gender flexibility, not an error.
+
+SEND BACK: reports/phase3_girls_curve_fine.txt
+Do not send data/processed/chattogram_rural_phase3_optimization_input.csv.

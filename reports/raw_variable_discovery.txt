@@ -1,0 +1,2936 @@
+================================================================================
+RAW VARIABLE DISCOVERY
+================================================================================
+RAW DIR: E:\Children Project\edu-support-optimization-bd\data\raw
+FILES FOUND: ['bh.sav', 'ch.sav', 'fs.sav', 'hh.sav', 'hl.sav', 'wm.sav']
+
+================================================================================
+FILE: bh.sav
+================================================================================
+COLUMN COUNT: 50
+FSWEIGHT EXACT MATCH: NO
+
+WEIGHT-LIKE COLUMNS
+--------------------------------------------------------------------------------
+wmweight | label: Woman's sample weight
+
+KEY GEOGRAPHY / DEMOGRAPHIC / EDUCATION COLUMNS
+--------------------------------------------------------------------------------
+
+COLUMN: HH1
+LABEL: Cluster number
+VALUE LABELS: {}
+
+COLUMN: HH2
+LABEL: Household number
+VALUE LABELS: {}
+
+COLUMN: LN
+LABEL: Line number
+VALUE LABELS: {}
+
+COLUMN: BH3
+LABEL: Sex of child
+VALUE LABELS: {1.0: 'BOY', 2.0: 'GIRL', 9.0: 'NO RESPONSE'}
+
+COLUMN: BH6
+LABEL: Age of child
+VALUE LABELS: {99.0: 'NO RESPONSE'}
+
+COLUMN: BH9U
+LABEL: Age at death (units)
+VALUE LABELS: {1.0: 'DAYS', 2.0: 'MONTHS', 3.0: 'YEARS', 9.0: 'NO RESPONSE'}
+
+COLUMN: BH9N
+LABEL: Age at death (number)
+VALUE LABELS: {99.0: 'NO RESPONSE'}
+
+COLUMN: BH9C
+LABEL: Age at death months (imputed)
+VALUE LABELS: {}
+
+COLUMN: HH6
+LABEL: Area
+VALUE LABELS: {1.0: 'URBAN', 2.0: 'RURAL'}
+
+COLUMN: HH7
+LABEL: Division
+VALUE LABELS: {10.0: 'Barishal', 20.0: 'Chattogram', 30.0: 'Dhaka', 40.0: 'Khulna', 45.0: 'Mymenshing', 50.0: 'Rajshahi', 55.0: 'Rangpur', 60.0: 'Sylhet'}
+
+COLUMN: HH7A
+LABEL: District
+VALUE LABELS: {1.0: 'Bagerhat', 3.0: 'Bandarban', 4.0: 'Barguna', 6.0: 'Barishal', 9.0: 'Bhola', 10.0: 'Bogura', 12.0: 'Brahmanbaria', 13.0: 'Chandpur', 15.0: 'Chattogram', 18.0: 'Chuadanga', 19.0: 'Cumilla', 22.0: "Cox's Bazar", 26.0: 'Dhaka', 27.0: 'Dinajpur', 29.0: 'Faridpur', 30.0: 'Feni', 32.0: 'Gaibandha', 33.0: 'Gazipur', 35.0: 'Gopalganj', 36.0: 'Habiganj', 38.0: 'Joypurhat', 39.0: 'Jamalpur', 41.0: 'Jashore', 42.0: 'Jhalokati', 44.0: 'Jhenaidah', 46.0: 'Khagrachhari', 47.0: 'Khulna', 48.0: 'Kishoregonj', 49.0: 'Kurigram', 50.0: 'Kushtia'}
+
+COLUMN: wscore
+LABEL: Combined wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5
+LABEL: Wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: wscoreu
+LABEL: Urban wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5u
+LABEL: Urban wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: wscorer
+LABEL: Rural wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5r
+LABEL: Rural wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: ethnicity
+LABEL: Ethnicity of household head
+VALUE LABELS: {1.0: 'Bengali', 2.0: 'Other', 9.0: 'Missing/DK'}
+
+COLUMN: welevel
+LABEL: Education
+VALUE LABELS: {0.0: 'Pre-primary or none', 1.0: 'Primary', 2.0: 'Secondary', 3.0: 'Higher secondary+', 9.0: 'Missing/DK'}
+
+COLUMN: disability
+LABEL: Functional difficulties (age 18-49 years)
+VALUE LABELS: {1.0: 'Has functional difficulty', 2.0: 'Has no functional difficulty'}
+
+COLUMN: BHLN
+LABEL: None
+VALUE LABELS: {}
+
+COLUMN: magebrt
+LABEL: Mother's age at birth
+VALUE LABELS: {1.0: '<20', 2.0: '20-34', 3.0: '35+'}
+
+COLUMN: stratum
+LABEL: Stratum
+VALUE LABELS: {}
+
+COLUMN: PSU
+LABEL: Primary sampling unit
+VALUE LABELS: {}
+
+FULL COLUMN LIST
+--------------------------------------------------------------------------------
+001. HH1 | Cluster number
+002. HH2 | Household number
+003. LN | Line number
+004. WM1 | Cluster number
+005. WM2 | Household number
+006. WM3 | Woman's line number
+007. WMINT | Interviewer number
+008. BH0 | Line Number
+009. BH2 | Twins
+010. BH3 | Sex of child
+011. BH4D | Day of birth
+012. BH4M | Month of birth
+013. BH4Y | Year of birth
+014. BH5 | Still alive
+015. BH6 | Age of child
+016. BH7 | Living with respondent
+017. BH8 | Line number of child in HH
+018. BH9U | Age at death (units)
+019. BH9N | Age at death (number)
+020. BH10 | Any other between births
+021. BH4C | Date of birth of child (CMC)
+022. BH4F | Date flag for BH4C
+023. BH9C | Age at death months (imputed)
+024. BH9F | Date flag for BH9C
+025. HH4 | Supervisor number
+026. HH6 | Area
+027. HH7 | Division
+028. HH7A | District
+029. WDOI | Date of interview women (CMC)
+030. WDOB | Date of birth of woman (CMC)
+031. wscore | Combined wealth score
+032. windex5 | Wealth index quintile
+033. windex10 | Percentile Group of com1
+034. wscoreu | Urban wealth score
+035. windex5u | Urban wealth index quintile
+036. windex10u | Percentile Group of urb1
+037. wscorer | Rural wealth score
+038. windex5r | Rural wealth index quintile
+039. windex10r | Percentile Group of rur1
+040. wmweight | Woman's sample weight
+041. ethnicity | Ethnicity of household head
+042. welevel | Education
+043. disability | Functional difficulties (age 18-49 years)
+044. migration | None
+045. BHLN | None
+046. brthord | Birth order
+047. magebrt | Mother's age at birth
+048. birthint | Previous birth interval
+049. stratum | Stratum
+050. PSU | Primary sampling unit
+
+================================================================================
+FILE: ch.sav
+================================================================================
+COLUMN COUNT: 346
+FSWEIGHT EXACT MATCH: NO
+
+WEIGHT-LIKE COLUMNS
+--------------------------------------------------------------------------------
+chweight | label: Children under 5's sample weight
+wmweight | label: Woman's sample weight
+
+KEY GEOGRAPHY / DEMOGRAPHIC / EDUCATION COLUMNS
+--------------------------------------------------------------------------------
+
+COLUMN: HH1
+LABEL: Cluster number
+VALUE LABELS: {}
+
+COLUMN: HH2
+LABEL: Household number
+VALUE LABELS: {}
+
+COLUMN: LN
+LABEL: Line number
+VALUE LABELS: {}
+
+COLUMN: UF4
+LABEL: Mother / Caretaker's line number
+VALUE LABELS: {}
+
+COLUMN: UF12
+LABEL: Language of the questionnaire
+VALUE LABELS: {2.0: 'BANGLA'}
+
+COLUMN: UF13
+LABEL: Language of the interview
+VALUE LABELS: {2.0: 'BANGLA', 6.0: 'OTHER LANGUAGE'}
+
+COLUMN: UF14
+LABEL: Native language of the respondent
+VALUE LABELS: {2.0: 'BANGLA', 6.0: 'OTHER LANGUAGE'}
+
+COLUMN: UB2
+LABEL: Age of child
+VALUE LABELS: {}
+
+COLUMN: UB6
+LABEL: Ever attended early childhood education programme
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: UB7
+LABEL: Attended early childhood education programme anytime since the beginning of current school year
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: UB8
+LABEL: Currently attending early childhood education programme
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: EC1
+LABEL: Number of children's books or picture books for child
+VALUE LABELS: {0.0: 'NONE', 1.0: 'ONE', 2.0: 'TWO', 3.0: 'THREE', 4.0: 'FOUR', 5.0: 'FIVE', 6.0: 'SIX', 7.0: 'SEVEN', 8.0: 'EIGHT', 9.0: 'NINE', 10.0: 'TEN OR MORE BOOKS', 99.0: 'NO RESPONSE'}
+
+COLUMN: EC5AA
+LABEL: Read books - Mother
+VALUE LABELS: {'?': 'NO RESPONSE', 'A': 'MOTHER'}
+
+COLUMN: EC5AB
+LABEL: Read books - Father
+VALUE LABELS: {'?': 'NO RESPONSE', 'B': 'FATHER'}
+
+COLUMN: EC5AX
+LABEL: Read books - Other
+VALUE LABELS: {'?': 'NO RESPONSE', 'X': 'OTHER'}
+
+COLUMN: EC5AY
+LABEL: Read books - No one
+VALUE LABELS: {'?': 'NO RESPONSE', 'Y': 'NO ONE'}
+
+COLUMN: EC5ANR
+LABEL: Read books - No response
+VALUE LABELS: {'?': 'NO RESPONSE'}
+
+COLUMN: EC5BA
+LABEL: Tell stories - Mother
+VALUE LABELS: {'?': 'NO RESPONSE', 'A': 'MOTHER'}
+
+COLUMN: EC5CA
+LABEL: Sang songs - Mother
+VALUE LABELS: {'?': 'NO RESPONSE', 'A': 'MOTHER'}
+
+COLUMN: EC5DA
+LABEL: Took outside - Mother
+VALUE LABELS: {'?': 'NO RESPONSE', 'A': 'MOTHER'}
+
+COLUMN: EC5EA
+LABEL: Played with - Mother
+VALUE LABELS: {'?': 'NO RESPONSE', 'A': 'MOTHER'}
+
+COLUMN: EC5FA
+LABEL: Named/counted - Mother
+VALUE LABELS: {'?': 'NO RESPONSE', 'A': 'MOTHER'}
+
+COLUMN: UCD3
+LABEL: Mother / Caretaker of another child age under 5 or selected child age 5-17
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO'}
+
+COLUMN: UCF13
+LABEL: Compared with children of the same age, child has difficulty walking
+VALUE LABELS: {1.0: 'NO DIFFICULTY', 2.0: 'SOME DIFFICULTY', 3.0: 'A LOT OF DIFFICULTY', 4.0: 'CANNOT WALK AT ALL', 9.0: 'NO RESPONSE'}
+
+COLUMN: UCF14
+LABEL: Compared with children of the same age, child has difficulty picking upsmall objects with his/her hand
+VALUE LABELS: {1.0: 'NO DIFFICULTY', 2.0: 'SOME DIFFICULTY', 3.0: 'A LOT OF DIFFICULTY', 4.0: 'CANNOT PICK-UP AT ALL', 9.0: 'NO RESPONSE'}
+
+COLUMN: UCF17
+LABEL: Compared with children of the same age, child has difficulty learning things
+VALUE LABELS: {1.0: 'NO DIFFICULTY', 2.0: 'SOME DIFFICULTY', 3.0: 'A LOT OF DIFFICULTY', 4.0: 'CANNOT LEARN THINGS AT ALL', 9.0: 'NO RESPONSE'}
+
+COLUMN: UCF18
+LABEL: Compared with children of the same age, child has difficulty playing
+VALUE LABELS: {1.0: 'NO DIFFICULTY', 2.0: 'SOME DIFFICULTY', 3.0: 'A LOT OF DIFFICULTY', 4.0: 'CANNOT PLAY AT ALL', 9.0: 'NO RESPONSE'}
+
+COLUMN: UCF19
+LABEL: Compared with children of the same age, how much child kick, bite or hit other children or adults
+VALUE LABELS: {1.0: 'NOT AT ALL', 2.0: 'LESS', 3.0: 'THE SAME', 4.0: 'MORE', 5.0: 'A LOT MORE', 9.0: 'NO RESPONSE'}
+
+COLUMN: CA6D
+LABEL: Place sought care: Community health worker
+VALUE LABELS: {'?': 'NO RESPONSE', 'D': 'COMMUNITY HEALTH WORKER (HA/CHCP/HI)'}
+
+COLUMN: CA6L
+LABEL: Place sought care: Community health worker (Non Government)
+VALUE LABELS: {'?': 'NO RESPONSE', 'L': 'COMMUNITY HEALTH WORKER (NON-GOVERNMENT)'}
+
+COLUMN: CA9D
+LABEL: Place got ORS: Community health worker
+VALUE LABELS: {'?': 'NO RESPONSE', 'D': 'COMMUNITY HEALTH WORKER (HA/CHCP/HI)'}
+
+COLUMN: CA9L
+LABEL: Place got ORS: Community health worker (Non Government)
+VALUE LABELS: {'?': 'NO RESPONSE', 'L': 'COMMUNITY HEALTH WORKER (NON-GOVERNMENT)'}
+
+COLUMN: CA11D
+LABEL: Place got zinc: Community health worker
+VALUE LABELS: {'?': 'NO RESPONSE', 'D': 'COMMUNITY HEALTH WORKER'}
+
+COLUMN: CA11L
+LABEL: Place got zinc: Community health worker (Non Government)
+VALUE LABELS: {'?': 'NO RESPONSE', 'L': 'COMMUNITY HEALTH WORKER (NON-GOVERNMENT)'}
+
+COLUMN: CA17
+LABEL: Difficulty breathing during illness with cough
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: CA20
+LABEL: Sought advice or treatment for illness
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: CA21D
+LABEL: Place sought care: Community health worker
+VALUE LABELS: {'?': 'NO RESPONSE', 'D': 'COMMUNITY HEALTH WORKER (HA/CHCP/HI)'}
+
+COLUMN: CA21L
+LABEL: Place sought care: Community health worker (Non Government)
+VALUE LABELS: {'?': 'NO RESPONSE', 'L': 'COMMUNITY HEALTH WORKER (NON-GOVERNMENT)'}
+
+COLUMN: CA22
+LABEL: Given medicine to treat this illness
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: CA25D
+LABEL: Place got antibiotics: Community health worker (Non Government)
+VALUE LABELS: {'?': 'NO RESPONSE', 'D': 'COMMUNITY HEALTH WORKER (HA/CHCP/HI)'}
+
+COLUMN: CA25L
+LABEL: Place got antibiotics: Community health worker (Non Government)
+VALUE LABELS: {'?': 'NO RESPONSE', 'L': 'COMMUNITY HEALTH WORKER (NON-GOVERNMENT)'}
+
+COLUMN: AN4
+LABEL: Age of child
+VALUE LABELS: {}
+
+COLUMN: AN5
+LABEL: Mother's line number
+VALUE LABELS: {}
+
+COLUMN: HH6
+LABEL: Area
+VALUE LABELS: {1.0: 'URBAN', 2.0: 'RURAL'}
+
+COLUMN: HH7
+LABEL: Division
+VALUE LABELS: {10.0: 'Barishal', 20.0: 'Chattogram', 30.0: 'Dhaka', 40.0: 'Khulna', 45.0: 'Mymenshing', 50.0: 'Rajshahi', 55.0: 'Rangpur', 60.0: 'Sylhet'}
+
+COLUMN: HH7A
+LABEL: District
+VALUE LABELS: {1.0: 'Bagerhat', 3.0: 'Bandarban', 4.0: 'Barguna', 6.0: 'Barishal', 9.0: 'Bhola', 10.0: 'Bogura', 12.0: 'Brahmanbaria', 13.0: 'Chandpur', 15.0: 'Chattogram', 18.0: 'Chuadanga', 19.0: 'Cumilla', 22.0: "Cox's Bazar", 26.0: 'Dhaka', 27.0: 'Dinajpur', 29.0: 'Faridpur', 30.0: 'Feni', 32.0: 'Gaibandha', 33.0: 'Gazipur', 35.0: 'Gopalganj', 36.0: 'Habiganj', 38.0: 'Joypurhat', 39.0: 'Jamalpur', 41.0: 'Jashore', 42.0: 'Jhalokati', 44.0: 'Jhenaidah', 46.0: 'Khagrachhari', 47.0: 'Khulna', 48.0: 'Kishoregonj', 49.0: 'Kurigram', 50.0: 'Kushtia'}
+
+COLUMN: HL4
+LABEL: Sex
+VALUE LABELS: {1.0: 'MALE', 2.0: 'FEMALE'}
+
+COLUMN: ED5A
+LABEL: Highest level of education attended
+VALUE LABELS: {0.0: 'ECE', 1.0: 'PRIMARY', 2.0: 'LOWER SECONDARY', 3.0: 'SECONDARY/ HIGHER SECONDARY', 4.0: 'HIGHER', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: CAGE
+LABEL: Age (in months)
+VALUE LABELS: {}
+
+COLUMN: CAGE_6
+LABEL: Age (in months)
+VALUE LABELS: {1.0: '0-5', 2.0: '6-11', 3.0: '12-23', 4.0: '24-35', 5.0: '36-47', 6.0: '48-59'}
+
+COLUMN: CAGE_11
+LABEL: Age (in months)
+VALUE LABELS: {1.0: '0-11', 2.0: '12-23', 3.0: '24-35', 4.0: '36-47', 5.0: '48-59'}
+
+COLUMN: CAGED
+LABEL: Age (in days)
+VALUE LABELS: {}
+
+COLUMN: HAP
+LABEL: Height for age percentile NCHS
+VALUE LABELS: {}
+
+COLUMN: HAZ
+LABEL: Height for age z-score NCHS
+VALUE LABELS: {}
+
+COLUMN: HAM
+LABEL: Height for age percent of reference median NCHS
+VALUE LABELS: {}
+
+COLUMN: WAP
+LABEL: Weight for age percentile NCHS
+VALUE LABELS: {}
+
+COLUMN: WAZ
+LABEL: Weight for age z-score NCHS
+VALUE LABELS: {}
+
+COLUMN: WAM
+LABEL: Weight for age percent of reference median NCHS
+VALUE LABELS: {}
+
+COLUMN: HAZ2
+LABEL: Height for age z-score WHO
+VALUE LABELS: {99.97: 'Measurement out of range', 99.98: 'Z-score out of range', 99.99: 'Not measured'}
+
+COLUMN: WAZ2
+LABEL: Weight for age z-score WHO
+VALUE LABELS: {99.97: 'Measurement out of range', 99.98: 'Z-score out of range', 99.99: 'Not measured'}
+
+COLUMN: HAZFLAG
+LABEL: Height for age flag WHO
+VALUE LABELS: {0.0: 'No error', 1.0: 'Error flag'}
+
+COLUMN: WAZFLAG
+LABEL: Weight for age flag WHO
+VALUE LABELS: {0.0: 'No error', 1.0: 'Error flag'}
+
+COLUMN: WHZNOAGE
+LABEL: Weight for height - Age flag WHO
+VALUE LABELS: {0.0: 'Age given - all measurements calculated', 1.0: 'No age - only weight for height calculated'}
+
+COLUMN: wscore
+LABEL: Combined wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5
+LABEL: Wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: wscoreu
+LABEL: Urban wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5u
+LABEL: Urban wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: wscorer
+LABEL: Rural wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5r
+LABEL: Rural wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: melevel
+LABEL: Mother's education
+VALUE LABELS: {0.0: 'Pre-primary or none', 1.0: 'Primary', 2.0: 'Secondary', 3.0: 'Higher secondary+', 9.0: 'Missing/DK'}
+
+COLUMN: cdisability
+LABEL: Disability status (age 2-4 years)
+VALUE LABELS: {1.0: 'Has functional difficulty', 2.0: 'Has no functional difficulty'}
+
+COLUMN: ethnicity
+LABEL: Ethnicity of household head
+VALUE LABELS: {1.0: 'Bengali', 2.0: 'Other', 9.0: 'Missing/DK'}
+
+COLUMN: caretakerdis
+LABEL: Mother's functional difficulties
+VALUE LABELS: {1.0: 'Has functional difficulty', 2.0: 'Has no functional difficulty', 9.0: 'No information'}
+
+COLUMN: stratum
+LABEL: Stratum
+VALUE LABELS: {}
+
+COLUMN: PSU
+LABEL: Primary sampling unit
+VALUE LABELS: {}
+
+FULL COLUMN LIST
+--------------------------------------------------------------------------------
+001. HH1 | Cluster number
+002. HH2 | Household number
+003. LN | Line number
+004. UF1 | Cluster number
+005. UF2 | Household number
+006. UF3 | Child's line number
+007. UFINT | Interviewer number
+008. UF4 | Mother / Caretaker's line number
+009. UF5 | Interviewer number
+010. UF6 | Supervisor number
+011. UF7D | Day of interview
+012. UF7M | Month of interview
+013. UF7Y | Year of interview
+014. UF9 | Respondent to another questionnaire
+015. UF10 | Consent
+016. UF17 | Result of interview for children under 5
+017. UF8H | Start of interview - Hour
+018. UF8M | Start of interview - Minutes
+019. UF11H | End of interview - Hour
+020. UF11M | End of interview - Minutes
+021. UF12 | Language of the questionnaire
+022. UF13 | Language of the interview
+023. UF14 | Native language of the respondent
+024. UF15 | Translator used
+025. UFAN | Anthro prompt
+026. UFHINT | Household interviewer
+027. CHFIN | Finish
+028. UB1D | Day of birth of child
+029. UB1M | Month of birth of child
+030. UB1Y | Year of birth of child
+031. UB2 | Age of child
+032. UB6 | Ever attended early childhood education programme
+033. UB7 | Attended early childhood education programme anytime since the beginning of current school year
+034. UB8 | Currently attending early childhood education programme
+035. BR1 | Birth certificate
+036. BR2 | Birth registered
+037. BR3 | Know how to register birth
+038. EC1 | Number of children's books or picture books for child
+039. EC2A | Homemade toys
+040. EC2B | Toys from shops
+041. EC2C | Household objects or outside objects
+042. EC3A | Days left alone for more than one hour
+043. EC3B | Days left in the care of another child, that is someone less than 10 years old, for more than one hour
+044. EC5AA | Read books - Mother
+045. EC5AB | Read books - Father
+046. EC5AX | Read books - Other
+047. EC5AY | Read books - No one
+048. EC5ANR | Read books - No response
+049. EC5BA | Tell stories - Mother
+050. EC5BB | Tell stories - Father
+051. EC5BX | Tell stories - Other
+052. EC5BY | Tell stories - No one
+053. EC5BNR | Tell stories - No response
+054. EC5CA | Sang songs - Mother
+055. EC5CB | Sang songs - Father
+056. EC5CX | Sang songs - Other
+057. EC5CY | Sang songs - No one
+058. EC5CNR | Sang songs - No response
+059. EC5DA | Took outside - Mother
+060. EC5DB | Took outside - Father
+061. EC5DX | Took outside - Other
+062. EC5DY | Took outside - No one
+063. EC5DNR | Took outside - No response
+064. EC5EA | Played with - Mother
+065. EC5EB | Played with - Father
+066. EC5EX | Played with - Other
+067. EC5EY | Played with - No one
+068. EC5ENR | Played with - No response
+069. EC5FA | Named/counted - Mother
+070. EC5FB | Named/counted - Father
+071. EC5FX | Named/counted - Other
+072. EC5FY | Named/counted - No one
+073. EC5FNR | Named/counted - No response
+074. EC6 | Child identifies at least ten letters of the alphabet
+075. EC7 | Child reads at least four simple, popular words
+076. EC8 | Child knows name and recognizes symbol of all numbers from 1-10
+077. EC9 | Child able to pick up small object with 2 fingers
+078. EC10 | Child sometimes too sick to play
+079. EC11 | Child follows simple directions
+080. EC12 | Child able to do something independently
+081. EC13 | Child gets along well with other children
+082. EC14 | Child kicks, bites or hits other children or adults
+083. EC15 | Child gets distracted easily
+084. UCD2A | Took away privileges
+085. UCD2B | Explained why behaviour was wrong
+086. UCD2C | Shook child
+087. UCD2D | Shouted, yelled or screamed at child
+088. UCD2E | Gave child something else to do
+089. UCD2F | Spanked, hit or slapped child on bottom with bare hand
+090. UCD2G | Hit child on the bottom or elsewhere with belt, brush, stick, etc.
+091. UCD2H | Called child dumb, lazy or another name
+092. UCD2I | Hit or slapped child on the face, head or ears
+093. UCD2J | Hit or slapped child on the hand, arm or leg
+094. UCD2K | Beat child up as hard as one could
+095. UCD3 | Mother / Caretaker of another child age under 5 or selected child age 5-17
+096. UCD4 | Already responded to question UCD5 or FCD5
+097. UCD5 | Child needs to be physically punished to be brought up properly
+098. UCF2 | Child wear glasses
+099. UCF3 | Child uses hearing aid
+100. UCF4 | Child uses any equipment or receive assistance for walking
+101. UCF7 | Child has difficulty seeing
+102. UCF9 | Child has difficulty hearing sounds like people voices or music
+103. UCF11 | Without using equipment or assistance child has difficulty walking
+104. UCF12 | When using equipment or assistance child has difficulty walking
+105. UCF13 | Compared with children of the same age, child has difficulty walking
+106. UCF14 | Compared with children of the same age, child has difficulty picking upsmall objects with his/her hand
+107. UCF15 | Child has difficulty understanding parent/caretaker
+108. UCF16 | Child has difficulty being understood by parent/caretaker when speaks
+109. UCF17 | Compared with children of the same age, child has difficulty learning things
+110. UCF18 | Compared with children of the same age, child has difficulty playing
+111. UCF19 | Compared with children of the same age, how much child kick, bite or hit other children or adults
+112. BD2 | Child ever been breastfed
+113. BD3 | Child still being breastfed
+114. BD4 | Child drank anything from a bottle with a nipple yesterday
+115. BD5 | Child drank ORS yesterday
+116. BD6 | Child drank or ate vitamin or mineral supplements yesterday
+117. BD7A | Child drank plain water yesterday
+118. BD7B | Child drank juice or juice drinks yesterday
+119. BD7C | Child drank clear broth/clear soup yesterday
+120. BD7D | Child drank infant formula yesterday
+121. BD7D1 | Times child drank infant formula
+122. BD7E | Child drank milk from animals yesterday
+123. BD7E1 | Times child drank milk from animals
+124. BD7X | Child drank any other liquid yesterday
+125. BD8A | Child ate yogurt yesterday
+126. BD8A1 | Times ate yogurt
+127. BD8B | Child ate fortified baby food (gerber, hero, cerelac, nestum, etc.) yesterday
+128. BD8C | Child ate foods made from grains yesterday
+129. BD8D | Child ate pumpkin, carrots, squash etc. that are yellow or orange inside yesterday
+130. BD8E | Child ate white potatoes, white yams, manioc, cassava etc. any other foods made from roots yesterday
+131. BD8F | Child ate green leafy vegetables yesterday
+132. BD8G | Child ate ripe mangoes, papayas etc. any other vitamin A-rich fruits yesterday
+133. BD8H | Child ate other fruits or vegetables yesterday
+134. BD8I | Child ate liver, kidney, heart or other organ meat yesterday
+135. BD8J | Child ate meat, such as beef, pork, lamb, goat, chicken, duck yesterday
+136. BD8K | Child ate eggs yesterday
+137. BD8L | Child ate fresh or dried fish or shellfish yesterday
+138. BD8M | Child ate beans, peas, lentils or nuts or any food made from these yesterday
+139. BD8N | Child ate cheese or other food made from milk yesterday
+140. BD8X | Child ate other solid, semi-solid or soft food yesterday
+141. BD9 | Times child ate solid or semi-solid food
+142. BD8DUMMY | Dummy for BD8 explanation
+143. CA1 | Child had diarrhoea in last 2 weeks
+144. CA3 | Child drank less or more during diarrhoea
+145. CA4 | Child ate less or more during diarrhoea
+146. CA5 | Sought advice or treatment for the diarrhoea from any source
+147. CA6A | Place sought care: Government hospital
+148. CA6B | Place sought care: Government clinic / health centre (FWC / USC / RD)
+149. CA6C | Place sought care: Community Clinics (CC)
+150. CA6D | Place sought care: Community health worker
+151. CA6E | Place sought care: Mobile / Outreach clinic
+152. CA6H | Place sought care: Other public medical
+153. CA6I | Place sought care: Private hospital / clinic
+154. CA6J | Place sought care: Private physician
+155. CA6K | Place sought care: Private pharmacy
+156. CA6L | Place sought care: Community health worker (Non Government)
+157. CA6M | Place sought care: Private mobile clinic
+158. CA6N | Place sought care: NGO CLINCS/HOSPITAL
+159. CA6O | Place sought care: Other private medical
+160. CA6W | Place sought care: DK public or private
+161. CA6P | Place sought care: Relative / Friend
+162. CA6Q | Place sought care: Shop / Market / Street
+163. CA6R | Place sought care: Traditional practitioner
+164. CA6X | Place sought care: Other
+165. CA6NR | Place sought care: No response
+166. CA7A | A fluid made from a special packet called "Packet Saline"
+167. CA7B | Rice Based ORS Packet called "Rice Saline" for diarrhoea
+168. CA7C | Child given zinc tablets or syrup
+169. CA7D | Sugar and Salt Solution
+170. CA7E | Green Coconut Water
+171. CA7F | Flattened-rice Water
+172. CA7G | Boiled Rice Water
+173. CA9A | Place got ORS: Government hospital
+174. CA9B | Place got ORS: Government clinics / health centre (FWC / USC / RD)
+175. CA9C | Place got ORS: Community Clinics (CC)
+176. CA9D | Place got ORS: Community health worker
+177. CA9E | Place got ORS: Mobile / Outreach clinic
+178. CA9H | Place got ORS: Other public medical
+179. CA9I | Place got ORS: Private hospital / clinic
+180. CA9J | Place got ORS: Private physician
+181. CA9K | Place got ORS: Private pharmacy
+182. CA9L | Place got ORS: Community health worker (Non Government)
+183. CA9M | Place got ORS: Private mobile clinic
+184. CA9N | Place got ORS: NGO CLINIC/HOSPITAL
+185. CA9O | Place got ORS: Other private medical
+186. CA9W | Place got ORS: DK public or private
+187. CA9P | Place got ORS: Relative / Friend
+188. CA9Q | Place got ORS: Shop / Market / Street
+189. CA9R | Place got ORS: Traditional practitioner
+190. CA9X | Place got ORS: Other
+191. CA9Z | Place got ORS: DK/Don't remember
+192. CA9NR | Place got ORS: No response
+193. CA11A | Place got zinc: Government hospital
+194. CA11B | Place got zinc: Government clinics / health centre (FWC / USC / RD)
+195. CA11C | Place got zinc: Community clinics (CC)
+196. CA11D | Place got zinc: Community health worker
+197. CA11E | Place got zinc: Mobile / Outreach clinic
+198. CA11H | Place got zinc: Other public medical
+199. CA11I | Place got zinc: Private hospital / clinic
+200. CA11J | Place got zinc: Private physician
+201. CA11K | Place got zinc: Private pharmacy
+202. CA11L | Place got zinc: Community health worker (Non Government)
+203. CA11M | Place got zinc: Private mobile clinic
+204. CA11N | Place got zinc: NGO CLINIC/HOSPITAL
+205. CA11O | Place got zinc: Other private medical
+206. CA11W | Place got zinc: DK private or public
+207. CA11P | Place got zinc: Relative / Friend
+208. CA11Q | Place got zinc: Shop / Market / Street
+209. CA11R | Place got zinc: Traditional practitioner
+210. CA11X | Place got zinc: Other
+211. CA11Z | Place got zinc: DK/Don't remember
+212. CA11NR | Place got zinc: No response
+213. CA12 | Anything else given to treat the diarrhoea
+214. CA13A | Other treatment (pill or syrup): Antibiotic
+215. CA13B | Other treatment (pill or syrup): Antimotility (anti-diarrhoea)
+216. CA13G | Other treatment (pill or syrup): Other pill or syrup
+217. CA13H | Other treatment (pill or syrup): Unknown pill or syrup
+218. CA13L | Other treatment (injection): Antibiotic
+219. CA13M | Other treatment (injection): Non-antibiotic
+220. CA13N | Other treatment (injection): Unknown injection
+221. CA13O | Other treatment: Intravenous (IV)
+222. CA13Q | Other treatment: Home remedy / Herbal medicine
+223. CA13X | Other treatment: Other
+224. CA13NR | Other treatment: No response
+225. CA14 | Child ill with fever in last 2 weeks
+226. CA15 | Blood taken from finger or heel for testing
+227. CA16 | Child ill with cough in last 2 weeks
+228. CA17 | Difficulty breathing during illness with cough
+229. CA18 | Symptoms due to problem in chest or blocked nose
+230. CA20 | Sought advice or treatment for illness
+231. CA21A | Place sought care: Government hospital
+232. CA21B | Place sought care: Government clincs / health centre (FWC / USC / RD)
+233. CA21C | Place sought care: Community Clinics (CC)
+234. CA21D | Place sought care: Community health worker
+235. CA21E | Place sought care: Mobile / Outreach clinic
+236. CA21H | Place sought care: Other public medical
+237. CA21I | Place sought care: Private hospital / clinic
+238. CA21J | Place sought care: Private physician
+239. CA21K | Place sought care: Private pharmacy
+240. CA21L | Place sought care: Community health worker (Non Government)
+241. CA21M | Place sought care: Private mobile clinic
+242. CA21N | Place sought care: NGO clinic/hospital
+243. CA21O | Place sought care: Other private medical
+244. CA21W | Place sought care: DK public or private
+245. CA21P | Place sought care: Relative / Friend
+246. CA21Q | Place sought care: Shop / Market / Street
+247. CA21R | Place sought care: Traditional practitioner
+248. CA21X | Place sought care: Other
+249. CA21NR | Place sought care: No response
+250. CA22 | Given medicine to treat this illness
+251. CA23L | Medicine: Antibiotics: Amoxicillin
+252. CA23M | Medicine: Antibiotics: Cotrimoxazole
+253. CA23N | Medicine: Antibiotics: Other antibiotic pill / syrup
+254. CA23O | Medicine: Antibiotics: Other antibiotic injection / IV
+255. CA23R | Medicine: Paracetamol / Panadol / Acetaminophen
+256. CA23S | Medicine: Aspirin
+257. CA23T | Medicine: Ibupropfen
+258. CA23W | Medicine: Only brand name recorded
+259. CA23X | Medicine: Other
+260. CA23Z | Medicine: DK
+261. CA23NR | Medicine: No response
+262. CA25A | Place got antibiotics: Government hospital
+263. CA25B | Place got antibiotics: Government clinics / health centre (FWC / USC / RD)
+264. CA25C | Place got antibiotics: Community Clinics (CC)
+265. CA25D | Place got antibiotics: Community health worker (Non Government)
+266. CA25E | Place got antibiotics: Mobile / Outreach clinic
+267. CA25H | Place got antibiotics: Other public medical
+268. CA25I | Place got antibiotics: Private hospital / clinic
+269. CA25J | Place got antibiotics: Private physician
+270. CA25K | Place got antibiotics: Private pharmacy
+271. CA25L | Place got antibiotics: Community health worker (Non Government)
+272. CA25M | Place got antibiotics: Private mobile clinic
+273. CA25N | Place got antibiotics: NGO clinic/hospital
+274. CA25O | Place got antibiotics: Other private medical
+275. CA25W | Place got antibiotics: DK public or private
+276. CA25P | Place got antibiotics: Relative / Friend
+277. CA25Q | Place got antibiotics: Shop / Market / Street
+278. CA25R | Place got antibiotics: Traditional practitioner
+279. CA25X | Place got antibiotics: Other
+280. CA25Z | Place got antibiotics: DK/Don't remember
+281. CA25NR | Place got antibiotics: No response
+282. CA31 | What was done to dispose of the stools
+283. AN1 | Cluster number
+284. AN2 | Household number
+285. AN3 | Child's line number
+286. AN4 | Age of child
+287. AN5 | Mother's line number
+288. AN6 | Interviewer number
+289. AN7 | Measurer number
+290. AN8 | Child's weight (kilograms)
+291. AN9 | Child undressed to the minimum
+292. AN11 | Child's length or height (centimetres)
+293. AN12 | Child measured lying or standing
+294. AN13D | Day of measurement
+295. AN13M | Month of measurement
+296. AN13Y | Year of measurement
+297. HH4 | Supervisor number
+298. HH6 | Area
+299. HH7 | Division
+300. HH7A | District
+301. HL4 | Sex
+302. ED5A | Highest level of education attended
+303. ED5B | Highest grade attended at that level
+304. CDOI | Date of interview of child (CMC)
+305. CDOB | Date of birth of child (CMC)
+306. CAGE | Age (in months)
+307. CAGE_6 | Age (in months)
+308. CAGE_11 | Age (in months)
+309. CAGED | Age (in days)
+310. HAP | Height for age percentile NCHS
+311. HAZ | Height for age z-score NCHS
+312. HAM | Height for age percent of reference median NCHS
+313. WAP | Weight for age percentile NCHS
+314. WAZ | Weight for age z-score NCHS
+315. WAM | Weight for age percent of reference median NCHS
+316. WHP | Weight for height percentile NCHS
+317. WHZ | Weight for height z-score NCHS
+318. WHM | Weight for height percent of reference median NCHS
+319. FLAG | Flag for anthropometric indicators
+320. BMI | Body Mass Index WHO
+321. ZBMI | Body Mass Index z-score WHO
+322. HAZ2 | Height for age z-score WHO
+323. WAZ2 | Weight for age z-score WHO
+324. WHZ2 | Weight for height z-score WHO
+325. HAZFLAG | Height for age flag WHO
+326. WAZFLAG | Weight for age flag WHO
+327. WHZFLAG | Weight for height flag WHO
+328. BMIFLAG | BMI flag WHO
+329. WHZNOAGE | Weight for height - Age flag WHO
+330. wscore | Combined wealth score
+331. windex5 | Wealth index quintile
+332. windex10 | Percentile Group of com1
+333. wscoreu | Urban wealth score
+334. windex5u | Urban wealth index quintile
+335. windex10u | Percentile Group of urb1
+336. wscorer | Rural wealth score
+337. windex5r | Rural wealth index quintile
+338. windex10r | Percentile Group of rur1
+339. chweight | Children under 5's sample weight
+340. melevel | Mother's education
+341. cdisability | Disability status (age 2-4 years)
+342. ethnicity | Ethnicity of household head
+343. caretakerdis | Mother's functional difficulties
+344. wmweight | Woman's sample weight
+345. stratum | Stratum
+346. PSU | Primary sampling unit
+
+================================================================================
+FILE: fs.sav
+================================================================================
+COLUMN COUNT: 268
+FSWEIGHT EXACT MATCH: NO
+
+WEIGHT-LIKE COLUMNS
+--------------------------------------------------------------------------------
+fshweight | label: Children 5-17's sample weight
+fsweight | label: Children 5-17's sample weight
+
+KEY GEOGRAPHY / DEMOGRAPHIC / EDUCATION COLUMNS
+--------------------------------------------------------------------------------
+
+COLUMN: HH1
+LABEL: Cluster number
+VALUE LABELS: {}
+
+COLUMN: HH2
+LABEL: Household number
+VALUE LABELS: {}
+
+COLUMN: LN
+LABEL: Line number
+VALUE LABELS: {}
+
+COLUMN: FS4
+LABEL: Mother / Caretaker's line number
+VALUE LABELS: {}
+
+COLUMN: FS17
+LABEL: Result of interview for children 5-17
+VALUE LABELS: {1.0: 'COMPLETED', 2.0: 'NOT AT HOME', 3.0: 'REFUSED', 4.0: 'PARTLY COMPLETED', 5.0: 'INCAPACITATED', 6.0: 'NO ADULT CONSENT FOR MOTHER / CARETAKER AGE 15-17', 96.0: 'OTHER'}
+
+COLUMN: FS12
+LABEL: Language of the Questionnaire
+VALUE LABELS: {2.0: 'BANGLA'}
+
+COLUMN: FS13
+LABEL: Language of the Interview
+VALUE LABELS: {2.0: 'BANGLA', 6.0: 'OTHER LANGUAGE'}
+
+COLUMN: FS14
+LABEL: Native language of the Respondent
+VALUE LABELS: {2.0: 'BANGLA', 6.0: 'OTHER LANGUAGE'}
+
+COLUMN: CB3
+LABEL: Age of child
+VALUE LABELS: {}
+
+COLUMN: CB4
+LABEL: Ever attended school or early childhood programme
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: CB5A
+LABEL: Highest level of education attended
+VALUE LABELS: {0.0: 'ECE', 1.0: 'PRIMARY', 2.0: 'SECONDARY', 3.0: 'SECONDARY/ HIGHER SECONDARY', 4.0: 'HIGHER', 9.0: 'NO RESPONSE'}
+
+COLUMN: CB7
+LABEL: Attended school or early childhood programme during current school year
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: CB8A
+LABEL: Level of education attended current school year
+VALUE LABELS: {0.0: 'ECE', 1.0: 'PRIMARY', 2.0: 'SECONDARY', 3.0: 'SECONDARY/ HIGHER SECONDARY', 4.0: 'HIGHER', 9.0: 'NO RESPONSE'}
+
+COLUMN: CB8B
+LABEL: Grade attended at that level attended current school year
+VALUE LABELS: {1.0: 'GRADE 1', 2.0: 'GRADE 2', 3.0: 'GRADE 3', 4.0: 'GRADE 4', 5.0: 'GRADE 5', 6.0: 'GRADE 6', 7.0: 'GRADE 7', 8.0: 'GRADE 8', 9.0: 'GRADE 9', 10.0: 'SSC/Dakhil', 11.0: 'GRADE 11', 12.0: 'HSC/Alim/Diploma/Polytechnic', 13.0: 'GRADE 13', 14.0: 'GRADE 14', 15.0: 'BA (Pass)/Fazil', 16.0: 'BA (Hons)/MBBS/BSc Engg.', 17.0: 'MA/MS/MSc and above', 18.0: 'GRADE 18', 99.0: 'NO RESPONSE'}
+
+COLUMN: CB9
+LABEL: Attended school or early childhood programme during previous school year
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: CB10A
+LABEL: Level of education attended previous school year
+VALUE LABELS: {0.0: 'ECE', 1.0: 'PRIMARY', 2.0: 'SECONDARY', 3.0: 'SECONDARY/ HIGHER SECONDARY', 4.0: 'HIGHER', 9.0: 'NO RESPONSE'}
+
+COLUMN: CB10B
+LABEL: Grade attended at that level attended previous school year
+VALUE LABELS: {1.0: 'GRADE 1', 2.0: 'GRADE 2', 3.0: 'GRADE 3', 4.0: 'GRADE 4', 5.0: 'GRADE 5', 6.0: 'GRADE 6', 7.0: 'GRADE 7', 8.0: 'GRADE 8', 9.0: 'GRADE 9', 10.0: 'SSC/Dakhil', 11.0: 'GRADE 11', 12.0: 'HSC/Alim/Diploma/Polytechnic', 13.0: 'GRADE 13', 14.0: 'GRADE 14', 15.0: 'BA (Pass)/Fazil', 16.0: 'BA (Hons)/MBBS/BSc Engg.', 17.0: 'MA/MS/MSc and above', 18.0: 'GRADE 18', 99.0: 'NO RESPONSE'}
+
+COLUMN: CL1A
+LABEL: Worked or helped on garden in past week
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: CL1X
+LABEL: Engaged in any other activity for income in past week
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: CL3
+LABEL: Hours worked in past week
+VALUE LABELS: {99.0: 'NO RESPONSE'}
+
+COLUMN: CL5
+LABEL: Activities required working with dangerous tools or heavy machinery
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: CL6A
+LABEL: Description of work:  exposed to dust, fumes, or gas
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: CL6B
+LABEL: Description of work:  exposed to extreme temperatures or humidity
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: CL6C
+LABEL: Description of work:  exposed to loud noise or vibration
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: CL6D
+LABEL: Description of work:  required to work at heights
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: CL6E
+LABEL: Description of work:  required to work with chemicals
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: CL6X
+LABEL: Description of work:  exposed to other
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: CL13
+LABEL: Number of hours engaged in past week
+VALUE LABELS: {99.0: 'NO RESPONSE'}
+
+COLUMN: FCD3
+LABEL: Mother / Caretaker of another child age under 5
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO'}
+
+COLUMN: FCF14
+LABEL: Compared with children of the same age, child has difficulty walking 100 yards
+VALUE LABELS: {1.0: 'NO DIFFICULTY', 2.0: 'SOME DIFFICULTY', 3.0: 'A LOT OF DIFFICULTY', 4.0: 'CANNOT WALK 100 YARDS AT ALL', 9.0: 'NO RESPONSE'}
+
+COLUMN: FCF15
+LABEL: Compared with children of the same age, child has difficulty walking 500 yards
+VALUE LABELS: {1.0: 'NO DIFFICULTY', 2.0: 'SOME DIFFICULTY', 3.0: 'A LOT OF DIFFICULTY', 4.0: 'CANNOT WALK 500 YARDS AT ALL', 9.0: 'NO RESPONSE'}
+
+COLUMN: FCF19
+LABEL: Compared with children of the same age, child has difficulty learning things
+VALUE LABELS: {1.0: 'NO DIFFICULTY', 2.0: 'SOME DIFFICULTY', 3.0: 'A LOT OF DIFFICULTY', 4.0: 'CANNOT LEARN THINGS AT ALL', 9.0: 'NO RESPONSE'}
+
+COLUMN: FCF20
+LABEL: Compared with children of the same age, child has difficulty remembering things
+VALUE LABELS: {1.0: 'NO DIFFICULTY', 2.0: 'SOME DIFFICULTY', 3.0: 'A LOT OF DIFFICULTY', 4.0: 'CANNOT REMEMBER THINGS AT ALL', 9.0: 'NO RESPONSE'}
+
+COLUMN: FCF23
+LABEL: Compared with children of the same age, child have difficulty controlling his/her behaviour
+VALUE LABELS: {1.0: 'NO DIFFICULTY', 2.0: 'SOME DIFFICULTY', 3.0: 'A LOT OF DIFFICULTY', 4.0: 'CANNOT CONTROL BEHAVIOUR AT ALL', 9.0: 'NO RESPONSE'}
+
+COLUMN: PR3
+LABEL: Number of children's books or picture books for child
+VALUE LABELS: {0.0: 'NONE', 1.0: 'ONE', 2.0: 'TWO', 3.0: 'THREE', 4.0: 'FOUR', 5.0: 'FIVE', 6.0: 'SIX', 7.0: 'SEVEN', 8.0: 'EIGHT', 9.0: 'NINE', 10.0: 'TEN OR MORE BOOKS', 99.0: 'NO RESPONSE'}
+
+COLUMN: PR5
+LABEL: Child ever had homework
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: PR6
+LABEL: Anyone helps child with homework
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: PR7
+LABEL: School have a School Governing Body in which parents can participate
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: PR9A
+LABEL: At meeting - discussed a plan for addressing key education isses faced by child's school
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: PR9B
+LABEL: At meeting - discussed school budget or use of unds received by child's school
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: PR11A
+LABEL: In the last 12 months gone to school for -  a school celebration or a sport event
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: PR11B
+LABEL: In the last 12 months gone to school for - to discuss child's progress with child's teachers
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: PR12A
+LABEL: In the last 12 months gone to school for - to natural disasters, such as flood, cyclone,epidemics etc
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: PR12B
+LABEL: In the last 12 months gone to school for - to man made disasters such as fire, building collapse, riots etc.
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: PR12C
+LABEL: In the last 12 months school closed due to - teacher strike or teacher absenteesim
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: PR12X
+LABEL: In the last 12 months school closed due to - any other reasons
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: PR15
+LABEL: Contacted the school officials or school governing bodies when this happened
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: FL4B
+LABEL: You have engaged the child in conversation and built rapport e.g. using an Icebreaker
+VALUE LABELS: {'?': 'NO RESPONSE', 'B': 'You have engaged the child in conversation and built rapport, e.g. using Icebreaker'}
+
+COLUMN: FL4C
+LABEL: The child is sat comfortably, able to use the Reading & Numbers Book without difficulty while you can see which page is open
+VALUE LABELS: {'?': 'NO RESPONSE', 'C': 'The child is sat comfortably, able to use the READING & NUMBERS Books without difficulty while you can see which page is'}
+
+COLUMN: FL6A
+LABEL: Child read books at home
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: FL6B
+LABEL: Someone read books to child
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: FL7
+LABEL: Language child speaks most of the time at home
+VALUE LABELS: {1.0: 'ENGLISH', 2.0: 'BANGLA', 6.0: 'OTHER', 9.0: 'NO RESPONSE'}
+
+COLUMN: FL9
+LABEL: Language teacher use most of the time when teaching child in class
+VALUE LABELS: {1.0: 'ENGLISH', 2.0: 'BANGLA', 6.0: 'OTHER', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: FL13
+LABEL: Giving the Child book - Manual introduction
+VALUE LABELS: {1.0: 'CONTINUE'}
+
+COLUMN: HH6
+LABEL: Area
+VALUE LABELS: {1.0: 'URBAN', 2.0: 'RURAL'}
+
+COLUMN: HH7
+LABEL: Division
+VALUE LABELS: {10.0: 'Barishal', 20.0: 'Chattogram', 30.0: 'Dhaka', 40.0: 'Khulna', 45.0: 'Mymenshing', 50.0: 'Rajshahi', 55.0: 'Rangpur', 60.0: 'Sylhet'}
+
+COLUMN: HH7A
+LABEL: District
+VALUE LABELS: {1.0: 'Bagerhat', 3.0: 'Bandarban', 4.0: 'Barguna', 6.0: 'Barishal', 9.0: 'Bhola', 10.0: 'Bogura', 12.0: 'Brahmanbaria', 13.0: 'Chandpur', 15.0: 'Chattogram', 18.0: 'Chuadanga', 19.0: 'Cumilla', 22.0: "Cox's Bazar", 26.0: 'Dhaka', 27.0: 'Dinajpur', 29.0: 'Faridpur', 30.0: 'Feni', 32.0: 'Gaibandha', 33.0: 'Gazipur', 35.0: 'Gopalganj', 36.0: 'Habiganj', 38.0: 'Joypurhat', 39.0: 'Jamalpur', 41.0: 'Jashore', 42.0: 'Jhalokati', 44.0: 'Jhenaidah', 46.0: 'Khagrachhari', 47.0: 'Khulna', 48.0: 'Kishoregonj', 49.0: 'Kurigram', 50.0: 'Kushtia'}
+
+COLUMN: HH52
+LABEL: Number of children age 5-17
+VALUE LABELS: {}
+
+COLUMN: HL4
+LABEL: Sex
+VALUE LABELS: {1.0: 'MALE', 2.0: 'FEMALE'}
+
+COLUMN: ED5A
+LABEL: Highest level of education attended
+VALUE LABELS: {0.0: 'ECE', 1.0: 'PRIMARY', 2.0: 'LOWER SECONDARY', 3.0: 'SECONDARY/ HIGHER SECONDARY', 4.0: 'HIGHER', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: FSAGE
+LABEL: Age
+VALUE LABELS: {1.0: '5-9', 2.0: '10-14', 3.0: '15-17'}
+
+COLUMN: schage
+LABEL: Age at beginning of school year
+VALUE LABELS: {998.0: 'DK/Missing'}
+
+COLUMN: wscore
+LABEL: Combined wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5
+LABEL: Wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: wscoreu
+LABEL: Urban wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5u
+LABEL: Urban wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: wscorer
+LABEL: Rural wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5r
+LABEL: Rural wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: fselevel
+LABEL: Child's education
+VALUE LABELS: {0.0: 'Pre-primary or none', 1.0: 'Primary', 2.0: 'Secondary', 3.0: 'Higher secondary+', 9.0: 'Missing/DK'}
+
+COLUMN: fsdisability
+LABEL: Child's functional difficulties
+VALUE LABELS: {1.0: 'Has functional difficulty', 2.0: 'Has no functional difficulty'}
+
+COLUMN: ethnicity
+LABEL: Ethnicity of household head
+VALUE LABELS: {1.0: 'Bengali', 2.0: 'Other', 9.0: 'Missing/DK'}
+
+COLUMN: caretakerdis
+LABEL: Functional difficulties (age 18-49 years)
+VALUE LABELS: {1.0: 'Has functional difficulty', 2.0: 'Has no functional difficulty', 9.0: 'No information'}
+
+COLUMN: melevel
+LABEL: Mother’s education
+VALUE LABELS: {0.0: 'Pre-primary or none', 1.0: 'Primary', 2.0: 'Secondary', 3.0: 'Higher secondary+', 9.0: 'Missing/DK'}
+
+COLUMN: stratum
+LABEL: Stratum
+VALUE LABELS: {}
+
+COLUMN: PSU
+LABEL: Primary sampling unit
+VALUE LABELS: {}
+
+FULL COLUMN LIST
+--------------------------------------------------------------------------------
+001. HH1 | Cluster number
+002. HH2 | Household number
+003. LN | Line number
+004. FS1 | Cluster number
+005. FS2 | Household number
+006. FS3 | Child's line number
+007. FSINT | Interviewer number
+008. FS4 | Mother / Caretaker's line number
+009. FS5 | Interviewer number
+010. FS6 | Supervisor number
+011. FS7D | Day of interview
+012. FS7M | Month of interview
+013. FS7Y | Year of interview
+014. FS9 | Respondent to another questionnaire
+015. FS10 | Consent
+016. FS17 | Result of interview for children 5-17
+017. FS8H | Start of interview - Hour
+018. FS8M | Start of interview - Minutes
+019. FS11H | End of interview - Hour
+020. FS11M | End of interview - Minutes
+021. FS12 | Language of the Questionnaire
+022. FS13 | Language of the Interview
+023. FS14 | Native language of the Respondent
+024. FS15 | Translator used
+025. FSHINT | Household interviewer
+026. FSFIN | Finish
+027. CB2M | Month of birth of child
+028. CB2Y | Year of birth of child
+029. CB3 | Age of child
+030. CB4 | Ever attended school or early childhood programme
+031. CB5A | Highest level of education attended
+032. CB5B | Highest grade attended at that level
+033. CB6 | Ever completed that grade/year
+034. CB7 | Attended school or early childhood programme during current school year
+035. CB8A | Level of education attended current school year
+036. CB8B | Grade attended at that level attended current school year
+037. CB9 | Attended school or early childhood programme during previous school year
+038. CB10A | Level of education attended previous school year
+039. CB10B | Grade attended at that level attended previous school year
+040. CL1A | Worked or helped on garden in past week
+041. CL1B | Helped in family business in past week
+042. CL1C | Produced or sold articles in past week
+043. CL1X | Engaged in any other activity for income in past week
+044. CL3 | Hours worked in past week
+045. CL4 | Activities required carrying heavy loads
+046. CL5 | Activities required working with dangerous tools or heavy machinery
+047. CL6A | Description of work:  exposed to dust, fumes, or gas
+048. CL6B | Description of work:  exposed to extreme temperatures or humidity
+049. CL6C | Description of work:  exposed to loud noise or vibration
+050. CL6D | Description of work:  required to work at heights
+051. CL6E | Description of work:  required to work with chemicals
+052. CL6X | Description of work:  exposed to other
+053. CL7 | Fetched water in past week
+054. CL8 | Hours spent fetching water  in past week
+055. CL9 | Collected firewood  in past week
+056. CL10 | Hours spent collecting firewood  in past week
+057. CL11A | Household chores in past week:  shopping
+058. CL11B | Household chores in past week:  cooking
+059. CL11C | Household chores in past week:  washing dishes  or cleaning around the house
+060. CL11D | Household chores in past week:  washing clothes
+061. CL11E | Household chores in past week:  caring for children
+062. CL11F | Household chores in past week:  caring for old or sick
+063. CL11X | Household chores in past week:  other household tasks
+064. CL13 | Number of hours engaged in past week
+065. FCD2A | Took away privileges
+066. FCD2B | Explained why behaviour was wrong
+067. FCD2C | Shook child
+068. FCD2D | Shouted, yelled or screamed at child
+069. FCD2E | Gave child something else to do
+070. FCD2F | Spanked, hit or slapped child on bottom with bare hand
+071. FCD2G | Hit child on the bottom or elsewhere with belt, brush, stick, etc.
+072. FCD2H | Called child dumb, lazy or another name
+073. FCD2I | Hit or slapped child on the face, head or ears
+074. FCD2J | Hit or slapped child on the hand, arm or leg
+075. FCD2K | Beat child up as hard as one could
+076. FCD3 | Mother / Caretaker of another child age under 5
+077. FCD4 | Already responded to question UCD5
+078. FCD5 | Child needs to be physically punished to be brought up properly
+079. FCF1 | Child wear glasses or contact lenses
+080. FCF2 | Child uses hearing aid
+081. FCF3 | Child uses any equipment or receive assistance for walking
+082. FCF6 | Child has difficulty seeing
+083. FCF8 | Child has difficulty hearing sounds like people voices or music
+084. FCF10 | Without using equipment or assistance child has difficulty walking 100 yards
+085. FCF11 | Without using equipment or assistance child has difficulty walking 500 yards
+086. FCF12 | When using equipment or assistance child has difficulty walking 100 yards
+087. FCF13 | When using equipment or assistance child has difficulty walking 500 yards
+088. FCF14 | Compared with children of the same age, child has difficulty walking 100 yards
+089. FCF15 | Compared with children of the same age, child has difficulty walking 500 yards
+090. FCF16 | Child has difficulty with self-care such as feeding or dressing
+091. FCF17 | Child has difficulty being understood by people inside of this household
+092. FCF18 | Child has difficulty being understood by people outside of this household
+093. FCF19 | Compared with children of the same age, child has difficulty learning things
+094. FCF20 | Compared with children of the same age, child has difficulty remembering things
+095. FCF21 | Child has difficulty concentrating on an activity that he/she enjoys
+096. FCF22 | Child has difficulty accepting changes in his/her routine
+097. FCF23 | Compared with children of the same age, child have difficulty controlling his/her behaviour
+098. FCF24 | Child has difficulty making friends
+099. FCF25 | How often child seems very anxious, nervous or worried
+100. FCF26 | How often child seems very sad or depressed
+101. PR3 | Number of children's books or picture books for child
+102. PR5 | Child ever had homework
+103. PR6 | Anyone helps child with homework
+104. PR7 | School have a School Governing Body in which parents can participate
+105. PR8 | Attended a PTA / SMC meeting in the last 12 months
+106. PR9A | At meeting - discussed a plan for addressing key education isses faced by child's school
+107. PR9B | At meeting - discussed school budget or use of unds received by child's school
+108. PR10 | In the last 12 months - received a student or student report card
+109. PR11A | In the last 12 months gone to school for -  a school celebration or a sport event
+110. PR11B | In the last 12 months gone to school for - to discuss child's progress with child's teachers
+111. PR12A | In the last 12 months gone to school for - to natural disasters, such as flood, cyclone,epidemics etc
+112. PR12B | In the last 12 months gone to school for - to man made disasters such as fire, building collapse, riots etc.
+113. PR12C | In the last 12 months school closed due to - teacher strike or teacher absenteesim
+114. PR12X | In the last 12 months school closed due to - any other reasons
+115. PR13 | In the last 12 months, child was unable to attend class due to teacher being strike/ absent
+116. PR15 | Contacted the school officials or school governing bodies when this happened
+117. FL1 | Consent
+118. FL2H | Start of interview with child - Hour
+119. FL2M | Start of interview with child - Minutes
+120. FL3 | Consent
+121. FL4A | You are not alone with the child unless they are at least visible to an adult known to the child
+122. FL4B | You have engaged the child in conversation and built rapport e.g. using an Icebreaker
+123. FL4C | The child is sat comfortably, able to use the Reading & Numbers Book without difficulty while you can see which page is open
+124. FL6A | Child read books at home
+125. FL6B | Someone read books to child
+126. FL7 | Language child speaks most of the time at home
+127. FL9 | Language teacher use most of the time when teaching child in class
+128. FL10 | Like to read story
+129. FL13 | Giving the Child book - Manual introduction
+130. FL14 | Child read every word in the practice correctly
+131. FL15 | Reading done: How old is Mini?
+132. FL16 | FL16: Mini is 5 years old
+133. FL17 | Another question: Who is older: Mini or Tomi
+134. FL18 | FL18: Tomi is older than Mini. Tomi is 6 and Mini is 5.
+135. FLINTRO | FL19. INTRO
+136. FL19W1 | Word1
+137. FL19W2 | Word2
+138. FL19W3 | Word3
+139. FL19W4 | Word4
+140. FL19W5 | Word5
+141. FL19W6 | Word6
+142. FL19W7 | Word7
+143. FL19W8 | Word8
+144. FL19W9 | Word9
+145. FL19W10 | Word10
+146. FL19W11 | Word11
+147. FL19W12 | Word12
+148. FL19W13 | Word13
+149. FL19W14 | Word14
+150. FL19W15 | Word15
+151. FL19W16 | Word16
+152. FL19W17 | Word17
+153. FL19W18 | Word18
+154. FL19W19 | Word19
+155. FL19W20 | Word20
+156. FL19W21 | Word21
+157. FL19W22 | Word22
+158. FL19W23 | Word23
+159. FL19W24 | Word24
+160. FL19W25 | Word25
+161. FL19W26 | Word26
+162. FL19W27 | Word27
+163. FL19W28 | Word28
+164. FL19W29 | Word29
+165. FL19W30 | Word30
+166. FL19W31 | Word31
+167. FL19W32 | Word32
+168. FL19W33 | Word33
+169. FL19W34 | Word34
+170. FL19W35 | Word35
+171. FL19W36 | Word36
+172. FL19W37 | Word37
+173. FL19W38 | Word38
+174. FL19W39 | Word39
+175. FL19W40 | Word40
+176. FL19W41 | Word41
+177. FL19W42 | Word42
+178. FL19W43 | Word43
+179. FL19W44 | Word44
+180. FL19W45 | Word45
+181. FL19W46 | Word46
+182. FL19W47 | Word47
+183. FL19W48 | Word48
+184. FL19W49 | Word49
+185. FL19W50 | Word50
+186. FL19W51 | Word51
+187. FL19W52 | Word52
+188. FL19W53 | Word53
+189. FL19W54 | Word54
+190. FL19W55 | Word55
+191. FL19W56 | Word56
+192. FL19W57 | Word57
+193. FL19W58 | Word58
+194. FL19W59 | Word59
+195. FL19W60 | Word60
+196. FL19W61 | Word61
+197. FL19W62 | Word62
+198. FL19W63 | Word63
+199. FL19W64 | Word64
+200. FL19W65 | Word65
+201. FL19W66 | Word66
+202. FL19W67 | Word67
+203. FL19W68 | Word68
+204. FL19W69 | Word69
+205. FL19W70 | Word70
+206. FL19W71 | Word71
+207. FL19W72 | Word72
+208. FL20A | Total number of words attempted
+209. FL20B | Total number of words incorrect or missed
+210. FL21 | How well did child read the story
+211. FL22A | Story comprehension: 1 (What class is Musa in)
+212. FL22B | Story comprehension: 2 (What did Musa see on the way home)
+213. FL22C | Story comprehension: 3 (Why did Musa start crying)
+214. FL22D | Story comprehension: 4 (Where did Musa (down))
+215. FL22E | Story comprehension: 5 (Why was Musa happy)
+216. FL23A | Child recognizes symbol: 9
+217. FL23B | Child recognizes symbol: 12
+218. FL23C | Child recognizes symbol: 30
+219. FL23D | Child recognizes symbol: 48
+220. FL23E | Child recognizes symbol: 74
+221. FL23F | Child recognizes symbol: 731
+222. FL28 | Result of interview with child
+223. HH4 | Supervisor number
+224. HH6 | Area
+225. HH7 | Division
+226. HH7A | District
+227. HH52 | Number of children age 5-17
+228. HL4 | Sex
+229. ED5A | Highest level of education attended
+230. ED5B | Highest grade attended at that level
+231. FSAGE | Age
+232. FSDOI | Date of interview child 5-17 (CMC)
+233. FSDOB | Date of birth of child 5-17 (CMC)
+234. schage | Age at beginning of school year
+235. wscore | Combined wealth score
+236. windex5 | Wealth index quintile
+237. windex10 | Percentile Group of com1
+238. wscoreu | Urban wealth score
+239. windex5u | Urban wealth index quintile
+240. windex10u | Percentile Group of urb1
+241. wscorer | Rural wealth score
+242. windex5r | Rural wealth index quintile
+243. windex10r | Percentile Group of rur1
+244. fshweight | Children 5-17's sample weight
+245. fsweight | Children 5-17's sample weight
+246. fselevel | Child's education
+247. fsdisability | Child's functional difficulties
+248. ethnicity | Ethnicity of household head
+249. caretakerdis | Functional difficulties (age 18-49 years)
+250. melevel | Mother’s education
+251. FL24A | Child identities bigger of two numbers: 7-5
+252. FL24B | Child identities bigger of two numbers: 11-24
+253. FL24C | Child identities bigger of two numbers: 58-49
+254. FL24D | Child identities bigger of two numbers: 65-67
+255. FL24E | Child identities bigger of two numbers: 146-154
+256. FL25A | Child adds numbers correctly: 3+2
+257. FL25B | Child adds numbers correctly: 8+6
+258. FL25C | Child adds numbers correctly: 7+3
+259. FL25D | Child adds numbers correctly: 13+6
+260. FL25E | Child adds numbers correctly: 12+24
+261. FL27A | Child identifies next number: 5-6-7-X
+262. FL27B | Child identifies next number: 14-15-X-17
+263. FL27C | Child identifies next number: 20-X-40-50
+264. FL27D | Child identifies next number: 2-4-6-X
+265. FL27E | Child identifies next number: 5-8-11-X
+266. FL27_shift | Shift on variable FL27
+267. stratum | Stratum
+268. PSU | Primary sampling unit
+
+================================================================================
+FILE: hh.sav
+================================================================================
+COLUMN COUNT: 273
+FSWEIGHT EXACT MATCH: NO
+
+WEIGHT-LIKE COLUMNS
+--------------------------------------------------------------------------------
+hhweight | label: Household sample weight
+wqhaweight | label: Weight for household WQT-Arsenic
+wqeweight | label: Weight for WQT E.coli household and source
+wqsaweight | label: Weight for WQT Arsenic  source
+
+KEY GEOGRAPHY / DEMOGRAPHIC / EDUCATION COLUMNS
+--------------------------------------------------------------------------------
+
+COLUMN: HH1
+LABEL: Cluster number
+VALUE LABELS: {}
+
+COLUMN: HH2
+LABEL: Household number
+VALUE LABELS: {}
+
+COLUMN: HH6
+LABEL: Area
+VALUE LABELS: {1.0: 'URBAN', 2.0: 'RURAL'}
+
+COLUMN: HH7
+LABEL: Division
+VALUE LABELS: {10.0: 'Barishal', 20.0: 'Chattogram', 30.0: 'Dhaka', 40.0: 'Khulna', 45.0: 'Mymenshing', 50.0: 'Rajshahi', 55.0: 'Rangpur', 60.0: 'Sylhet'}
+
+COLUMN: HH7A
+LABEL: District
+VALUE LABELS: {1.0: 'Bagerhat', 3.0: 'Bandarban', 4.0: 'Barguna', 6.0: 'Barishal', 9.0: 'Bhola', 10.0: 'Bogura', 12.0: 'Brahmanbaria', 13.0: 'Chandpur', 15.0: 'Chattogram', 18.0: 'Chuadanga', 19.0: 'Cumilla', 22.0: "Cox's Bazar", 26.0: 'Dhaka', 27.0: 'Dinajpur', 29.0: 'Faridpur', 30.0: 'Feni', 32.0: 'Gaibandha', 33.0: 'Gazipur', 35.0: 'Gopalganj', 36.0: 'Habiganj', 38.0: 'Joypurhat', 39.0: 'Jamalpur', 41.0: 'Jashore', 42.0: 'Jhalokati', 44.0: 'Jhenaidah', 46.0: 'Khagrachhari', 47.0: 'Khulna', 48.0: 'Kishoregonj', 49.0: 'Kurigram', 50.0: 'Kushtia'}
+
+COLUMN: HH10
+LABEL: HH selected for Blank Testing
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO'}
+
+COLUMN: HH11H
+LABEL: Start of interview - Hour
+VALUE LABELS: {}
+
+COLUMN: HH11M
+LABEL: Start of interview - Minutes
+VALUE LABELS: {}
+
+COLUMN: HH12
+LABEL: Consent
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO / NOT ASKED'}
+
+COLUMN: HH13H
+LABEL: End of interview - Hour
+VALUE LABELS: {}
+
+COLUMN: HH13M
+LABEL: End of interview - Minutes
+VALUE LABELS: {}
+
+COLUMN: HH14
+LABEL: Language of the Questionnaire
+VALUE LABELS: {2.0: 'BANGLA'}
+
+COLUMN: HH15
+LABEL: Language of the Interview
+VALUE LABELS: {2.0: 'BANGLA', 6.0: 'OTHER LANGUAGE'}
+
+COLUMN: HH16
+LABEL: Native language of the Respondent
+VALUE LABELS: {2.0: 'BANGLA', 6.0: 'OTHER LANGUAGE'}
+
+COLUMN: HH17
+LABEL: Translator used
+VALUE LABELS: {1.0: 'YES, ENTIRE QUESTIONNAIRE', 2.0: 'YES, PART OF QUESTIONNAIRE', 3.0: 'NO, NOT USED'}
+
+COLUMN: HH26A
+LABEL: Rank number of the selected child
+VALUE LABELS: {}
+
+COLUMN: HH26B
+LABEL: Child line number
+VALUE LABELS: {97.0: 'Inconsistent'}
+
+COLUMN: HH26C
+LABEL: Child's age
+VALUE LABELS: {}
+
+COLUMN: HH51
+LABEL: Number of children under age 5
+VALUE LABELS: {}
+
+COLUMN: HH52
+LABEL: Number of children age 5-17
+VALUE LABELS: {}
+
+COLUMN: HC1A
+LABEL: Religion of household head
+VALUE LABELS: {1.0: 'MUSLIM', 2.0: 'HINDU', 3.0: 'CHRISTIANITY', 4.0: 'BUDDHISM', 6.0: 'OTHER RELIGION', 7.0: 'NO RELIGION', 9.0: 'NO RESPONSE'}
+
+COLUMN: HC1B
+LABEL: Language of household head
+VALUE LABELS: {2.0: 'BANGLA', 6.0: 'OTHER LANGUAGE', 9.0: 'NO RESPONSE'}
+
+COLUMN: HC2
+LABEL: Ethnic group of household head
+VALUE LABELS: {1.0: 'BANGALI', 2.0: 'CHAKMA', 3.0: 'SAONTAL', 4.0: 'MARMA', 5.0: 'TRIPURA', 6.0: 'GARO', 7.0: 'TONCHANGYA', 8.0: 'MRO', 9.0: 'KHASHIA', 10.0: 'MANIPUR', 96.0: 'OTHER', 99.0: 'NO RESPONSE'}
+
+COLUMN: HHSEX
+LABEL: Sex of household head
+VALUE LABELS: {1.0: 'Male', 2.0: 'Female', 9.0: 'Missing'}
+
+COLUMN: HHAGE
+LABEL: Age of household head
+VALUE LABELS: {}
+
+COLUMN: HH56
+LABEL: Number of CF questionnaires completed (age 5-17)
+VALUE LABELS: {}
+
+COLUMN: ethnicity
+LABEL: Ethnicity of household head
+VALUE LABELS: {1.0: 'Bengali', 2.0: 'Other', 9.0: 'Missing/DK'}
+
+COLUMN: helevel
+LABEL: Education of household head
+VALUE LABELS: {0.0: 'Pre-primary or none', 1.0: 'Primary', 2.0: 'Secondary', 3.0: 'Higher+', 9.0: 'Missing/DK'}
+
+COLUMN: wscore
+LABEL: Combined wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5
+LABEL: Wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: wscoreu
+LABEL: Urban wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5u
+LABEL: Urban wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: wscorer
+LABEL: Rural wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5r
+LABEL: Rural wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: stratum
+LABEL: Stratum
+VALUE LABELS: {}
+
+COLUMN: PSU
+LABEL: Primary sampling unit
+VALUE LABELS: {}
+
+FULL COLUMN LIST
+--------------------------------------------------------------------------------
+001. HH1 | Cluster number
+002. HH2 | Household number
+003. HINT | Household interviewer number
+004. HH3 | Interviewer number
+005. HH4 | Supervisor number
+006. HH5D | Day of interview
+007. HH5M | Month of interview
+008. HH5Y | Year of interview
+009. HH6 | Area
+010. HH7 | Division
+011. HH7A | District
+012. HH9 | HH selected for Water Quality Testing (Arsenic HH)
+013. HH9A | HH selected for Water Quality Testing (E.Coli)
+014. HH9B | HH selected for Water Quality Testing (Arsenic source)
+015. HH10 | HH selected for Blank Testing
+016. HH11H | Start of interview - Hour
+017. HH11M | Start of interview - Minutes
+018. HH12 | Consent
+019. HH46 | Result of HH interview
+020. HH13H | End of interview - Hour
+021. HH13M | End of interview - Minutes
+022. HH14 | Language of the Questionnaire
+023. HH15 | Language of the Interview
+024. HH16 | Native language of the Respondent
+025. HH17 | Translator used
+026. HH26A | Rank number of the selected child
+027. HH26B | Child line number
+028. HH26C | Child's age
+029. HH33X$01 | Roster to check the consent for interview girls 15-17
+030. HH33X$02 | Roster to check the consent for interview girls 15-17
+031. HH33X$03 | Roster to check the consent for interview girls 15-17
+032. HH33X$04 | Roster to check the consent for interview girls 15-17
+033. HH33X$05 | Roster to check the consent for interview girls 15-17
+034. HH33X$06 | Roster to check the consent for interview girls 15-17
+035. HH33X$07 | Roster to check the consent for interview girls 15-17
+036. HH33X$08 | Roster to check the consent for interview girls 15-17
+037. HH33X$09 | Roster to check the consent for interview girls 15-17
+038. HH33X$10 | Roster to check the consent for interview girls 15-17
+039. HH33X$11 | Roster to check the consent for interview girls 15-17
+040. HH33X$12 | Roster to check the consent for interview girls 15-17
+041. HH33X$13 | Roster to check the consent for interview girls 15-17
+042. HH33X$14 | Roster to check the consent for interview girls 15-17
+043. HH33X$15 | Roster to check the consent for interview girls 15-17
+044. HH33X$16 | Roster to check the consent for interview girls 15-17
+045. HH33X$17 | Roster to check the consent for interview girls 15-17
+046. HH33X$18 | Roster to check the consent for interview girls 15-17
+047. HH33X$19 | Roster to check the consent for interview girls 15-17
+048. HH33X$20 | Roster to check the consent for interview girls 15-17
+049. HH33X$21 | Roster to check the consent for interview girls 15-17
+050. HH33X$22 | Roster to check the consent for interview girls 15-17
+051. HH33X$23 | Roster to check the consent for interview girls 15-17
+052. HH33X$24 | Roster to check the consent for interview girls 15-17
+053. HH33X$25 | Roster to check the consent for interview girls 15-17
+054. HH33X$26 | Roster to check the consent for interview girls 15-17
+055. HH33X$27 | Roster to check the consent for interview girls 15-17
+056. HH33X$28 | Roster to check the consent for interview girls 15-17
+057. HH33X$29 | Roster to check the consent for interview girls 15-17
+058. HH33X$30 | Roster to check the consent for interview girls 15-17
+059. HH33X$31 | Roster to check the consent for interview girls 15-17
+060. HH33X$32 | Roster to check the consent for interview girls 15-17
+061. HH33X$33 | Roster to check the consent for interview girls 15-17
+062. HH33X$34 | Roster to check the consent for interview girls 15-17
+063. HH33X$35 | Roster to check the consent for interview girls 15-17
+064. HH33X$36 | Roster to check the consent for interview girls 15-17
+065. HH33X$37 | Roster to check the consent for interview girls 15-17
+066. HH33X$38 | Roster to check the consent for interview girls 15-17
+067. HH33X$39 | Roster to check the consent for interview girls 15-17
+068. HH33X$40 | Roster to check the consent for interview girls 15-17
+069. HH33X$41 | Roster to check the consent for interview girls 15-17
+070. HH33X$42 | Roster to check the consent for interview girls 15-17
+071. HH33X$43 | Roster to check the consent for interview girls 15-17
+072. HH33X$44 | Roster to check the consent for interview girls 15-17
+073. HH33X$45 | Roster to check the consent for interview girls 15-17
+074. HH33X$46 | Roster to check the consent for interview girls 15-17
+075. HH33X$47 | Roster to check the consent for interview girls 15-17
+076. HH33X$48 | Roster to check the consent for interview girls 15-17
+077. HH33X$49 | Roster to check the consent for interview girls 15-17
+078. HH33X$50 | Roster to check the consent for interview girls 15-17
+079. HH33 | Consent for interview girls 15-17
+080. HH44 | Consent for Water Quality Testing
+081. HH47 | Respondent to HH questionnaire
+082. HH48 | Number of HH members
+083. HH49 | Number of women 15-49 years
+084. HH51 | Number of children under age 5
+085. HH52 | Number of children age 5-17
+086. INTROHL | Introduction HH Listing
+087. HHAUX | Other household members
+088. HHWQ | Water Quality prompt
+089. HHFIN | Finish
+090. HC1A | Religion of household head
+091. HC1B | Language of household head
+092. HC2 | Ethnic group of household head
+093. HC3 | Number of rooms used for sleeping
+094. HC4 | Main material of floor
+095. HC5 | Main material of roof
+096. HC6 | Main material of exterior wall
+097. HC7A | Household have: Fixed telephone line
+098. HC7B | Household have: Radio
+099. HC7C | Household have: Cot/Bed
+100. HC7D | Household have: Table/Chair
+101. HC7E | Household have: Almirah/wardrobe
+102. HC7F | Household have: Sofa set
+103. HC7G | Household have: Water Filter/Dispenser
+104. HC8 | Household have electricity
+105. HC9A | Household have: Television
+106. HC9B | Household have: Refrigerator/Freezer
+107. HC9C | Household have: Air Conditioner
+108. HC9D | Household have: Washing Machine
+109. HC9E | Household have: Electric Water Pump
+110. HC9F | Household have: Electric Fan
+111. HC10A | Any member of household own: Wristwatch
+112. HC10B | Any member of household own: Bicycle
+113. HC10C | Any member of household own: Motorcycle or scooter
+114. HC10D | Any member of household own: Animal-drawn cart
+115. HC10E | Any member of household own: Bus, Car, truck or covered van
+116. HC10F | Any member of household own: Boat with motor
+117. HC10G | Any member of household own: Rickshaw or Rickshaw Van
+118. HC10H | Any member of household own: Nasiman/ Kariman/ Votbati
+119. HC10I | Any member of household own: Easy Bike/Auto Bike
+120. HC10J | Any member of household own: Country boat (without motor)
+121. HC11 | Any member have a computer
+122. HC12 | Any member have a mobile phone
+123. HC13 | Internet access at home
+124. HC14 | Household owns the dwelling
+125. HC15 | Any household member own land that can be used for agriculture
+126. HC16 | Decimal of agricultural land members of household owns
+127. HC17 | Household own any animals
+128. HC18A | Cows or bulls
+129. HC18B | Water buffalo/goail
+130. HC18C | Horses, donkeys or mules
+131. HC18D | Goats
+132. HC18E | Sheep
+133. HC18F | Chickens
+134. HC18G | Pigs
+135. HC18H | Ducks
+136. HC18I | Pigeons
+137. HC19 | Any household member own bank account
+138. ST2$1 | Aware of (name of programme)
+139. ST2$2 | Aware of (name of programme)
+140. ST2$3 | Aware of (name of programme)
+141. ST2$4 | Aware of (name of programme)
+142. ST2$5 | Aware of (name of programme)
+143. ST2$6 | Aware of (name of programme)
+144. ST3$1 | Received assistance through (name of programme)
+145. ST3$2 | Received assistance through (name of programme)
+146. ST3$3 | Received assistance through (name of programme)
+147. ST3$4 | Received assistance through (name of programme)
+148. ST3$5 | Received assistance through (name of programme)
+149. ST3$6 | Received assistance through (name of programme)
+150. ST4U$1 | Last time assistance was received (unit)
+151. ST4U$2 | Last time assistance was received (unit)
+152. ST4U$3 | Last time assistance was received (unit)
+153. ST4U$4 | Last time assistance was received (unit)
+154. ST4U$5 | Last time assistance was received (unit)
+155. ST4U$6 | Last time assistance was received (unit)
+156. ST4N$1 | Last time assistance was received (number)
+157. ST4N$2 | Last time assistance was received (number)
+158. ST4N$3 | Last time assistance was received (number)
+159. ST4N$4 | Last time assistance was received (number)
+160. ST4N$5 | Last time assistance was received (number)
+161. ST4N$6 | Last time assistance was received (number)
+162. EU1 | Type of cookstove mainly used for cooking
+163. EU2 | Cookstove have a chimney
+164. EU3 | Cookstove have a fan
+165. EU4 | Type of energy source for cookstove
+166. EU5 | Place for cooking
+167. EU9 | Type of lighting in household
+168. WS1 | Main source of drinking water
+169. WS2 | Main source of water used for other purposes (if bottled water used for drinking)
+170. WS3 | Location of the water source
+171. WS4 | Time (in minutes) to get water and come back
+172. WS5 | Person collecting water
+173. WS6 | Number of times person collected water in the last seven days
+174. WS7 | There been any time in the last month without sufficient water
+175. WS8 | Main reason without sufficient water
+176. WS9 | Treat water to make safer for drinking
+177. WS10A | Water treatment: Boil
+178. WS10B | Water treatment: Add bleach/chlorine
+179. WS10C | Water treatment: Strain it through a cloth
+180. WS10D | Water treatment: Use water filter
+181. WS10E | Water treatment: Solar disinfection
+182. WS10F | Water treatment: Let it stand and settle
+183. WS10X | Water treatment: Other
+184. WS10Z | Water treatment: DK
+185. WS10NR | Water treatment: No response
+186. WS11 | Type of toilet facility
+187. WS12 | Pit latrine or septic tank ever been emptied
+188. WS13 | Place the contents were emptied
+189. WS14 | Location of the toilet faciltity
+190. WS15 | Toilet facility shared
+191. WS16 | Toilet shared with other household or with general public
+192. WS17 | Households using this toilet facility
+193. HW1 | Place where household members most often wash their hands
+194. HW2 | Water available at the place for handwashing
+195. HW3 | Soap or detergent present at place of handwashing
+196. HW4 | Usual place for handwashing
+197. HW5 | Soap/other material available for washing hands
+198. HW6 | Hand washing material shown
+199. HW7A | Bar or liquid soap
+200. HW7B | Detergent (Powder / Liquid / Paste)
+201. HW7C | Ash / Mud / Sand
+202. HW7NR | No response
+203. SA1 | Salt iodization test outcome
+204. SA2 | Salt iodization recheck test outcome
+205. WQ1 | Cluster number
+206. WQ2 | Household number
+207. WQ3 | Measurer number
+208. WQ4 | Interviewer number
+209. WQ5D | Day of water quality test
+210. WQ5M | Month of water quality test
+211. WQ5Y | Year of water quality test
+212. WQ5A | HH selected for household Arsenic testing
+213. WQ5B | HH selected for E.coli testing
+214. WQ5C | HH selected for source Arsenic testing
+215. WQ6 | HH selected for blank testing
+216. WQ7 | Respondent to water quality testing questionnaire
+217. WQ8 | Consent for water quality test
+218. WQ31 | Result of water quality test
+219. WQ10H | Start of water quality test - Hour
+220. WQ10M | Start of water quality test - Minutes
+221. WQ23H | End of water quality test - Hour
+222. WQ23M | End of water quality test - Minutes
+223. WQ11 | A glass of water that you would give to a child to drink was provided
+224. WQ12 | Water was collected from the source
+225. WQ12A | Result of Arsenic test from Household water (in PPB)
+226. WQ14 | Done anything to the water to make it safer to drink
+227. WQ15A | Water treatment: Boil
+228. WQ15B | Water treatment: Add bleach/chlorine
+229. WQ15C | Water treatment: Strain it through a cloth
+230. WQ15D | Water treatment: Use water filter
+231. WQ15E | Water treatment: Solar disinfection
+232. WQ15F | Water treatment: Let it stand and settle
+233. WQ15X | Water treatment: Other
+234. WQ15Z | Water treatment: DK
+235. WQ15NR | Water treatment: No response
+236. WQ17 | Source of water where the glass of water was collected
+237. WQ18 | Main source of water was shown
+238. WQ19 | Source water sample for E.Coli collected
+239. WQ19B | Source water sample for arsenic source testing
+240. WQ19C | Result of Arsenic test from source water (in PPB)
+241. WQ20A | Blank water test available for Arsenic
+242. WQ20B | Result of Arsenic test from Sterile water (in PPB)
+243. WQ20C | Blank water test available for E.Coli
+244. WQ24D | Day of recording test results
+245. WQ24M | Month of recording test results
+246. WQ24Y | Year of recording test results
+247. WQ25H | Time of recording test results - Hour
+248. WQ25M | Time of recording test results - Minutes
+249. WQ26 | Household water test (100ml)
+250. WQ27 | Source water test (100ml)
+251. WQ29 | Blank water test (100ml)
+252. HHSEX | Sex of household head
+253. HHAGE | Age of household head
+254. HH53 | Number of woman' questionnaires completed
+255. HH55 | Number of under - 5 questionnaires completed
+256. HH56 | Number of CF questionnaires completed (age 5-17)
+257. ethnicity | Ethnicity of household head
+258. helevel | Education of household head
+259. wscore | Combined wealth score
+260. windex5 | Wealth index quintile
+261. windex10 | Percentile Group of com1
+262. wscoreu | Urban wealth score
+263. windex5u | Urban wealth index quintile
+264. windex10u | Percentile Group of urb1
+265. wscorer | Rural wealth score
+266. windex5r | Rural wealth index quintile
+267. windex10r | Percentile Group of rur1
+268. hhweight | Household sample weight
+269. wqhaweight | Weight for household WQT-Arsenic
+270. wqeweight | Weight for WQT E.coli household and source
+271. wqsaweight | Weight for WQT Arsenic  source
+272. stratum | Stratum
+273. PSU | Primary sampling unit
+
+================================================================================
+FILE: hl.sav
+================================================================================
+COLUMN COUNT: 74
+FSWEIGHT EXACT MATCH: NO
+
+WEIGHT-LIKE COLUMNS
+--------------------------------------------------------------------------------
+hhweight | label: Household sample weight
+
+KEY GEOGRAPHY / DEMOGRAPHIC / EDUCATION COLUMNS
+--------------------------------------------------------------------------------
+
+COLUMN: HH1
+LABEL: Cluster number
+VALUE LABELS: {}
+
+COLUMN: HH2
+LABEL: Household number
+VALUE LABELS: {}
+
+COLUMN: HL4
+LABEL: Sex
+VALUE LABELS: {1.0: 'MALE', 2.0: 'FEMALE'}
+
+COLUMN: HL6
+LABEL: Age
+VALUE LABELS: {95.0: '95+', 98.0: 'DK', 99.0: 'NO RESPONSE'}
+
+COLUMN: HL8
+LABEL: Line number of woman age 15-49
+VALUE LABELS: {0.0: 'NOT ELIGIBLE'}
+
+COLUMN: HL10
+LABEL: Line number for children age 0-4
+VALUE LABELS: {0.0: 'NOT ELIGIBLE'}
+
+COLUMN: HL11
+LABEL: Member age 0-17
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO'}
+
+COLUMN: HL12
+LABEL: Is natural mother alive
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: HL13
+LABEL: Does natural mother live in HH
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: HL14
+LABEL: Natural mother's line number in HH
+VALUE LABELS: {99.0: 'NO RESPONSE'}
+
+COLUMN: HL15
+LABEL: Where does natural mother live
+VALUE LABELS: {1.0: 'ABROAD', 2.0: 'IN ANOTHER HOUSEHOLD IN THE SAME DIVISION', 3.0: 'IN ANOTHER HOUSEHOLD IN ANOTHER DIVISION', 4.0: 'INSTITUTION IN THIS COUNTRY', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: HL20
+LABEL: Line number of mother or primary caretaker for children 0-17 years of age
+VALUE LABELS: {90.0: 'NO ONE'}
+
+COLUMN: ED2A
+LABEL: Age
+VALUE LABELS: {}
+
+COLUMN: ED3
+LABEL: Age above 3
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO'}
+
+COLUMN: ED4
+LABEL: Ever attended school or any Early Childhood Education programme
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: ED5A
+LABEL: Highest level of education attended
+VALUE LABELS: {0.0: 'ECE', 1.0: 'PRIMARY', 2.0: 'LOWER SECONDARY', 3.0: 'SECONDARY/ HIGHER SECONDARY', 4.0: 'HIGHER', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: ED7
+LABEL: Age 3-24
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO'}
+
+COLUMN: ED8
+LABEL: Check: Ever attended school or any Early Childhood Education programme
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: ED9
+LABEL: Attended school during current school year
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: ED10A
+LABEL: Level of education attended current school year
+VALUE LABELS: {0.0: 'ECE', 1.0: 'PRIMARY', 2.0: 'LOWER SECONDARY', 3.0: 'SECONDARY/ HIGHER SECONDARY', 4.0: 'HIGHER', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: ED10B
+LABEL: Grade attended at that level during current school year
+VALUE LABELS: {1.0: 'GRADE 1', 2.0: 'GRADE 2', 3.0: 'GRADE 3', 4.0: 'GRADE 4', 5.0: 'GRADE 5', 6.0: 'GRADE 6', 7.0: 'GRADE 7', 8.0: 'GRADE 8', 9.0: 'GRADE 9', 10.0: 'SSC/Dakhil', 11.0: 'GRADE 11', 12.0: 'HSC/Alim/Diploma/Polytechnic', 13.0: 'GRADE 13', 14.0: 'GRADE 14', 15.0: 'BA (Pass)/Fazil', 16.0: 'BA (Hons)/MBBS/BSc Engg.', 17.0: 'MA/MS/MSc and above', 18.0: 'GRADE 18', 98.0: 'DK', 99.0: 'NO RESPONSE'}
+
+COLUMN: ED11
+LABEL: Attended public school current school year
+VALUE LABELS: {1.0: 'GOVT./ PUBLIC', 2.0: 'RELIGIOUS/ FAITH ORG.', 3.0: 'PRIVATE', 4.0: 'NGO', 6.0: 'OTHER', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: ED12
+LABEL: School tuition in the current school year
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: ED14
+LABEL: Material support in the current school year
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: ED15
+LABEL: Attended school previous school year
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: ED16A
+LABEL: Level of education attended previous school year
+VALUE LABELS: {0.0: 'ECE', 1.0: 'PRIMARY', 2.0: 'LOWER SECONDARY', 3.0: 'SECONDARY/ HIGHER SECONDARY', 4.0: 'HIGHER', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: ED16B
+LABEL: Grade attended at that level during previous school year
+VALUE LABELS: {1.0: 'GRADE 1', 2.0: 'GRADE 2', 3.0: 'GRADE 3', 4.0: 'GRADE 4', 5.0: 'GRADE 5', 6.0: 'GRADE 6', 7.0: 'GRADE 7', 8.0: 'GRADE 8', 9.0: 'GRADE 9', 10.0: 'SSC/Dakhil', 11.0: 'GRADE 11', 12.0: 'HSC/Alim/Diploma/Polytechnic', 13.0: 'GRADE 13', 14.0: 'GRADE 14', 15.0: 'BA (Pass)/Fazil', 16.0: 'BA (Hons)/MBBS/BSc Engg.', 17.0: 'MA/MS/MSc and above', 18.0: 'GRADE 18', 98.0: 'DK', 99.0: 'NO RESPONSE'}
+
+COLUMN: HH6
+LABEL: Area
+VALUE LABELS: {1.0: 'URBAN', 2.0: 'RURAL'}
+
+COLUMN: HH7
+LABEL: Division
+VALUE LABELS: {10.0: 'Barishal', 20.0: 'Chattogram', 30.0: 'Dhaka', 40.0: 'Khulna', 45.0: 'Mymenshing', 50.0: 'Rajshahi', 55.0: 'Rangpur', 60.0: 'Sylhet'}
+
+COLUMN: HH7A
+LABEL: District
+VALUE LABELS: {1.0: 'Bagerhat', 3.0: 'Bandarban', 4.0: 'Barguna', 6.0: 'Barishal', 9.0: 'Bhola', 10.0: 'Bogura', 12.0: 'Brahmanbaria', 13.0: 'Chandpur', 15.0: 'Chattogram', 18.0: 'Chuadanga', 19.0: 'Cumilla', 22.0: "Cox's Bazar", 26.0: 'Dhaka', 27.0: 'Dinajpur', 29.0: 'Faridpur', 30.0: 'Feni', 32.0: 'Gaibandha', 33.0: 'Gazipur', 35.0: 'Gopalganj', 36.0: 'Habiganj', 38.0: 'Joypurhat', 39.0: 'Jamalpur', 41.0: 'Jashore', 42.0: 'Jhalokati', 44.0: 'Jhenaidah', 46.0: 'Khagrachhari', 47.0: 'Khulna', 48.0: 'Kishoregonj', 49.0: 'Kurigram', 50.0: 'Kushtia'}
+
+COLUMN: MLINE
+LABEL: Mother's line number
+VALUE LABELS: {0.0: 'Not in household'}
+
+COLUMN: caretakerdis
+LABEL: Functional difficulties (age 18-49 years)
+VALUE LABELS: {1.0: 'Has functional difficulty', 2.0: 'Has no functional difficulty', 9.0: 'No information'}
+
+COLUMN: wscore
+LABEL: Combined wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5
+LABEL: Wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: wscoreu
+LABEL: Urban wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5u
+LABEL: Urban wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: wscorer
+LABEL: Rural wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5r
+LABEL: Rural wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: ethnicity
+LABEL: Ethnicity of household head
+VALUE LABELS: {1.0: 'Bengali', 2.0: 'Other', 9.0: 'Missing/DK'}
+
+COLUMN: helevel
+LABEL: Education of household head
+VALUE LABELS: {0.0: 'Pre-primary or none', 1.0: 'Primary', 2.0: 'Secondary', 3.0: 'Higher secondary+', 9.0: 'Missing/DK'}
+
+COLUMN: melevel
+LABEL: Mother’s education
+VALUE LABELS: {0.0: 'Pre-primary or none', 1.0: 'Primary', 2.0: 'Secondary', 3.0: 'Higher secondary+', 9.0: 'Missing/DK'}
+
+COLUMN: felevel
+LABEL: Father's education
+VALUE LABELS: {0.0: 'Pre-primary or none', 1.0: 'Primary', 2.0: 'Secondary', 3.0: 'Higher secondary+', 5.0: 'No information', 9.0: 'Missing/DK'}
+
+COLUMN: schage
+LABEL: Age at beginning of school year
+VALUE LABELS: {995.0: 'Child  born after beginning of school year', 998.0: 'DK/Missing'}
+
+COLUMN: stratum
+LABEL: Stratum
+VALUE LABELS: {}
+
+COLUMN: PSU
+LABEL: Primary sampling unit
+VALUE LABELS: {}
+
+FULL COLUMN LIST
+--------------------------------------------------------------------------------
+001. HH1 | Cluster number
+002. HH2 | Household number
+003. HINT | Household interviewer number
+004. HL1 | Line number
+005. HL3 | Relationship to the head
+006. HL4 | Sex
+007. HL5M | Month of birth
+008. HL5Y | Year of birth
+009. HL6 | Age
+010. HL8 | Line number of woman age 15-49
+011. HL10 | Line number for children age 0-4
+012. HL11 | Member age 0-17
+013. HL12 | Is natural mother alive
+014. HL13 | Does natural mother live in HH
+015. HL14 | Natural mother's line number in HH
+016. HL15 | Where does natural mother live
+017. HL16 | Is natural father alive
+018. HL17 | Does natural father live in HH
+019. HL18 | Natural father's line number in HH
+020. HL19 | Where does natural father live
+021. HL20 | Line number of mother or primary caretaker for children 0-17 years of age
+022. ED1 | Line number
+023. ED2A | Age
+024. ED3 | Age above 3
+025. ED4 | Ever attended school or any Early Childhood Education programme
+026. ED5A | Highest level of education attended
+027. ED5B | Highest grade attended at that level
+028. ED6 | Ever completed that grade/year
+029. ED7 | Age 3-24
+030. ED8 | Check: Ever attended school or any Early Childhood Education programme
+031. ED9 | Attended school during current school year
+032. ED10A | Level of education attended current school year
+033. ED10B | Grade attended at that level during current school year
+034. ED11 | Attended public school current school year
+035. ED12 | School tuition in the current school year
+036. ED13A | Tuition provided: Govt./public
+037. ED13B | Tuition provided: Religious/faith org.
+038. ED13C | Tuition provided: Private
+039. ED13D | Tuition provided: NGO
+040. ED13X | Tuition provided: Other
+041. ED13Z | Tuition provided: DK
+042. ED13NR | Tuition provided: No response
+043. ED14 | Material support in the current school year
+044. ED15 | Attended school previous school year
+045. ED16A | Level of education attended previous school year
+046. ED16B | Grade attended at that level during previous school year
+047. HH4 | Supervisor number
+048. HH5D | Day of interview
+049. HH5M | Month of interview
+050. HH5Y | Year of interview
+051. HH6 | Area
+052. HH7 | Division
+053. HH7A | District
+054. MLINE | Mother's line number
+055. FLINE | Father's line number
+056. cline | None
+057. caretakerdis | Functional difficulties (age 18-49 years)
+058. wscore | Combined wealth score
+059. windex5 | Wealth index quintile
+060. windex10 | Percentile Group of com1
+061. wscoreu | Urban wealth score
+062. windex5u | Urban wealth index quintile
+063. windex10u | Percentile Group of urb1
+064. wscorer | Rural wealth score
+065. windex5r | Rural wealth index quintile
+066. windex10r | Percentile Group of rur1
+067. hhweight | Household sample weight
+068. ethnicity | Ethnicity of household head
+069. helevel | Education of household head
+070. melevel | Mother’s education
+071. felevel | Father's education
+072. schage | Age at beginning of school year
+073. stratum | Stratum
+074. PSU | Primary sampling unit
+
+================================================================================
+FILE: wm.sav
+================================================================================
+COLUMN COUNT: 412
+FSWEIGHT EXACT MATCH: NO
+
+WEIGHT-LIKE COLUMNS
+--------------------------------------------------------------------------------
+wmweight | label: Woman's sample weight
+
+KEY GEOGRAPHY / DEMOGRAPHIC / EDUCATION COLUMNS
+--------------------------------------------------------------------------------
+
+COLUMN: HH1
+LABEL: Cluster number
+VALUE LABELS: {}
+
+COLUMN: HH2
+LABEL: Household number
+VALUE LABELS: {}
+
+COLUMN: LN
+LABEL: Line number
+VALUE LABELS: {}
+
+COLUMN: WM12
+LABEL: Language of the Questionnaire
+VALUE LABELS: {2.0: 'BANGLA'}
+
+COLUMN: WM13
+LABEL: Language of the Interview
+VALUE LABELS: {2.0: 'BANGLA', 6.0: 'OTHER LANGUAGE'}
+
+COLUMN: WM14
+LABEL: Native language of the Respondent
+VALUE LABELS: {2.0: 'BANGLA', 6.0: 'OTHER LANGUAGE'}
+
+COLUMN: WB4
+LABEL: Age of woman
+VALUE LABELS: {}
+
+COLUMN: WB5
+LABEL: Ever attended school
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: WB6A
+LABEL: Highest level of school attended
+VALUE LABELS: {0.0: 'ECE', 1.0: 'PRIMARY', 2.0: 'LOWER SECONDARY', 3.0: 'SECONDARY/ HIGHER SECONDARY', 4.0: 'HIGHER', 9.0: 'NO RESPONSE'}
+
+COLUMN: WB9
+LABEL: Attended school during current school year
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: WB10A
+LABEL: Level of education attended current school year
+VALUE LABELS: {1.0: 'PRIMARY', 2.0: 'LOWER SECONDARY', 3.0: 'SECONDARY/ HIGHER SECONDARY', 4.0: 'HIGHER', 9.0: 'NO RESPONSE'}
+
+COLUMN: WB10B
+LABEL: Grade attended at that level during current school year
+VALUE LABELS: {1.0: 'GRADE 1', 2.0: 'GRADE 2', 3.0: 'GRADE 3', 4.0: 'GRADE 4', 5.0: 'GRADE 5', 6.0: 'GRADE 6', 7.0: 'GRADE 7', 8.0: 'GRADE 8', 9.0: 'GRADE 9', 10.0: 'SSC/Dakhil', 11.0: 'GRADE 11', 12.0: 'HSC/Alim/Diploma/Polytechnic', 13.0: 'GRADE 13', 14.0: 'GRADE 14', 15.0: 'BA (Pass)/Fazil', 16.0: 'BA (Hons)/MBBS/BSc Engg.', 17.0: 'MA/MS/MSc and above', 18.0: 'GRADE 18', 99.0: 'NO RESPONSE'}
+
+COLUMN: WB11
+LABEL: Attended school previous school year
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: WB12A
+LABEL: Level of education attended previous school year
+VALUE LABELS: {1.0: 'PRIMARY', 2.0: 'LOWER SECONDARY', 3.0: 'SECONDARY/ HIGHER SECONDARY', 4.0: 'HIGHER', 9.0: 'NO RESPONSE'}
+
+COLUMN: WB12B
+LABEL: Grade attended at that level during previous school year
+VALUE LABELS: {1.0: 'GRADE 1', 2.0: 'GRADE 2', 3.0: 'GRADE 3', 4.0: 'GRADE 4', 5.0: 'GRADE 5', 6.0: 'GRADE 6', 7.0: 'GRADE 7', 8.0: 'GRADE 8', 9.0: 'GRADE 9', 10.0: 'SSC/Dakhil', 11.0: 'GRADE 11', 12.0: 'HSC/Alim/Diploma/Polytechnic', 13.0: 'GRADE 13', 14.0: 'GRADE 14', 15.0: 'BA (Pass)/Fazil', 16.0: 'BA (Hons)/MBBS/BSc Engg.', 17.0: 'MA/MS/MSc and above', 18.0: 'GRADE 18', 99.0: 'NO RESPONSE'}
+
+COLUMN: WB17
+LABEL: Division prior to moving to current place
+VALUE LABELS: {10.0: 'BARISAL', 20.0: 'CHITTAGONG', 30.0: 'DHAKA', 40.0: 'KHLUNA', 45.0: 'MYMENSHING', 50.0: 'RAJSHAHI', 55.0: 'RANGPUR', 60.0: 'SYLHET', 96.0: 'OUTSIDE OF COUNTRY', 99.0: 'NO RESPONSE'}
+
+COLUMN: WAGE
+LABEL: Age
+VALUE LABELS: {1.0: '15-19', 2.0: '20-24', 3.0: '25-29', 4.0: '30-34', 5.0: '35-39', 6.0: '40-44', 7.0: '45-49'}
+
+COLUMN: MT5
+LABEL: Computer / tablet usage in the last 3 months
+VALUE LABELS: {0.0: 'NOT AT ALL', 1.0: 'LESS THAN ONCE A WEEK', 2.0: 'AT LEAST ONCE A WEEK', 3.0: 'ALMOST EVERY DAY', 9.0: 'NO RESPONSE'}
+
+COLUMN: MT10
+LABEL: Internet usage in the last 3 months
+VALUE LABELS: {0.0: 'NOT AT ALL', 1.0: 'LESS THAN ONCE A WEEK', 2.0: 'AT LEAST ONCE A WEEK', 3.0: 'ALMOST EVERY DAY', 9.0: 'NO RESPONSE'}
+
+COLUMN: MT12
+LABEL: Mobile phone usage in the last 3 months
+VALUE LABELS: {0.0: 'NOT AT ALL', 1.0: 'LESS THAN ONCE A WEEK', 2.0: 'AT LEAST ONCE A WEEK', 3.0: 'ALMOST EVERY DAY', 9.0: 'NO RESPONSE'}
+
+COLUMN: MA2
+LABEL: Age of husband
+VALUE LABELS: {98.0: 'DK', 99.0: 'NO RESPONSE'}
+
+COLUMN: MA6
+LABEL: Marital status
+VALUE LABELS: {1.0: 'WIDOWED', 2.0: 'DIVORCED', 3.0: 'SEPARATED', 9.0: 'NO RESPONSE'}
+
+COLUMN: MA11
+LABEL: Age at first union
+VALUE LABELS: {99.0: 'NO RESPONSE'}
+
+COLUMN: MN3G
+LABEL: Prenatal care provider: Community health worker (HA / CHCP)
+VALUE LABELS: {'?': 'NO RESPONSE', 'G': 'COMMUNITY HEALTH WORKER (HA / CHCP/HI)'}
+
+COLUMN: MN3J
+LABEL: Prenatal care provider: NGO Worker
+VALUE LABELS: {'?': 'NO RESPONSE', 'J': 'NGO'}
+
+COLUMN: MN3K
+LABEL: Prenatal care provider: Village Doctor
+VALUE LABELS: {'?': 'NO RESPONSE', 'K': 'VILLAGE DOCTOR'}
+
+COLUMN: MN19G
+LABEL: Assistance at delivery: Community health worker (HA / CHCP)
+VALUE LABELS: {'?': 'NO RESPONSE', 'G': 'COMMUNITY HEALTH WORKER (HA / CHCP/HI)'}
+
+COLUMN: MN19J
+LABEL: Assistance at delivery: NGO Worker
+VALUE LABELS: {'?': 'NO RESPONSE', 'J': 'NGO'}
+
+COLUMN: MN19K
+LABEL: Assistance at delivery: Village Doctor
+VALUE LABELS: {'?': 'NO RESPONSE', 'K': 'VILLAGE DOCTOR'}
+
+COLUMN: MN21
+LABEL: Delivery by caesarean section
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: MN22
+LABEL: Decision made to have caesarean section
+VALUE LABELS: {1.0: 'BEFORE LABOUR PAINS', 2.0: 'AFTER LABOUR PAINS', 9.0: 'NO RESPONSE'}
+
+COLUMN: MN23
+LABEL: After the birth, baby was put directly on the bare skin of mothers chest
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK/ DON?T REMEMBER', 9.0: 'NO RESPONSE'}
+
+COLUMN: MN24
+LABEL: Baby was wrapped up before being placed on mothers chest
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK/ DON?T REMEMBER', 9.0: 'NO RESPONSE'}
+
+COLUMN: PN5
+LABEL: Mother's health checked before leaving health facility
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: PN9
+LABEL: Mother checked after the delivery was over
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: PN14G
+LABEL: Person checking on baby's health: Community Health Worker (HA / CHCP)
+VALUE LABELS: {'?': 'NO RESPONSE', 'G': 'COMMUNITY HEALTH WORKER (HP / CHCP/HI)'}
+
+COLUMN: PN14J
+LABEL: Person checking on baby's health: NGO Worker
+VALUE LABELS: {'?': 'NO RESPONSE', 'J': 'NGO WORKER'}
+
+COLUMN: PN14K
+LABEL: Person checking on baby's health: Village Doctor
+VALUE LABELS: {'?': 'NO RESPONSE', 'K': 'VILLAGE DOCTOR'}
+
+COLUMN: PN17
+LABEL: Mother's health checked after leaving health facility
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: PN19
+LABEL: Mother's health checked after the delivery was over
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: PN20
+LABEL: Mother's health checked after the birth of the baby
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 9.0: 'NO RESPONSE'}
+
+COLUMN: PN21
+LABEL: Number of times mother's health was checked after the birth
+VALUE LABELS: {1.0: 'ONCE', 2.0: 'MORE THAN ONCE', 9.0: 'NO RESPONSE'}
+
+COLUMN: PN22U
+LABEL: How long after delivery did the first check of mother happen - unit
+VALUE LABELS: {1.0: 'HOURS', 2.0: 'DAYS', 3.0: 'WEEKS', 9.0: 'SPECIAL'}
+
+COLUMN: PN22N
+LABEL: How long after delivery did the first check of mother happen - number
+VALUE LABELS: {98.0: 'DK / DON?T REMEMBER', 99.0: 'NO RESPONSE'}
+
+COLUMN: PN23A
+LABEL: Person checking on mother's health: Doctor
+VALUE LABELS: {'?': 'NO RESPONSE', 'A': 'DOCTOR'}
+
+COLUMN: PN23B
+LABEL: Person checking on mother's health: Nurse / Midwife
+VALUE LABELS: {'?': 'NO RESPONSE', 'B': 'NURSE / MIDWIFE'}
+
+COLUMN: PN23C
+LABEL: Person checking on mother's health: Paramedic / Medical Assistant (MA) / Sub-Assistant Community Medical Officers (SACMO)
+VALUE LABELS: {'?': 'NO RESPONSE', 'C': 'PARAMEDIC / MEDICAL ASSISTANT (MA) / SUB-ASSISTANT COMMUNITY MEDICAL OFFICERS (SACMO)'}
+
+COLUMN: PN23D
+LABEL: Person checking on mother's health: Family Welfare Visitor (FWV)
+VALUE LABELS: {'?': 'NO RESPONSE', 'D': 'FAMILY WELFARE VISITOR (FWV)'}
+
+COLUMN: PN23E
+LABEL: Person checking on mother's health: Community Skilled Attendants (CSBA/PCSBA)
+VALUE LABELS: {'?': 'NO RESPONSE', 'E': 'COMMUNITY SKILLED BIRTH ATTENDANTS (CSBA/PCSBA)'}
+
+COLUMN: PN23F
+LABEL: Person checking on mother's health: Traditional Birth Attendant
+VALUE LABELS: {'?': 'NO RESPONSE', 'F': 'TRADITIONAL BIRTH ATTENDANT'}
+
+COLUMN: PN23G
+LABEL: Person checking on mother's health: Community Health Worker (HA/CHCP)
+VALUE LABELS: {'?': 'NO RESPONSE', 'G': 'COMMUNITY HEALTH WORKER (HA/CHCP/HI)'}
+
+COLUMN: PN23H
+LABEL: Person checking on mother's health: Relative / Friend
+VALUE LABELS: {'?': 'NO RESPONSE', 'H': 'RELATIVE / FRIEND'}
+
+COLUMN: PN23I
+LABEL: Person checking on mother's health: Family Welfare assistant (FWA)
+VALUE LABELS: {'?': 'NO RESPONSE', 'I': 'FAMILY WELFARE ASSISTANT (FWA)'}
+
+COLUMN: PN23J
+LABEL: Person checking on mother's health: NGO Worker
+VALUE LABELS: {'?': 'NO RESPONSE', 'J': 'NGO WORKER'}
+
+COLUMN: PN23K
+LABEL: Person checking on mother's health: Village Doctor
+VALUE LABELS: {'?': 'NO RESPONSE', 'K': 'VILLAGE DOCTOR'}
+
+COLUMN: PN23X
+LABEL: Person checking on mother's health: Other
+VALUE LABELS: {'?': 'NO RESPONSE', 'X': 'OTHER'}
+
+COLUMN: PN23NR
+LABEL: Person checking on mother's health: No response
+VALUE LABELS: {'?': 'NO RESPONSE'}
+
+COLUMN: PN24
+LABEL: Place where mother's health was checked
+VALUE LABELS: {11.0: "RESPONDENT'S HOME", 12.0: 'OTHER HOME', 21.0: 'GOVERNMENT HOSPITAL', 22.0: 'GOVERNMENT CLINIC / HEALTH CENTRE (FWC/USC/RD)', 23.0: 'COMMUNITY CLINIC (CC)', 26.0: 'OTHER PUBLIC', 31.0: 'PRIVATE HOSPITAL', 32.0: 'PRIVATE CLINIC', 33.0: 'PRIVATE MATERNITY HOME', 34.0: 'NGO CLINIC / HOSPITAL', 36.0: 'OTHER PRIVATE MEDICAL', 76.0: 'DK PUBLIC OR PRIVATE', 96.0: 'OTHER', 99.0: 'NO RESPONSE'}
+
+COLUMN: UN12A
+LABEL: Reason: Infrequent sex / No sex
+VALUE LABELS: {'?': 'NO RESPONSE', 'A': 'INFREQUENT SEX / NO SEX'}
+
+COLUMN: UN16
+LABEL: Social activities, school or work days not attended due to menstruation
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK / NOT SURE / NO SUCH ACTIVITY', 9.0: 'NO RESPONSE'}
+
+COLUMN: DV1D
+LABEL: If she refuses sex with husband: wife beating justified
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: VT22A
+LABEL: In the past 12 months, felt discriminated: Ethnic or immigration origin
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: VT22C
+LABEL: In the past 12 months, felt discriminated: Sexual orientation
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: VT22D
+LABEL: In the past 12 months, felt discriminated: Age
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: VT22E
+LABEL: In the past 12 months, felt discriminated: Religion or belief
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: VT22F
+LABEL: In the past 12 months, felt discriminated: Disability
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: HA8A
+LABEL: HIV from mother to child during pregnancy
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: HA8B
+LABEL: HIV from mother to child during delivery
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: HA8C
+LABEL: HIV from mother to child through breastfeeding
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: HA13A
+LABEL: Given information about HIV during antenatal care visit: HIV from mother
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK', 9.0: 'NO RESPONSE'}
+
+COLUMN: HA31
+LABEL: Children living with HIV should be allowed to attend school with other children
+VALUE LABELS: {1.0: 'YES', 2.0: 'NO', 8.0: 'DK / NOT SURE / DEPENDS', 9.0: 'NO RESPONSE'}
+
+COLUMN: HH6
+LABEL: Area
+VALUE LABELS: {1.0: 'URBAN', 2.0: 'RURAL'}
+
+COLUMN: HH7
+LABEL: Division
+VALUE LABELS: {10.0: 'Barishal', 20.0: 'Chattogram', 30.0: 'Dhaka', 40.0: 'Khulna', 45.0: 'Mymenshing', 50.0: 'Rajshahi', 55.0: 'Rangpur', 60.0: 'Sylhet'}
+
+COLUMN: HH7A
+LABEL: District
+VALUE LABELS: {1.0: 'Bagerhat', 3.0: 'Bandarban', 4.0: 'Barguna', 6.0: 'Barishal', 9.0: 'Bhola', 10.0: 'Bogura', 12.0: 'Brahmanbaria', 13.0: 'Chandpur', 15.0: 'Chattogram', 18.0: 'Chuadanga', 19.0: 'Cumilla', 22.0: "Cox's Bazar", 26.0: 'Dhaka', 27.0: 'Dinajpur', 29.0: 'Faridpur', 30.0: 'Feni', 32.0: 'Gaibandha', 33.0: 'Gazipur', 35.0: 'Gopalganj', 36.0: 'Habiganj', 38.0: 'Joypurhat', 39.0: 'Jamalpur', 41.0: 'Jashore', 42.0: 'Jhalokati', 44.0: 'Jhenaidah', 46.0: 'Khagrachhari', 47.0: 'Khulna', 48.0: 'Kishoregonj', 49.0: 'Kurigram', 50.0: 'Kushtia'}
+
+COLUMN: WDOM
+LABEL: Date of marriage of woman (CMC)
+VALUE LABELS: {}
+
+COLUMN: WAGEM
+LABEL: Age at first marriage/union of woman
+VALUE LABELS: {}
+
+COLUMN: MSTATUS
+LABEL: Marital/Union status of woman
+VALUE LABELS: {1.0: 'Currently married/in union', 2.0: 'Formerly married/in union', 3.0: 'Never married/in union'}
+
+COLUMN: BH6_first
+LABEL: Age of child
+VALUE LABELS: {99.0: 'NO RESPONSE'}
+
+COLUMN: BH3_last
+LABEL: Sex of newborn
+VALUE LABELS: {1.0: 'Male', 2.0: 'Female'}
+
+COLUMN: BH6_last
+LABEL: Age of child
+VALUE LABELS: {99.0: 'NO RESPONSE'}
+
+COLUMN: wscore
+LABEL: Combined wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5
+LABEL: Wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: wscoreu
+LABEL: Urban wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5u
+LABEL: Urban wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: wscorer
+LABEL: Rural wealth score
+VALUE LABELS: {}
+
+COLUMN: windex5r
+LABEL: Rural wealth index quintile
+VALUE LABELS: {1.0: 'Poorest', 2.0: 'Second', 3.0: 'Middle', 4.0: 'Fourth', 5.0: 'Richest'}
+
+COLUMN: welevel
+LABEL: Education
+VALUE LABELS: {0.0: 'Pre-primary or none', 1.0: 'Primary', 2.0: 'Secondary', 3.0: 'Higher secondary+', 9.0: 'Missing/DK'}
+
+COLUMN: disability
+LABEL: Functional difficulties (age 18-49 years)
+VALUE LABELS: {1.0: 'Has functional difficulty', 2.0: 'Has no functional difficulty'}
+
+COLUMN: ethnicity
+LABEL: Ethnicity of household head
+VALUE LABELS: {1.0: 'Bengali', 2.0: 'Other', 9.0: 'Missing/DK'}
+
+COLUMN: stratum
+LABEL: Stratum
+VALUE LABELS: {}
+
+COLUMN: PSU
+LABEL: Primary sampling unit
+VALUE LABELS: {}
+
+FULL COLUMN LIST
+--------------------------------------------------------------------------------
+001. HH1 | Cluster number
+002. HH2 | Household number
+003. LN | Line number
+004. WM1 | Cluster number
+005. WM2 | Household number
+006. WM3 | Woman's line number
+007. WMINT | Interviewer number
+008. WM4 | Supervisor number
+009. WM5 | Interviewer number
+010. WM6D | Day of interview
+011. WM6M | Month of interview
+012. WM6Y | Year of interview
+013. WM8 | Respondent to another questionnaire
+014. WM9 | Consent
+015. WM17 | Result of woman's interview
+016. WM7H | Start of interview - Hour
+017. WM7M | Start of interview - Minutes
+018. WM10H | End of interview - Hour
+019. WM10M | End of interview - Minutes
+020. WM11 | Interview completed in private
+021. WM12 | Language of the Questionnaire
+022. WM13 | Language of the Interview
+023. WM14 | Native language of the Respondent
+024. WM15 | Translator used
+025. WMHINT | Household interviewer
+026. WMFIN | Finish
+027. WB3M | Month of birth of woman
+028. WB3Y | Year of birth of woman
+029. WB4 | Age of woman
+030. WB5 | Ever attended school
+031. WB6A | Highest level of school attended
+032. WB6B | Highest grade attended at that level
+033. WB7 | Ever completed that grade/year
+034. WB9 | Attended school during current school year
+035. WB10A | Level of education attended current school year
+036. WB10B | Grade attended at that level during current school year
+037. WB11 | Attended school previous school year
+038. WB12A | Level of education attended previous school year
+039. WB12B | Grade attended at that level during previous school year
+040. WB14 | Can read part of the sentence
+041. WB15 | Duration of living in current place
+042. WB16 | Place of living prior to moving to current place
+043. WB17 | Division prior to moving to current place
+044. WDOI | Date of interview women (CMC)
+045. WAGE | Age
+046. MT1 | Frequency of reading newspaper or magazine
+047. MT2 | Frequency of listening to the radio
+048. MT3 | Frequency of watching TV
+049. MT4 | Ever used a computer or a tablet
+050. MT5 | Computer / tablet usage in the last 3 months
+051. MT6A | During the last 3 months: Copy or move a file or folder
+052. MT6B | During the last 3 months: Use a copy / paste in document
+053. MT6C | During the last 3 months: Send e-mail with attached file
+054. MT6D | During the last 3 months: Use a basic arithmetic formula in a spreadsheet
+055. MT6E | During the last 3 months: Connect and install a new device
+056. MT6F | During the last 3 months: Install and configure software
+057. MT6G | During the last 3 months: Create an electronic presentation
+058. MT6H | During the last 3 months: Transfer a file
+059. MT6I | During the last 3 months: Write a computer program
+060. MT9 | Ever used internet
+061. MT10 | Internet usage in the last 3 months
+062. MT11 | Own a mobile phone
+063. MT12 | Mobile phone usage in the last 3 months
+064. MA1 | Currently married
+065. MA2 | Age of husband
+066. MA3 | Husband has more wives
+067. MA4 | Number of other wives
+068. MA5 | Ever married
+069. MA6 | Marital status
+070. MA7 | Married with a man once or more than once
+071. MA8M | Month of first union
+072. MA8Y | Year of first union
+073. MA11 | Age at first union
+074. CM1 | Ever given birth
+075. CM2 | Any sons or daughters living with you
+076. CM3 | Sons living with you
+077. CM4 | Daughters living with you
+078. CM5 | Any sons or daughters not living with you
+079. CM6 | Sons living elsewhere
+080. CM7 | Daughters living elsewhere
+081. CM8 | Ever had child who later died
+082. CM9 | Boys dead
+083. CM10 | Girls dead
+084. CM11 | Children ever born
+085. CM12 | Confirm total number of children ever born
+086. CM15 | Check total number of children ever born
+087. CM17 | Live births in last two years
+088. BH11 | Any other live births
+089. DB2 | Wanted last child then
+090. DB4 | Wanted child later or did not want more children
+091. MN2 | Received prenatal care
+092. MN3A | Prenatal care provider: Doctor
+093. MN3B | Prenatal care provider: Nurse/Midwife
+094. MN3C | Prenatal care provider: Paramedic / Medical Assistant (MA) / Sub-Assistant Community Medical Officers
+095. MN3D | Prenatal care provider: Family Welfare Visitor (FWV)
+096. MN3E | Prenatal care provider: Community Skilled Birth Attendants (CSBA / PCSBA)
+097. MN3F | Prenatal care provider: Traditional birth attendant
+098. MN3G | Prenatal care provider: Community health worker (HA / CHCP)
+099. MN3I | Prenatal care provider: Family Welfare Assistant (FWA)
+100. MN3J | Prenatal care provider: NGO Worker
+101. MN3K | Prenatal care provider: Village Doctor
+102. MN3X | Prenatal care provider: Other
+103. MN3NR | Prenatal care provider: No Response
+104. MN4AU | Weeks or months pregnent at first prenatal care - unit
+105. MN4AN | Weeks or months pregnant at first prenatal care - number
+106. MN5 | Times received prenatal care
+107. MN6A | Blood pressure
+108. MN6B | Urine sample
+109. MN6C | Blood sample
+110. MN7 | Has own immunization card
+111. MN8 | Any tetanus toxoid injection during last pregnancy
+112. MN9 | Doses of tetanus toxoid during last pregnancy
+113. MN11 | Any tetanus toxoid injection before last pregnancy
+114. MN12 | Doses of tetanus toxoid before last pregnancy
+115. MN14 | Years ago last tetanus toxoid received before last pregnancy
+116. MN19A | Assistance at delivery: Doctor
+117. MN19B | Assistance at delivery: Nurse / Midwife
+118. MN19C | Assistance at delivery: Paramedic / Medical Assistant (MA) / Sub-Assistant Community Medical Officers
+119. MN19D | Assistance at delivery: Family Welfare Visitor (FWV)
+120. MN19E | Assistance at delivery: Community Skilled Birth Attendants (CSBA / PCSBA)
+121. MN19F | Assistance at delivery: Traditional birth attendant
+122. MN19G | Assistance at delivery: Community health worker (HA / CHCP)
+123. MN19H | Assistance at delivery: Relative / Friend
+124. MN19I | Assistance at delivery: Family Welfare Assistant (FWA)
+125. MN19J | Assistance at delivery: NGO Worker
+126. MN19K | Assistance at delivery: Village Doctor
+127. MN19X | Assistance at delivery: Other
+128. MN19Y | Assistance at delivery: No one
+129. MN19NR | Assistance at delivery: No response
+130. MN20 | Place of delivery
+131. MN21 | Delivery by caesarean section
+132. MN22 | Decision made to have caesarean section
+133. MN22BA | Have any complications due to C-section: Place of wound became infected
+134. MN22BB | Have any complications due to C-section: Pus/water came out of the wound
+135. MN22BC | Have any complications due to C-section: Pain at the wound
+136. MN22BY | Have any complications due to C-section: No problem
+137. MN22BX | Have any complications due to C-section: Others (specify)
+138. MN22BZ | Have any complications due to C-section: DK/can?t recall
+139. MN22BNR | Have any complications due to C-section: Non response
+140. MN23 | After the birth, baby was put directly on the bare skin of mothers chest
+141. MN24 | Baby was wrapped up before being placed on mothers chest
+142. MN25 | Baby was dried or wiped soon after birth
+143. MN26U | Time baby was bathed - unit
+144. MN26N | Time baby was bathed - number
+145. MN28 | What was used to cut the cord
+146. MN29 | Instrument used to cut the cord boiled prior to use
+147. MN30 | Something applied to the cord after it was cut
+148. MN31A | What was applied to the cord: Chlorhexidine
+149. MN31B | What was applied to the cord: Other antiseptic
+150. MN31C | What was applied to the cord: Mustard oil
+151. MN31D | What was applied to the cord: Ash
+152. MN31E | What was applied to the cord: Animal dung
+153. MN31F | What was applied to the cord: Sindur
+154. MN31X | What was applied to the cord: Other
+155. MN31Z | What was applied to the cord: DK / Don't remember
+156. MN31NR | What was applied to the cord: No Response
+157. MN32 | Size of child at birth
+158. MN33 | Weighed at birth
+159. MN34A | Weight from card or recall
+160. MN34 | Weight at birth (Kilograms)
+161. MN35 | Menstrual period returned since the birth of child
+162. MN36 | Ever breastfeed
+163. MN37U | Time baby put to breast - unit
+164. MN37N | Time baby put to breast - number
+165. MN38 | Within first 3 days after delivery, child given anything to drink other than breast milk
+166. MN39A | Child given to drink: Milk (other than breast milk)
+167. MN39B | Child given to drink: Plain water
+168. MN39C | Child given to drink: Sugar or glucose water
+169. MN39D | Child given to drink: Gripe water
+170. MN39E | Child given to drink: Sugar - salt - water solution
+171. MN39F | Child given to drink: Fruit juice
+172. MN39G | Child given to drink: Infant formula
+173. MN39H | Child given to drink: Tea / Infusions
+174. MN39I | Child given to drink: Honey
+175. MN39J | Child given to drink: Prescribed medicine
+176. MN39X | Child given to drink: Other
+177. MN39Y | Child given to drink: Not given anything to drink
+178. MN39NR | Child given to drink: No response
+179. PN3U | Duration of staying in the health facility - unit
+180. PN3N | Duration of staying in the health facility - number
+181. PN4 | Baby's health checked before leaving health facility
+182. PN5 | Mother's health checked before leaving health facility
+183. PN6 | Baby's health checked after leaving health facility
+184. PN8 | Baby checked after the delivery was over
+185. PN9 | Mother checked after the delivery was over
+186. PN10 | Additional baby check after the delivery
+187. PN11 | Baby checked after the delivery
+188. PN12 | Number of times baby was checked
+189. PN13U | How long after delivery did the first check of baby happen - unit
+190. PN13N | How long after delivery did the first check of baby happen - number
+191. PN14A | Person checking on baby's health: Doctor
+192. PN14B | Person checking on baby's health: Nurse / Midwife
+193. PN14C | Person checking on baby's health: Paramedic / Medical Assistant (MA) / Sub-Assistant Community Medical Officers (SACMO)
+194. PN14D | Person checking on baby's health: Family Welfare Visitor (FWV)
+195. PN14E | Person checking on baby's health: Community Skilled Birth Attendants (CSBA / PCSBA)
+196. PN14F | Person checking on baby's health: Traditional Birth Attendant
+197. PN14G | Person checking on baby's health: Community Health Worker (HA / CHCP)
+198. PN14H | Person checking on baby's health: Relative / Friend
+199. PN14I | Person checking on baby's health: Family Welfare Assistant (FWA)
+200. PN14J | Person checking on baby's health: NGO Worker
+201. PN14K | Person checking on baby's health: Village Doctor
+202. PN14X | Person checking on baby's health: Other
+203. PN14NR | Person checking on baby's health: No response
+204. PN15 | Place where baby's health was checked
+205. PN17 | Mother's health checked after leaving health facility
+206. PN19 | Mother's health checked after the delivery was over
+207. PN20 | Mother's health checked after the birth of the baby
+208. PN21 | Number of times mother's health was checked after the birth
+209. PN22U | How long after delivery did the first check of mother happen - unit
+210. PN22N | How long after delivery did the first check of mother happen - number
+211. PN23A | Person checking on mother's health: Doctor
+212. PN23B | Person checking on mother's health: Nurse / Midwife
+213. PN23C | Person checking on mother's health: Paramedic / Medical Assistant (MA) / Sub-Assistant Community Medical Officers (SACMO)
+214. PN23D | Person checking on mother's health: Family Welfare Visitor (FWV)
+215. PN23E | Person checking on mother's health: Community Skilled Attendants (CSBA/PCSBA)
+216. PN23F | Person checking on mother's health: Traditional Birth Attendant
+217. PN23G | Person checking on mother's health: Community Health Worker (HA/CHCP)
+218. PN23H | Person checking on mother's health: Relative / Friend
+219. PN23I | Person checking on mother's health: Family Welfare assistant (FWA)
+220. PN23J | Person checking on mother's health: NGO Worker
+221. PN23K | Person checking on mother's health: Village Doctor
+222. PN23X | Person checking on mother's health: Other
+223. PN23NR | Person checking on mother's health: No response
+224. PN24 | Place where mother's health was checked
+225. PN25A | During two days after birth health care provider: Examine cord
+226. PN25B | During two days after birth health care provider: Take temperature
+227. PN25C | During two days after birth health care provider: Counsel on breastfeeding
+228. PN27 | During two days after birth health care provider observe child's breastfeeding
+229. PN29 | During two days after birth health care provider weighed child again
+230. PN30 | During two days after birth health care provider gave information on symtomps
+231. CP1 | Currently pregnant
+232. CP2 | Currently using a method to avoid pregnancy
+233. CP3 | Ever used a method to avoid pregnancy
+234. CP4A | Current method: Female sterilization
+235. CP4B | Current method: Male sterilization
+236. CP4C | Current method: IUD
+237. CP4D | Current method: Injectables
+238. CP4E | Current method: Implants
+239. CP4F | Current method: Pill
+240. CP4G | Current method: Male condom
+241. CP4H | Current method: Female condom
+242. CP4I | Current method: Diaphragm
+243. CP4J | Current method: Foam / Jelly
+244. CP4K | Lactational amenorrhoea method (LAM)
+245. CP4L | Current method: Periodic abstinence / Rhythm
+246. CP4M | Current method: Withdrawal
+247. CP4X | Current method: Other
+248. CP4NR | Current method: No response
+249. MR3 | Pregnant month
+250. MR4 | Any kind of health complications
+251. MR5 | Seizures or Convulsions DURING  pregnancy
+252. MR6 | Ever had seizures during times when you were not pregnant
+253. MR7 | Had increased blood pressure during (this current/last) pregnancy
+254. MR8 | Swelling in the legs, face of hands during (this current/last) pregnancy
+255. MR9 | Have blurred vision during (this current/last) pregnancy
+256. MR11 | Vaginal bleeding at any time starting from the second half of the pregnancy
+257. MR12 | High fever during (this current/last) pregnancy
+258. MR13 | This high fever come with chills
+259. MR14 | Sick with some other disease during (this current/last) pregnancy
+260. MR15 | Smelly discharge when you had this high fever
+261. MR16 | Eyes/skin turn yellow during (this current/last) pregnancy
+262. MR17 | Turned yellow did this happen only to you or did people around you  display comparable symptoms
+263. MR19 | Any kind of health complications after the birth of your child
+264. MR20 | Seizures or convulsions after the birth of your child
+265. MR21 | Had seizures during times when you were not pregnant
+266. MR22 | Had increased blood pressure after the birth of your last child
+267. MR23 | Swelling in the legs, face of hands after the birth of your last child
+268. MR24 | Blurred vision after the birth of your last child
+269. MR25 | Excessive bleeding after the birth of your last child
+270. MR26 | Bleeding wet your clothes, the bed or the floor
+271. MR27 | High fever after the birth of your last child
+272. MR28 | Fever come with chills
+273. MR29 | Sick with some other disease after the birth of your last child
+274. MR30 | Have a very smelly discharge during this period of high fever
+275. MR31 | Eyes/skin turn yellow after the birth of your last child
+276. MR32 | Skin or Eyes turned yellow did this happen only to you or did people around you display comparable symptoms
+277. MR33 | Hours passed between the start of labor pain and deliver
+278. UN2 | Wanted to get pregnant at the time
+279. UN4 | Wanted baby later or did not want more children
+280. UN5 | Would like to have another child (currently pregnant)
+281. UN7 | Would like to have another child (not currently pregnant)
+282. UN8U | Desired waiting time (unit)
+283. UN8N | Desired waiting time (number)
+284. UN11 | Able to get pregnant
+285. UN12A | Reason: Infrequent sex / No sex
+286. UN12B | Reason: Menopausal
+287. UN12C | Reason: Never menstruated
+288. UN12D | Reason: Hysterectomy
+289. UN12E | Reason: Trying to get pregnant for 2 years or more without result
+290. UN12F | Reason: Postpartum amenorrheic
+291. UN12G | Reason: Breastfeeding
+292. UN12H | Reason: Too old
+293. UN12I | Reason: Fatalistic
+294. UN12X | Reason: Other
+295. UN12Z | Reason: DK
+296. UN12NR | Reason: No response
+297. UN14U | Start of last menstrual period - unit
+298. UN14N | Start of last menstrual period - number
+299. UN16 | Social activities, school or work days not attended due to menstruation
+300. UN17 | Availability of private place for washing during last menstrual period
+301. UN18 | Used any materials such as sanitary pads, tampons or cloth
+302. UN18A | Type of materials used in last mensuration
+303. UN19 | Materials reusable
+304. DV1A | If she goes out with out telling husband: wife beating justified
+305. DV1B | If she neglects the children: wife beating justified
+306. DV1C | If she argues with husband: wife beating justified
+307. DV1D | If she refuses sex with husband: wife beating justified
+308. DV1E | If she burns the food: wife beating justified
+309. VT1 | Someone taken or tried taking something, by using force or threatening to use force
+310. VT2 | Victimisation happened during the last 12 months
+311. VT3 | Number of times victimisation happened in the last year
+312. VT5 | The last time that this happened, was anything stolen
+313. VT6 | Person(s) had a weapon
+314. VT7A | Offender(s) had a knife, a gun or something else used as a weapon: A knife
+315. VT7B | Offender(s) had a knife, a gun or something else used as a weapon: A gun
+316. VT7X | Offender(s) had a knife, a gun or something else used as a weapon: Other weapon
+317. VT7NR | Offender(s) had a knife, a gun or something else used as a weapon: No response
+318. VT8 | Incident reported to the police
+319. VT9 | Physically attacked
+320. VT10 | Attack happened during the last 12 months
+321. VT11 | Number of times attack happened in the last year
+322. VT12 | Place attack happened the last time
+323. VT13 | Number of people involved in committing the offence
+324. VT14 | At least one of the offender(s) recognized at the time of the incident
+325. VT17 | Person(s) had a weapon
+326. VT18A | Offender(s) had a knife, a gun or something else used as a weapon: A knife
+327. VT18B | Offender(s) had a knife, a gun or something else used as a weapon: A gun
+328. VT18X | Offender(s) had a knife, a gun or something else used as a weapon: Other weapon
+329. VT18NR | Offender(s) had a knife, a gun or something else used as a weapon: No response
+330. VT19 | Incident reported to the police
+331. VT20 | Feeling safe walking alone in neighbourhood after dark
+332. VT21 | Feeling safe at home alone after dark
+333. VT22A | In the past 12 months, felt discriminated: Ethnic or immigration origin
+334. VT22B | In the past 12 months, felt discriminated: Gender
+335. VT22C | In the past 12 months, felt discriminated: Sexual orientation
+336. VT22D | In the past 12 months, felt discriminated: Age
+337. VT22E | In the past 12 months, felt discriminated: Religion or belief
+338. VT22F | In the past 12 months, felt discriminated: Disability
+339. VT22X | In the past 12 months, felt discriminated: Any other reason
+340. AF2 | Use glasses or contact lenses
+341. AF3 | Use hearing aid
+342. AF6 | Difficulty seeing, even if wearing glasses or contact lenses
+343. AF8 | Difficulty hearing, even if using a hearing aid
+344. AF9 | Difficulty walking or climbing steps
+345. AF10 | Difficulty remembering or concentrating
+346. AF11 | Difficulty with self-care, such as washing all over or dressing
+347. AF12 | Difficulty communicating
+348. HA1 | Ever heard of HIV or AIDS
+349. HA2 | Can avoid HIV by having one uninfected partner
+350. HA3 | Can get HIV from mosquito bites
+351. HA4 | Can avoid HIV by using a condom correctly every time
+352. HA5 | Can get HIV by sharing food with a person who has HIV
+353. HA6 | Can get HIV through supernatural means
+354. HA7 | Healthy-looking person may have HIV
+355. HA8A | HIV from mother to child during pregnancy
+356. HA8B | HIV from mother to child during delivery
+357. HA8C | HIV from mother to child through breastfeeding
+358. HA10 | Aware of drugs used to reduce the risk of transmission to the baby
+359. HA13A | Given information about HIV during antenatal care visit: HIV from mother
+360. HA13B | Given information about HIV during antenatal care visit: Things to do
+361. HA13C | Given information about HIV during antenatal care visit: Tested for HIV
+362. HA13D | Given information about HIV during antenatal care visit: Offered a test
+363. HA27 | Know a place to get HIV test
+364. HA30 | Would buy fresh vegetables from shopkeeper with AIDS virus
+365. HA31 | Children living with HIV should be allowed to attend school with other children
+366. HA32 | People hesitate to take an HIV test because they are afraid of how other people will react if the test result is positive
+367. HA33 | People talk badly about people living with HIV, or who are thought to be living with HIV
+368. HA34 | People living with HIV, or thought to be living with HIV, lose the respect of other people
+369. HA35 | Agreement with the following statement: I would be ashamed if someone in my family had HIV
+370. HA36 | Fear of getting HIV in contact with the saliva of a person living with HIV
+371. LS1 | Estimation of overall happiness
+372. LS2 | Satisfaction with ladder step
+373. LS3 | Life satisfaction in comparison with last year
+374. LS4 | Life satisfaction expectation one year from now
+375. HH4 | Supervisor number
+376. HH6 | Area
+377. HH7 | Division
+378. HH7A | District
+379. WDOB | Date of birth of woman (CMC)
+380. WDOM | Date of marriage of woman (CMC)
+381. WAGEM | Age at first marriage/union of woman
+382. WDOBFC | Date of birth of first child (CMC)
+383. WDOBLC | Date of birth of last child (CMC)
+384. MSTATUS | Marital/Union status of woman
+385. CEB | Children ever born
+386. CSURV | Children surviving
+387. CDEAD | Children dead
+388. BH4D_first | Day of birth
+389. BH4M_first | Month of birth
+390. BH4Y_first | Year of birth
+391. BH6_first | Age of child
+392. BH3_last | Sex of newborn
+393. BH4D_last | Day of birth
+394. BH4M_last | Month of birth
+395. BH4Y_last | Year of birth
+396. BH6_last | Age of child
+397. wscore | Combined wealth score
+398. windex5 | Wealth index quintile
+399. windex10 | Percentile Group of com1
+400. wscoreu | Urban wealth score
+401. windex5u | Urban wealth index quintile
+402. windex10u | Percentile Group of urb1
+403. wscorer | Rural wealth score
+404. windex5r | Rural wealth index quintile
+405. windex10r | Percentile Group of rur1
+406. wmweight | Woman's sample weight
+407. welevel | Education
+408. disability | Functional difficulties (age 18-49 years)
+409. migration | None
+410. ethnicity | Ethnicity of household head
+411. stratum | Stratum
+412. PSU | Primary sampling unit
+
+================================================================================
+SUMMARY
+================================================================================
+
+FSWEIGHT exact presence by file:
+- No raw .sav file contains a column exactly named FSWEIGHT.
+
+Weight-like columns by file:
+- bh.sav: ['wmweight']
+- ch.sav: ['chweight', 'wmweight']
+- fs.sav: ['fshweight', 'fsweight']
+- hh.sav: ['hhweight', 'wqhaweight', 'wqeweight', 'wqsaweight']
+- hl.sav: ['hhweight']
+- wm.sav: ['wmweight']
+
+Important next check:
+If no FSWEIGHT exists, the Phase 2 FSWEIGHT column must have come from:
+1. a renamed weight variable;
+2. a merge from another raw file;
+3. a computed weight;
+4. or an incorrect/unsupported transformation.
+Do not use it for final optimization until this is resolved.

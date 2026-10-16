@@ -1,0 +1,137 @@
+================================================================================
+PHASE 3 RISK SCORING
+================================================================================
+INPUT: E:\Children Project\edu-support-optimization-bd\data\processed\chattogram_rural_phase3_clean.csv
+SCORED OUTPUT: E:\Children Project\edu-support-optimization-bd\data\processed\chattogram_rural_phase3_scored.csv
+REPORT: E:\Children Project\edu-support-optimization-bd\reports\phase3_risk_scoring.txt
+
+INPUT CHECK
+--------------------------------------------------------------------------------
+Clean input shape: (4891, 38)
+Total clean rows: 4891
+Modeling-ready rows: 4861
+Excluded rows: 30
+
+MODELING SAMPLE CHECKS
+--------------------------------------------------------------------------------
+Missing values in modeling sample:
+age                            0
+female                         0
+wealth_q                       0
+mom_edu                        0
+eth_minor                      0
+disabled                       0
+worked                         0
+Out_of_School                  0
+PSU                            0
+child_weight_fsweight          0
+normalized_weight_fshweight    0
+
+Target counts:
+0    4220
+1     641
+Out-of-school rate: 0.131866
+
+Unique PSU groups: 421
+Group size summary:
+count    421.000000
+mean      11.546318
+std        2.483444
+min        3.000000
+25%       10.000000
+50%       12.000000
+75%       13.000000
+95%       15.000000
+max       17.000000
+
+MODEL SETUP
+--------------------------------------------------------------------------------
+Model: logistic regression
+Preprocessing: standard scaler inside pipeline
+Validation: out-of-fold predicted probabilities
+Folds: 5
+Group variable: PSU
+Random state: 2026
+Training weights: none
+Evaluation weights: child_weight_fsweight and normalized_weight_fshweight
+
+Cross-validation used: StratifiedGroupKFold
+Out-of-fold risk score shape: (4861,)
+Finite risk scores: 4861/4861
+Risk score min: 0.000874
+Risk score max: 0.797609
+Risk score mean: 0.132123
+
+RISK SCORE DISTRIBUTION
+--------------------------------------------------------------------------------
+count    4861.000000
+mean        0.132123
+std         0.156807
+min         0.000874
+5%          0.004588
+25%         0.017765
+50%         0.063018
+75%         0.195292
+90%         0.374273
+95%         0.481499
+99%         0.643179
+max         0.797609
+
+EVALUATION METRICS
+--------------------------------------------------------------------------------
+                 evaluation  n_used  roc_auc  average_precision  brier_score
+                 unweighted    4861 0.839825           0.460543     0.089064
+      child_weight_fsweight    4861 0.851954           0.514386     0.092989
+normalized_weight_fshweight    4861 0.842948           0.457614     0.090296
+
+TOP 15% BY RISK SCORE
+--------------------------------------------------------------------------------
+n_selected: 730
+selected_share: 0.150175
+total_out_of_school: 641
+captured_out_of_school: 332
+unweighted_capture_rate: 0.517941
+weighted_capture_rate_child_weight: 0.514165
+mean_risk_selected: 0.446115
+mean_risk_not_selected: 0.076637
+
+FINAL FIT COEFFICIENTS FOR INTERPRETATION
+--------------------------------------------------------------------------------
+These coefficients come from a final fit on all modeling-ready rows.
+They are for interpretation only. The saved risk_score_oof is out-of-fold.
+  feature  standardized_log_odds  odds_ratio_per_one_sd
+      age               1.381417               3.980539
+   female              -0.315006               0.729784
+ wealth_q              -0.432440               0.648924
+  mom_edu              -0.390939               0.676422
+eth_minor              -0.212061               0.808915
+ disabled               0.038982               1.039752
+   worked               0.048930               1.050147
+
+SAVE SCORED FILE
+--------------------------------------------------------------------------------
+Saved scored file: E:\Children Project\edu-support-optimization-bd\data\processed\chattogram_rural_phase3_scored.csv
+Scored shape: (4861, 40)
+Do not commit this file. It contains child-level survey data and predicted scores.
+
+VERDICT
+--------------------------------------------------------------------------------
+RISK SCORING STATUS: PASS
+All modeling-ready rows received a finite out-of-fold risk score.
+
+IMPORTANT LIMITATIONS
+--------------------------------------------------------------------------------
+This is a first reproducible risk model, not the final optimized model.
+It uses only complete core features: age, female, wealth_q, mom_edu, eth_minor, disabled, worked.
+It does not use no_books because that variable has 1,621 missing values.
+It does not use books_missing_data as a substantive feature because it is a nonresponse indicator.
+The model is fitted without sample weights.
+Survey weights are used only to evaluate population-weighted performance.
+The primary child weight is still provisional until MICS codebook confirmation.
+
+NEXT STEP AFTER THIS REPORT
+--------------------------------------------------------------------------------
+1. Send reports/phase3_risk_scoring.txt.
+2. If PASS, rebuild the optimization input using risk_score_oof, original IDs, PSU, and child_weight_fsweight.
+3. Run the budgeted selection MILP using the verified score.
+4. Run fairness constraints and sensitivity checks using both weight columns.
