@@ -268,64 +268,95 @@ def main():
     # Panel C: girls floor, incremental objective cost.
     ax = axs[1, 0]
 
-    ln0_c, = ax.plot(g0_x, g0_obj_drop, marker="o", color=BLUE)
-    ln423_c, = ax.plot(
+    ax.plot(
+        g0_x,
+        g0_obj_drop,
+        marker="o",
+        color=BLUE,
+        label="No young floor",
+    )
+
+    ax.plot(
         g423_x,
         g423_obj_drop,
         marker="^",
         linestyle="--",
         color=GREEN,
+        label="Proportional young floor",
     )
 
-    ax.axvline(0.374415, color=GRAY, linestyle=":", linewidth=0.8)
-    ax.axvline(0.502740, color=GRAY, linestyle="--", linewidth=0.8)
+    ax.axvline(
+        0.374415,
+        color=GRAY,
+        linestyle=":",
+        linewidth=0.8,
+        label="OOS-pool parity (37.4%)",
+    )
+
+    ax.axvline(
+        0.502740,
+        color=GRAY,
+        linestyle="--",
+        linewidth=0.8,
+        label="Population parity (50.3%)",
+    )
 
     ax.set_xlabel("Selected share girls")
     ax.set_ylabel("Incremental objective drop")
     ax.set_title("C. Cost of gender coverage")
-
     ax.legend(
-        handles=[ln0_c, ln423_c],
-        labels=["No young floor", "Proportional young floor"],
         frameon=False,
         loc="upper left",
-        bbox_to_anchor=(0.02, 0.98),
-        fontsize=7.0,
+        fontsize=6.5,
+        labelspacing=0.35,
     )
-
-    ymax_c = max(np.nanmax(g0_obj_drop), np.nanmax(g423_obj_drop))
-    ax.set_ylim(0, safe_top(ymax_c))
+    ax.set_ylim(bottom=0)
 
     # Panel D: girls floor, incremental observed capture cost.
     ax = axs[1, 1]
 
-    ln0_d, = ax.plot(g0_x, g0_cap_drop, marker="o", color=BLUE)
-    ln423_d, = ax.plot(
+    ax.plot(
+        g0_x,
+        g0_cap_drop,
+        marker="o",
+        color=BLUE,
+        label="No young floor",
+    )
+
+    ax.plot(
         g423_x,
         g423_cap_drop,
         marker="^",
         linestyle="--",
         color=GREEN,
+        label="Proportional young floor",
     )
 
-    ax.axvline(0.374415, color=GRAY, linestyle=":", linewidth=0.8)
-    ax.axvline(0.502740, color=GRAY, linestyle="--", linewidth=0.8)
+    ax.axvline(
+        0.374415,
+        color=GRAY,
+        linestyle=":",
+        linewidth=0.8,
+        label="OOS-pool parity (37.4%)",
+    )
+
+    ax.axvline(
+        0.502740,
+        color=GRAY,
+        linestyle="--",
+        linewidth=0.8,
+        label="Population parity (50.3%)",
+    )
 
     ax.set_xlabel("Selected share girls")
     ax.set_ylabel("Incremental observed OOS not captured")
     ax.set_title("D. Reach cost of gender coverage")
-
     ax.legend(
-        handles=[ln0_d, ln423_d],
-        labels=["No young floor", "Proportional young floor"],
         frameon=False,
         loc="upper left",
-        bbox_to_anchor=(0.02, 0.98),
-        fontsize=7.0,
+        fontsize=6.5,
+        labelspacing=0.35,
     )
-
-    ymax_d = max(np.nanmax(g0_cap_drop), np.nanmax(g423_cap_drop))
-    ax.set_ylim(0, safe_top(ymax_d))
 
     fig.suptitle(
         "Price of fairness constraints, rural Chattogram ages 6-17",

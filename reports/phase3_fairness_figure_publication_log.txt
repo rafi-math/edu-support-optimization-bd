@@ -27,9 +27,9 @@ CAPTURE WOBBLE DIAGNOSTICS
 Seaborn context applied: paper.
 
 SAVED FILES
-  E:\Children Project\edu-support-optimization-bd\results\figures\phase3_fairness_curves_publication.png (749295 bytes)
-  E:\Children Project\edu-support-optimization-bd\results\figures\phase3_fairness_curves_publication.pdf (34749 bytes)
-  E:\Children Project\edu-support-optimization-bd\results\figures\phase3_fairness_curves_publication.svg (135220 bytes)
+  E:\Children Project\edu-support-optimization-bd\results\figures\phase3_fairness_curves_publication.png (798506 bytes)
+  E:\Children Project\edu-support-optimization-bd\results\figures\phase3_fairness_curves_publication.pdf (35759 bytes)
+  E:\Children Project\edu-support-optimization-bd\results\figures\phase3_fairness_curves_publication.svg (143070 bytes)
 
 NEXT: open the PNG locally and check the two red-marked problems.
 The gray vertical-line explanation is intentionally not inside the PNG.
