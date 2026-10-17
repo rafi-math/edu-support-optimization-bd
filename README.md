@@ -116,6 +116,7 @@ file.
 .
 ├── docs/                      # public site (served by GitHub Pages)
 │   ├── index.html
+│   ├── phase3_reproduce_demo.ipynb  # public Colab demo (aggregate only)
 │   ├── styles.css
 │   ├── app.js                 # client-side reveal + reading-zoom, no backend
 │   ├── ai-use-log.html        # styled AI-use record
@@ -131,7 +132,6 @@ file.
 │   ├── build_phase2_policy_table_from_grid.py
 │   ├── build_public_site.py
 │   └── ...
-├── notebooks/
 ├── reports/                   # validation and grid audit logs
 ├── results/                   # aggregate result tables (no child-level rows)
 ├── .gitignore
