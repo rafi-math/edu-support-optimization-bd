@@ -59,6 +59,10 @@
 <p>A logistic regression model predicts out-of-school status using complete core covariates: age, sex, wealth quintile, mother's education, ethnic minority status, disability flag, and child work. The score used for optimization is out-of-fold, produced by 5-fold grouped cross-validation grouped by PSU.</p>
 <p>The model is fitted without sample weights. Survey weights are used for evaluation. The primary child weight is provisionally treated as <span class='code'>fsweight</span>, while <span class='code'>fshweight</span> is kept as a normalized sensitivity weight.</p>
 <h3>3. Allocation model</h3>
+<p>Let <span class="v">x</span><sub><span class="v">i</span></sub> = 1 if child <span class="v">i</span> is selected and <span class="v">r</span><sub><span class="v">i</span></sub> be the out-of-fold risk score. The baseline problem is</p>
+<div class="eq"><span class="lim"><span class="sym">max</span><span class="bot"><span class="v">x</span></span></span> <span class="lim"><span class="sym">&#8721;</span><span class="bot"><span class="v">i</span></span></span> <span class="v">r</span><sub><span class="v">i</span></sub><span class="v">x</span><sub><span class="v">i</span></sub> <span class="txt">subject to</span> <span class="lim"><span class="sym">&#8721;</span><span class="bot"><span class="v">i</span></span></span> <span class="v">x</span><sub><span class="v">i</span></sub> = <span class="v">K</span>.</div>
+<p>Fairness versions add lower-bound coverage constraints such as</p>
+<div class="eq"><span class="lim"><span class="sym">&#8721;</span><span class="bot"><span class="v">i</span> : age<sub><span class="v">i</span></sub> &#8804; 12</span></span> <span class="v">x</span><sub><span class="v">i</span></sub> &#8805; <span class="v">y</span><sub>min</sub> <span class="txt">and</span> <span class="lim"><span class="sym">&#8721;</span><span class="bot"><span class="v">i</span> : female<sub><span class="v">i</span></sub> = 1</span></span> <span class="v">x</span><sub><span class="v">i</span></sub> &#8805; <span class="v">g</span><sub>min</sub></div>
 <p>The integer programs were solved with SciPy's MILP interface using HiGHS. The relative MIP gap was set to zero, so the reported solutions are proven optimal for the stated models. The young-floor cases were also cross-checked against an independent exact greedy reference.</p>
 <h2 id='privacy'>Data access and privacy</h2>
 <p>MICS microdata contain household and child identifiers. Raw <span class='code'>.sav</span> files and derived child-level CSV files are kept local and are not published in the repository. This website publishes only aggregate tables, aggregate curves, figures, and code. No child-level records are included.</p>
@@ -67,13 +71,13 @@
 <h2>Files used by this page</h2>
 <ul><li><a href='data/phase3_fairness_summary.csv'>phase3_fairness_summary.csv</a></li><li><a href='data/phase3_fairness_curves.csv'>phase3_fairness_curves.csv</a></li><li><a href='assets/phase3_fairness_curves_publication.png'>phase3_fairness_curves_publication.png</a></li><li><a href='assets/phase3_fairness_curves_publication.pdf'>phase3_fairness_curves_publication.pdf</a></li></ul>
 <h2>Status and what is next</h2>
-<p>This site is live and is built from aggregate outputs only. A Google Colab demo that reproduces the fairness figure and the policy table from the aggregate CSVs, and a working-paper draft, are in preparation; neither is published yet, so no link is given until it exists.</p><div class='footer'>Generated from verified aggregate Phase 3 outputs. Do not add child-level microdata to this site.</div>
+<p>This site is live and is built from aggregate outputs only. A Google Colab demo that reproduces the fairness figure and the policy table from the aggregate CSVs, and a working-paper draft, are in preparation; neither is published yet, so no link is given until it exists.</p>
+<div class='footer'>Generated from verified aggregate Phase 3 outputs. Do not add child-level microdata to this site.</div>
 </main>
-  <script src='app.js' defer></script>
-  <div class='zoombar' role='group' aria-label='Reading zoom'>
+<div class='zoombar' role='group' aria-label='Reading zoom'>
   <span class='zoom-label' id='zoomLabel'>100%</span>
   <input type='range' id='zoomRange' min='0' max='100' step='1' value='50' aria-label='Reading zoom level'>
 </div>
-  <script src='app.js' defer></script>
+<script src='app.js' defer></script>
 </body>
 </html>
