@@ -405,3 +405,7 @@ li {
   transform: none; 
   will-change: auto; 
 }
+/* --- unified content width: removes right gap, matches figure to text, stops table overflow --- */
+:root { --page: 64rem; --measure: 100%; }
+.data-table { min-width: 0; }
+.data-table th { white-space: normal; }
