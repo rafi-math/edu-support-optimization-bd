@@ -1,0 +1,9 @@
+data/
+.venv/
+*.sav
+*phase2_input.csv
+*phase2_clean.csv
+*selected_private.csv
+results/private/
+__pycache__/
+*.pyc
