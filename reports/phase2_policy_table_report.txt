@@ -1,0 +1,23 @@
+Grid rows=40; missing columns: none
+K inferred from grid (median girls_selected/girls_share) = 730
+
+CROSS-CHECKS vs published figure/grid
+  raw unweighted obj: got=325.663745 expected=325.663745 -> OK
+  prop-young unweighted obj: got=222.022851 expected=222.022851 -> OK
+  raw weighted obj: got=835.475663 expected=835.475663 -> OK
+  prop-young weighted obj: got=656.653056 expected=656.653056 -> OK
+  raw captured OOS: got=332.000000 expected=332.000000 -> OK
+  prop-young captured OOS: got=219.000000 expected=219.000000 -> OK
+  interaction unweighted: got=-5.740452 expected=-5.740000 -> OK
+ALL CROSS-CHECKS PASSED
+
+POLICY TABLE (unweighted primary; weighted as sensitivity)
+                          policy  young_floor  girls_floor  obj_unweighted  obj_drop_vs_raw  obj_drop_pct_of_raw  observed_oos_captured  capture_rate_unweighted  capture_drop_vs_raw  young_selected  young_share  girls_selected  girls_share  obj_weighted_sensitivity
+                    raw_top_risk            0            0      325.663745     1.558885e-08         4.786794e-09                    332                 0.517941                    0               1     0.001370             212     0.290411                835.475663
+               young_floor_20pct          146            0      304.270078     2.139367e+01         6.569251e+00                    308                 0.480499                   24             146     0.200000             167     0.228767                817.442884
+      young_proportional_57.9pct          423            0      222.022851     1.036409e+02         3.182451e+01                    219                 0.341654                  113             423     0.579452             171     0.234247                656.653056
+               girls_floor_40pct            0          292      322.039208     3.624537e+00         1.112969e+00                    329                 0.513261                    3               0     0.000000             292     0.400000                833.781196
+ girls_population_parity_50.3pct            0          367      312.749944     1.291380e+01         3.965379e+00                    320                 0.499220                   12               0     0.000000             367     0.502740                819.244513
+young_prop_plus_girls_pop_parity          423          367      214.849502     1.108142e+02         3.402720e+01                    213                 0.332293                  119             423     0.579452             367     0.502740                646.016677
+
+Saved aggregate policy table: E:\Children Project\edu-support-optimization-bd\results\phase2_policy_table_from_verified_grid.csv
