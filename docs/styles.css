@@ -323,6 +323,11 @@ li {
 .code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 0.88em;
+
+  /* --- right-edge / overflow fixes (added) --- */
+:root { --measure: 90ch; }
+.data-table { min-width: 0; }
+.data-table th { white-space: normal; }
   background: var(--soft);
   padding: 0.1rem 0.32rem;
   border-radius: 4px;
