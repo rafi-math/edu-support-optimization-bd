@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>AI Use Log — Fairness-Constrained Allocation, Rural Chattogram</title>
+<link rel='stylesheet' href='styles.css'>
+</head>
+<body>
+<nav class='topnav' aria-label='Section navigation'>
+  <div class='topnav-inner'>
+    <a class='topnav-brand' href='index.html'>Edu-support optimization</a>
+    <div class='topnav-links'>
+      <a href='index.html#summary'>Summary</a>
+      <a href='index.html#numbers'>Numbers</a>
+      <a href='index.html#figure'>Figure</a>
+      <a href='index.html#policy'>Policy table</a>
+      <a href='index.html#method'>Method</a>
+      <a href='index.html#corrections'>Corrections</a>
+      <a href='index.html#privacy'>Privacy</a>
+      <a href='index.html#ai' aria-current='page'>AI use</a>
+    </div>
+  </div>
+</nav>
+<main>
+<h1>AI Use Log</h1>
+<p>This log documents the development of the educational support optimization project. An AI coding assistant (Qwen) was used throughout for code generation, debugging, and structural guidance; Cursor contributed the final stylesheet draft. All methodological decisions, data verification, mathematical formulations, interpretations, and final wording were reviewed, corrected, and owned by the human researcher. Each row names the tool used for that step and separates what the assistant drafted from what the author checked or changed.</p>
+<table class='data-table'>
+<thead><tr><th>Date</th><th>Task</th><th>Tool</th><th>What AI helped with</th><th>What I checked or changed</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>2026-10-14</td><td>Public repo, .gitignore, README</td><td>GitHub</td><td>Drafted .gitignore rules for MICS privacy and the README skeleton</td><td>Applied them, verified raw .sav files are not committed, wrote the BBS/UTM notes</td><td>Done</td></tr>
+<tr><td>2026-10-15</td><td>Load fs.sav; build rural Chattogram ages 6-17 sample</td><td>Google Colab</td><td>Wrote pandas/pyreadstat code to load fs.sav and filter the cohort</td><td>Confirmed 40617 x 268; read rural = HH6:2 and Chattogram = HH7:20 from metadata</td><td>Done</td></tr>
+<tr><td>2026-10-15</td><td>Correct PR3 and weight handling; build feature matrix and PSU groups</td><td>Google Colab</td><td>Suggested the feature-matrix construction and grouped-CV split</td><td>Read PR3's true missing code (99) from metadata and fixed the earlier wrong assumption; checked PSU grouping</td><td>Done</td></tr>
+<tr><td>2026-10-15</td><td>Train three classifiers out-of-fold; lock R_i; segment composition</td><td>Google Colab</td><td>Drafted the StratifiedGroupKFold loop and metric reporting</td><td>Ran it grouped by PSU over LR/RF/MLP; chose LR on OOF ROC-AUC; verified the locked risk score is out-of-fold</td><td>Done</td></tr>
+<tr><td>2026-10-16</td><td>Solve budgeted selection MILP; confirm y_min=0 sanity gate</td><td>PyCharm</td><td>Drafted the constrained-knapsack model and solver call</td><td>Ran it in the activated .venv via terminal; confirmed the no-constraint baseline reproduces top-K</td><td>Done</td></tr>
+<tr><td>2026-10-16</td><td>Price young and girls floors; sweep 2-D interaction grid</td><td>PyCharm</td><td>Wrote the grid-sweep driver and pivot tables</td><td>Ran the 16-scenario sweep; checked every cell solved to proven optimality</td><td>Done</td></tr>
+<tr><td>2026-10-16</td><td>Verified fairness trade-offs; priced young/girls floors</td><td>PyCharm</td><td>Drafted the greedy reference and SciPy HiGHS MILP cross-check</td><td>Ran exact greedy and HiGHS solvers on verified OOF risk scores; reconciled objective values</td><td>Done</td></tr>
+<tr><td>2026-10-16</td><td>Built reproducible public project site</td><td>PyCharm</td><td>Generated static HTML/CSS from aggregate CSVs only</td><td>Enforced strict data-privacy filters; confirmed no child-level records reach docs/</td><td>Done</td></tr>
+<tr><td>2026-10-17</td><td>Published repository &amp; enabled live site</td><td>Git / GitHub</td><td>Drafted the commit/push sequence and safety filters</td><td>Committed safe aggregate files (docs/results/src/reports); configured GitHub Pages; verified HEAD carried no restricted data</td><td>Done</td></tr>
+<tr><td>2026-10-17</td><td>Fix fairness figure label overlap; move parity lines into legend</td><td>PyCharm</td><td>Rewrote panels C-D legend, removed rotated in-plot text and cramped footer caption</td><td>Inspected the regenerated PNG by eye and confirmed the overlap was gone; ran build_public_site.py; staged only figure/site files; ran the data/.sav filter (empty); committed and pushed (ca413ac)</td><td>Done</td></tr>
+<tr><td>2026-10-17</td><td>Validate and clean Phase 2 processed file; build impact_score</td><td>Google Colab</td><td>Wrote the validation/cleaning cell and report writer</td><td>Confirmed 4891 to 4863 rows (28 dropped for missing FSWEIGHT), zero duplicate sid, zero invalid age/risk/weight, 421 PSU groups; kept the clean CSV private</td><td>Done</td></tr>
+<tr><td>2026-10-17</td><td>Diagnose MILP import failure; pin PuLP to classic API</td><td>PyCharm</td><td>Identified PuLP 4.0.1 (Rust rewrite) as the cause and proposed pulp&lt;4.0.0</td><td>Read the ImportError, installed the pin, confirmed the classic API imports (pulp 3.3.2)</td><td>Done</td></tr>
+<tr><td>2026-10-17</td><td>Build Phase 2 policy table from the verified fairness grid</td><td>PyCharm</td><td>Wrote the grid-derived script and recommended aligning Phase 2 to the OOF score and young/girls-floor model</td><td>Ran it; confirmed all seven cross-checks OK and interaction -5.740452; verified the 641 denominator on n=4861, K=730; corrected scenario labels</td><td>Done</td></tr>
+<tr><td>2026-10-17</td><td>Remove stray duplicate of the policy-table script from reports/</td><td>Git / GitHub</td><td>Proposed comparing the two copies and force-removing the outdated one</td><td>Found reports/ held the old broken version (girls floor 219 + figure block); force-removed it; verified one src/ copy tracked and leak filter empty; pushed (b1ccbf5)</td><td>Done</td></tr>
+<tr><td>2026-10-17</td><td>Add section navigation, fix figure caption, correct AI disclosure</td><td>GitHub web editor</td><td>Wrote replacement docs/index.html with sticky nav, rewritten caption explaining the grey parity lines, expanded img alt, honest AI line</td><td>Checked against the live page, confirmed no number or table row changed, pasted via GitHub web editor, hard-refreshed, screenshotted nav/figure/table</td><td>Done</td></tr>
+<tr><td>2026-10-18</td><td>Polish page stylesheet (light/dark, tables, figure, focus rings)</td><td>Cursor</td><td>Generated a complete academic stylesheet</td><td>Reviewed line by line against index.html, found one defect (split display:block table misaligns the 13-column policy table), wrote the two-rule fix, adopted via GitHub web editor, hard-refreshed, screenshotted to confirm alignment</td><td>Done</td></tr>
+</tbody>
+</table>
+<p class='small'><a href='index.html'>&larr; Back to the project page</a></p>
+<div class='footer'>Aggregate record only. No child-level data is stored in this log.</div>
+</main>
+</body>
+</html>
