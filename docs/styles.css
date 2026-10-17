@@ -426,3 +426,11 @@ li {
   .zoombar { right: 0.5rem; bottom: 0.5rem; }
   .zoombar input[type=range] { width: 6rem; }
 }
+/* --- hand-rendered math (no CDN dependency) --- */
+.eq { text-align: center; font-size: 1.12rem; margin: 0.9rem 0 1.1rem; line-height: 2.1; }
+.eq .v { font-style: italic; }
+.eq .txt { font-style: normal; margin: 0 0.35em; color: var(--muted); }
+.eq .lim { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 0.12em; line-height: 1; }
+.eq .lim .sym { font-size: 1.35em; font-style: normal; }
+.eq .lim .bot { font-size: 0.6em; line-height: 1.1; }
+.eq sub { font-size: 0.7em; }
