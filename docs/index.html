@@ -9,6 +9,17 @@
 MathJax = {tex: {inlineMath: [['\\(', '\\)']]}};
 </script>
 <script src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js' async></script>
+<script>
+(function () {
+  var d = document.documentElement;
+  try {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+    if (!('IntersectionObserver' in window)) { return; }
+    d.className += ' js-reveal';
+    window.__revealGuard = setTimeout(function () { d.className = d.className.replace(' js-reveal', ''); }, 2000);
+  } catch (e) {}
+})();
+</script>
 </head>
 <body>
 <nav class='topnav' aria-label='Section navigation'>
@@ -69,5 +80,6 @@ MathJax = {tex: {inlineMath: [['\\(', '\\)']]}};
 <div class='grid'><div class='card'><h3>GitHub Pages site</h3><p>Deploy this <span class='code'>docs/</span> folder as the public project page.</p></div><div class='card'><h3>Google Colab demo</h3><p>Create a public notebook that reproduces the fairness figure from aggregate CSVs only.</p></div><div class='card'><h3>Notion project page</h3><p>Use Notion as a portfolio page linking the repo, site, Colab, and paper draft.</p></div><div class='card'><h3>Overleaf paper</h3><p>Convert the verified report skeleton into the research paper later.</p></div></div>
 <div class='footer'>Generated from verified aggregate Phase 3 outputs. Do not add child-level microdata to this site.</div>
 </main>
+  <script src='app.js' defer></script>
 </body>
 </html>
