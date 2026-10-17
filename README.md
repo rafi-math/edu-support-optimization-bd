@@ -36,9 +36,9 @@ The pipeline has three computational stages, all run on the same verified sample
   incomplete interview / zero weight or missing core features).
 
 The MICS 2019 children's file does **not** contain household coordinates, school
-identifiers, upazila identifiers, travel distances, center construction costs or center
+identifiers, upazila identifiers, travel distances, center construction costs, or center
 capacities. This project therefore does not claim to optimize physical support-center
-locations from observed MICS infrastructure data. Any distance, cost, capacity or budget
+locations from observed MICS infrastructure data. Any distance, cost, capacity, or budget
 value used in the optimization is an analyst- or policy-chosen scenario parameter, not an
 observed MICS variable.
 
