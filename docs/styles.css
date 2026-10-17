@@ -411,3 +411,18 @@ li {
 .data-table th { white-space: normal; }
 
 /* --- reading zoom (added) --- */ :root { --rs: 1; } main { font-size: calc(1.0625rem * var(--rs)); } .zoombar { position: fixed; right: 1rem; bottom: 1rem; z-index: 200; display: flex; gap: 0.25rem; padding: 0.3rem; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; box-shadow: var(--shadow); } .zoombar button { font: inherit; line-height: 1; min-width: 2rem; padding: 0.35rem 0.5rem; border: 1px solid var(--line); border-radius: 999px; background: var(--soft); color: var(--text); cursor: pointer; } .zoombar button:hover { background: var(--accent-soft); color: var(--accent); } .zoombar .zoom-reset { min-width: auto; padding: 0.35rem 0.6rem; } @media (max-width: 40rem) { .zoombar { right: 0.5rem; bottom: 0.5rem; } }
+/* --- figure size + zoom slider (added) --- */
+.figure { max-width: 80%; }
+.zoombar {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 200;
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.4rem 0.7rem;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 999px; box-shadow: var(--shadow);
+}
+.zoom-label { font: inherit; font-size: 0.8rem; min-width: 3.4ch; text-align: right; color: var(--muted); }
+.zoombar input[type=range] { width: 9rem; accent-color: var(--accent); cursor: pointer; }
+@media (max-width: 40rem) {
+  .zoombar { right: 0.5rem; bottom: 0.5rem; }
+  .zoombar input[type=range] { width: 6rem; }
+}
