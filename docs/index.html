@@ -6,10 +6,6 @@
 <title>Fairness-Constrained Allocation of Educational Support in Rural Chattogram</title>
 <link rel='stylesheet' href='styles.css'>
 <script>
-MathJax = {tex: {inlineMath: [['\\(', '\\)']]}};
-</script>
-<script src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js' async></script>
-<script>
 (function () {
   var d = document.documentElement;
   try {
@@ -64,9 +60,6 @@ MathJax = {tex: {inlineMath: [['\\(', '\\)']]}};
 <p>A logistic regression model predicts out-of-school status using complete core covariates: age, sex, wealth quintile, mother's education, ethnic minority status, disability flag, and child work. The score used for optimization is out-of-fold, produced by 5-fold grouped cross-validation grouped by PSU.</p>
 <p>The model is fitted without sample weights. Survey weights are used for evaluation. The primary child weight is provisionally treated as <span class='code'>fsweight</span>, while <span class='code'>fshweight</span> is kept as a normalized sensitivity weight.</p>
 <h3>3. Allocation model</h3>
-<p>Let \(x_i = 1\) if child \(i\) is selected and \(r_i\) be the out-of-fold risk score. The baseline problem is</p>
-\[ \max_x \sum_i r_i x_i \quad \text{subject to} \quad \sum_i x_i = K. \]
-<p>Fairness versions add lower-bound coverage constraints such as \( \sum_{i: \text{age}_i \leq 12} x_i \geq y_{\min} \) and \( \sum_{i: \text{female}_i = 1} x_i \geq g_{\min} \).</p>
 <p>The integer programs were solved with SciPy's MILP interface using HiGHS. The relative MIP gap was set to zero, so the reported solutions are proven optimal for the stated models. The young-floor cases were also cross-checked against an independent exact greedy reference.</p>
 <h2 id='corrections'>Important corrections from earlier drafts</h2>
 <div class='callout orange'><ul><li>The old Phase 2 column named <span class='code'>books_missing</span> was verified to be a nonresponse indicator for <span class='code'>PR3</span>, not a true no-books variable.</li><li>The old Phase 2 column named <span class='code'>FSWEIGHT</span> was verified to contain raw <span class='code'>fshweight</span>, not raw <span class='code'>fsweight</span>.</li><li>The old Phase 2 risk score was not locally reproducible, so Phase 3 rebuilt the score from raw verified data.</li><li>The old Phase 2 claim that age and gender floors were superadditive is withdrawn. On the reproducible Phase 3 score, the interaction is subadditive at the proportional corner.</li></ul></div>
