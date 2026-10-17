@@ -11,7 +11,22 @@ MathJax = {tex: {inlineMath: [['\\(', '\\)']]}};
 <script src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js' async></script>
 </head>
 <body>
-<header>
+<nav class='topnav' aria-label='Section navigation'>
+  <div class='topnav-inner'>
+    <a class='topnav-brand' href='#top'>Edu-support optimization</a>
+    <div class='topnav-links'>
+      <a href='#summary'>Summary</a>
+      <a href='#numbers'>Numbers</a>
+      <a href='#figure'>Figure</a>
+      <a href='#policy'>Policy table</a>
+      <a href='#method'>Method</a>
+      <a href='#corrections'>Corrections</a>
+      <a href='#privacy'>Privacy</a>
+      <a href='#ai'>AI use</a>
+    </div>
+  </div>
+</nav>
+<header id='top'>
 <h1>Fairness-Constrained Allocation of Educational Support in Rural Chattogram</h1>
 <div class='subtitle'>A reproducible risk-scoring and optimization project showcase</div>
 <div class='meta'>Md. Ali Arman Rafi &middot; Department of Mathematics, University of Chittagong, Bangladesh</div>
@@ -19,35 +34,35 @@ MathJax = {tex: {inlineMath: [['\\(', '\\)']]}};
 <div class='badge-row'><span class='badge'>MICS 2019</span><span class='badge'>Rural Chattogram</span><span class='badge'>Ages 6-17</span><span class='badge'>Out-of-fold risk score</span><span class='badge'>Fairness-constrained MILP</span><span class='badge'>Aggregate public outputs only</span></div>
 </header>
 <main>
-<h2>Project summary</h2>
+<h2 id='summary'>Project summary</h2>
 <p>This project builds a reproducible decision-support workflow for allocating limited educational support among rural children aged 6-17 in Chattogram, Bangladesh. It starts from verified MICS 2019 microdata, constructs an out-of-fold out-of-school risk score, and then prices the trade-off between predictive reach and explicit fairness coverage constraints.</p>
-<div class='callout'><strong>Main finding:</strong> raw risk ranking captures many out-of-school adolescents but almost excludes younger children. Age coverage is expensive. Gender parity is comparatively cheap, especially after age coverage has already been included. The age and gender floors are subadditive in objective cost at the proportional corner.</div>
-<h2>Verified numbers</h2>
+<div class='callout'><strong>Main finding:</strong> raw risk ranking captures many out-of-school adolescents but almost excludes younger children. Age coverage is expensive. Gender parity is comparatively cheap, especially after age coverage has already been included. At the proportional corner the two floors are subadditive in objective cost (interaction -5.74; see the policy table).</div>
+<h2 id='numbers'>Verified numbers</h2>
 <table class='data-table'><thead><tr><th>Item</th><th>Verified value</th></tr></thead><tbody><tr><td>Raw rural Chattogram sample</td><td>4,891 children</td></tr><tr><td>Modeling-ready sample</td><td>4,861 children</td></tr><tr><td>Selection budget K</td><td>730 children, about 15%</td></tr><tr><td>Observed out-of-school children</td><td>641</td></tr><tr><td>Unweighted out-of-school rate</td><td>13.19%</td></tr><tr><td>Provisional child-weighted out-of-school rate</td><td>14.52%</td></tr><tr><td>Out-of-fold ROC-AUC, unweighted</td><td>0.8398</td></tr><tr><td>Out-of-fold ROC-AUC, provisional child-weighted</td><td>0.8520</td></tr><tr><td>Raw-risk observed OOS captured</td><td>332 of 641, 51.8%</td></tr><tr><td>Raw-risk selected share aged &lt; 13</td><td>0.14%, only 1 child</td></tr><tr><td>Raw-risk selected share girls</td><td>29.04%</td></tr><tr><td>Age+gender interaction, unweighted objective</td><td>-5.740 objective units, subadditive</td></tr></tbody></table>
-<h2>Figure: price of fairness constraints</h2>
-<img class='figure' src='assets/phase3_fairness_curves_publication.png' alt='Fairness price curves'>
+<h2 id='figure'>Figure: price of fairness constraints</h2>
+<img class='figure' src='assets/phase3_fairness_curves_publication.png' alt='Four-panel line chart of the cost of fairness constraints in a rural Chattogram educational support allocation model. Panels A and B show the objective and reach cost of an under-13 coverage floor. Panels C and D show the incremental cost of a girls floor, with and without the under-13 floor, with grey reference lines for out-of-school-pool parity (37.4%) and population parity (50.3%).'>
 <p class='small'>Vector figure: <a href='assets/phase3_fairness_curves_publication.pdf'>PDF</a></p>
-<p class='small'>Panels A and B show the cost of requiring coverage for children under 13. Panels C and D show the cost of requiring coverage for girls, with and without the proportional young floor. The lower incremental cost of the girls floor under the young floor indicates subadditivity.</p>
-<h2>Policy scenario table</h2>
+<p class='small'>Panels A and B price the under-13 floor: the x-axis is the required minimum share of selected children aged under 13; in A the y-axis is the loss in total out-of-fold risk relative to the unconstrained allocation, and in B it is the additional observed out-of-school children left uncaptured. Panels C and D price the girls floor on the same axes, with and without the proportional under-13 floor already in place. In C and D the dotted grey line marks the female share among observed out-of-school children (37.4%) and the dashed grey line marks the female share among all children in the sample (50.3%); these are reference points, not constraints. The girls floor costs less once the age floor is present, which is the subadditivity reported in the policy table below (interaction -5.74 at the proportional corner).</p>
+<h2 id='policy'>Policy scenario table</h2>
 <p>The objective is the sum of out-of-fold predicted risk scores. Observed out-of-school capture is an evaluation metric only; it is not used as the optimization target.</p>
 <table class='data-table'><thead><tr><th>Scenario</th><th>Young floor</th><th>Girls floor</th><th>Young %</th><th>Girls %</th><th>Poorest %</th><th>Objective</th><th>Obj drop</th><th>Obj drop %</th><th>Captured OOS</th><th>Capture drop</th><th>Interaction</th><th>Proven optimal</th></tr></thead><tbody><tr><td>raw risk no floors</td><td>0</td><td>0</td><td>0.1%</td><td>29.0%</td><td>41.9%</td><td>325.66</td><td>0.00</td><td>0.00%</td><td>332</td><td>0</td><td>0.000</td><td>yes</td></tr><tr><td>girls 40pct only</td><td>0</td><td>292</td><td>0.0%</td><td>40.0%</td><td>45.8%</td><td>322.04</td><td>3.62</td><td>1.11%</td><td>329</td><td>3</td><td>0.000</td><td>yes</td></tr><tr><td>girls parity only</td><td>0</td><td>367</td><td>0.0%</td><td>50.3%</td><td>45.6%</td><td>312.75</td><td>12.91</td><td>3.97%</td><td>320</td><td>12</td><td>0.000</td><td>yes</td></tr><tr><td>young 10pct only</td><td>73</td><td>0</td><td>10.0%</td><td>25.1%</td><td>46.7%</td><td>318.08</td><td>7.58</td><td>2.33%</td><td>319</td><td>13</td><td>0.000</td><td>yes</td></tr><tr><td>young 20pct only</td><td>146</td><td>0</td><td>20.0%</td><td>22.9%</td><td>49.7%</td><td>304.27</td><td>21.39</td><td>6.57%</td><td>308</td><td>24</td><td>0.000</td><td>yes</td></tr><tr><td>young 33pct only</td><td>243</td><td>0</td><td>33.3%</td><td>24.2%</td><td>52.1%</td><td>280.05</td><td>45.62</td><td>14.01%</td><td>291</td><td>41</td><td>0.000</td><td>yes</td></tr><tr><td>young proportional only</td><td>423</td><td>0</td><td>57.9%</td><td>23.4%</td><td>56.2%</td><td>222.02</td><td>103.64</td><td>31.82%</td><td>219</td><td>113</td><td>0.000</td><td>yes</td></tr><tr><td>young 33pct girls 40pct</td><td>243</td><td>292</td><td>33.3%</td><td>40.0%</td><td>55.3%</td><td>276.47</td><td>49.19</td><td>15.10%</td><td>278</td><td>54</td><td>-0.054</td><td>yes</td></tr><tr><td>young 33pct girls parity</td><td>243</td><td>367</td><td>33.3%</td><td>50.3%</td><td>54.5%</td><td>270.23</td><td>55.44</td><td>17.02%</td><td>272</td><td>60</td><td>-3.095</td><td>yes</td></tr><tr><td>young proportional girls 40pct</td><td>423</td><td>292</td><td>57.9%</td><td>40.0%</td><td>56.4%</td><td>219.23</td><td>106.44</td><td>32.68%</td><td>216</td><td>116</td><td>-0.828</td><td>yes</td></tr><tr><td>young proportional girls parity</td><td>423</td><td>367</td><td>57.9%</td><td>50.3%</td><td>57.1%</td><td>214.85</td><td>110.81</td><td>34.03%</td><td>213</td><td>119</td><td>-5.740</td><td>yes</td></tr></tbody></table>
-<h2>Method in brief</h2>
+<h2 id='method'>Method in brief</h2>
 <h3>1. Data provenance</h3>
 <p>The public site uses only aggregate outputs. The raw analysis source is the Bangladesh MICS 2019 child file <span class='code'>fs.sav</span>. The sample is rural Chattogram, ages 6-17, with valid school attendance. This gives 4,891 children. The modeling-ready sample excludes 30 children because of incomplete interview/zero weight or missing core features, leaving 4,861 children.</p>
 <h3>2. Risk model</h3>
 <p>A logistic regression model predicts out-of-school status using complete core covariates: age, sex, wealth quintile, mother's education, ethnic minority status, disability flag, and child work. The score used for optimization is out-of-fold, produced by 5-fold grouped cross-validation grouped by PSU.</p>
 <p>The model is fitted without sample weights. Survey weights are used for evaluation. The primary child weight is provisionally treated as <span class='code'>fsweight</span>, while <span class='code'>fshweight</span> is kept as a normalized sensitivity weight.</p>
 <h3>3. Allocation model</h3>
-<p>Let \(x_i = 1\) if child \(i\) is selected and \(r_i\) be the out-of-fold risk score. The baseline problem is:
+<p>Let \(x_i = 1\) if child \(i\) is selected and \(r_i\) be the out-of-fold risk score. The baseline problem is</p>
 \[ \max_x \sum_i r_i x_i \quad \text{subject to} \quad \sum_i x_i = K. \]
 <p>Fairness versions add lower-bound coverage constraints such as \( \sum_{i: \text{age}_i \leq 12} x_i \geq y_{\min} \) and \( \sum_{i: \text{female}_i = 1} x_i \geq g_{\min} \).</p>
 <p>The integer programs were solved with SciPy's MILP interface using HiGHS. The relative MIP gap was set to zero, so the reported solutions are proven optimal for the stated models. The young-floor cases were also cross-checked against an independent exact greedy reference.</p>
-<h2>Important corrections from earlier drafts</h2>
+<h2 id='corrections'>Important corrections from earlier drafts</h2>
 <div class='callout orange'><ul><li>The old Phase 2 column named <span class='code'>books_missing</span> was verified to be a nonresponse indicator for <span class='code'>PR3</span>, not a true no-books variable.</li><li>The old Phase 2 column named <span class='code'>FSWEIGHT</span> was verified to contain raw <span class='code'>fshweight</span>, not raw <span class='code'>fsweight</span>.</li><li>The old Phase 2 risk score was not locally reproducible, so Phase 3 rebuilt the score from raw verified data.</li><li>The old Phase 2 claim that age and gender floors were superadditive is withdrawn. On the reproducible Phase 3 score, the interaction is subadditive at the proportional corner.</li></ul></div>
-<h2>Data access and privacy</h2>
+<h2 id='privacy'>Data access and privacy</h2>
 <p>MICS microdata contain household and child identifiers. Raw <span class='code'>.sav</span> files and derived child-level CSV files are kept local and are not published in the repository. This website publishes only aggregate tables, aggregate curves, figures, and code. No child-level records are included.</p>
-<h2>AI use disclosure</h2>
-<p>AI tools were used for code debugging, syntax generation, and structural suggestions. All methodological decisions, data verification, numerical checks, interpretations, and final wording are the responsibility of the author.</p>
+<h2 id='ai'>AI use disclosure</h2>
+<p>AI tools were used for code, debugging, and drafting parts of this page's text. Every methodological decision, data check, number, and final wording was reviewed, corrected, and approved by the author. A dated, step-by-step record of AI-assisted work is kept in <a href='AI_USE_LOG.md'>AI_USE_LOG.md</a>.</p>
 <h2>Files used by this page</h2>
 <ul><li><a href='data/phase3_fairness_summary.csv'>phase3_fairness_summary.csv</a></li><li><a href='data/phase3_fairness_curves.csv'>phase3_fairness_curves.csv</a></li><li><a href='assets/phase3_fairness_curves_publication.png'>phase3_fairness_curves_publication.png</a></li><li><a href='assets/phase3_fairness_curves_publication.pdf'>phase3_fairness_curves_publication.pdf</a></li></ul>
 <h2>Next public deliverables</h2>
