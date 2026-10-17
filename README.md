@@ -1,320 +1,139 @@
 # Fairness-Constrained Allocation of Educational Support in Rural Chattogram
 
-A reproducible risk-scoring and optimization project by **Md. Ali Arman Rafi**, Department of Mathematics, University of Chittagong, Bangladesh.
+A reproducible decision-support study that estimates out-of-school risk from verified
+survey microdata and then prices the trade-off between predictive reach and explicit
+fairness coverage constraints, under a fixed support budget.
 
-Repository: https://github.com/rafi-math/edu-support-optimization-bd  
-Public site source: `docs/`  
-Data source: Bangladesh MICS 2019 child file, analyzed locally. Raw microdata are not redistributed in this repository.
+The public site is live at
+<https://rafi-math.github.io/edu-support-optimization-bd/> and is built from aggregate
+outputs only. No child-level record, household identifier, or raw survey file is published
+in this repository.
 
----
+## What the project does
 
-## Project summary
+The pipeline has three computational stages, all run on the same verified sample:
 
-This project builds a decision-support workflow for allocating limited educational support among rural children aged 6–17 in Chattogram, Bangladesh.
+1. **Risk scoring.** A logistic regression predicts out-of-school status from complete core
+   covariates (age, sex, wealth quintile, mother's education, ethnic-minority status,
+   disability flag, child work). The score used downstream is out-of-fold, produced by
+   5-fold cross-validation grouped by survey cluster (PSU), so no child is scored by a model
+   fitted on that child. Logistic regression was selected on out-of-fold ROC-AUC over
+   random-forest and MLP alternatives.
+2. **Budgeted allocation.** With a fixed number of support packages, select the children that
+   maximize total predicted risk, then add lower-bound coverage floors for children under 13
+   ("young") and for girls, and measure what each floor costs in reach.
+3. **Fairness grid and publication figure.** Sweep the young and girls floors on a 2-D grid,
+   solve each cell to proven optimality, and report the price of fairness and the interaction
+   between the two floors.
 
-The workflow has three parts:
+## Data and scope
 
-1. **Verified data provenance** from the Bangladesh MICS 2019 child questionnaire.
-2. **Reproducible out-of-fold risk scoring** for out-of-school status.
-3. **Fairness-constrained allocation** using an exact integer optimization model.
+- Source: Bangladesh MICS 2019, children's file `fs.sav`.
+- Area: rural Chattogram Division.
+- Ages: 6–17.
+- Target: out-of-school status in the current school year.
+- Raw rural cohort: 4,891 children. Modeling-ready sample: 4,861 children (30 excluded for
+  incomplete interview / zero weight or missing core features).
 
-The main empirical finding is that a raw risk-ranking rule predicts out-of-school status well but concentrates support almost entirely among older adolescents. Adding explicit age-coverage constraints is expensive in terms of predicted reach. Adding gender-coverage constraints is comparatively cheap, especially after age coverage has already been included.
+The MICS 2019 children's file does **not** contain household coordinates, school
+identifiers, upazila identifiers, travel distances, center construction costs or center
+capacities. This project therefore does not claim to optimize physical support-center
+locations from observed MICS infrastructure data. Any distance, cost, capacity or budget
+value used in the optimization is an analyst- or policy-chosen scenario parameter, not an
+observed MICS variable.
 
----
+## Weight handling
 
-## Verified headline numbers
+The survey weight is used for evaluation, not for fitting the risk model. An early processed
+export labelled its weight column `FSWEIGHT`; that column was later verified to hold raw
+`fshweight`, not raw `fsweight`. The rebuilt optimization input uses the correct `fsweight`
+as the primary child weight and retains `fshweight` as a normalized sensitivity weight, so
+weighted results can be checked under both definitions.
 
-| Item | Value |
-|---|---:|
-| Analysis sample | Rural Chattogram, ages 6–17, valid school-attendance response: 4,891 children |
+## Verified numbers (anchors)
+
+These are the values the public tables and figure are built from; each is reproducible from
+the committed aggregate outputs.
+
+| Quantity | Value |
+| --- | --- |
 | Modeling-ready sample | 4,861 children |
-| Selection budget | K = 730 children, about 15% of the modeling-ready sample |
+| Selection budget K | 730 (about 15%) |
 | Observed out-of-school children | 641 |
 | Unweighted out-of-school rate | 13.19% |
-| Provisional child-weighted out-of-school rate | 14.52% |
-| Risk model | Logistic regression with out-of-fold predictions |
-| Cross-validation | 5-fold grouped CV by survey PSU |
-| Unweighted ROC-AUC | 0.8398 |
-| Provisional child-weighted ROC-AUC | 0.8520 |
-| Raw top-K observed out-of-school capture | 332 of 641, or 51.8% |
-| Raw top-K selected children aged under 13 | 1 child, 0.14% |
-| Raw top-K selected girls | 29.0% |
-| Raw top-K selected poorest quintile | 41.9% |
-| Proportional young-coverage floor | 423 children aged under 13 |
-| Cost of proportional young floor | 103.64 objective units, about 31.8% of the raw baseline |
-| Girls-parity floor | 367 girls |
-| Cost of girls parity alone | 12.91 objective units, about 4.0% of the raw baseline |
-| Cost of girls parity on top of proportional young floor | 7.17 objective units |
-| Age × gender interaction at proportional corner | -5.74 objective units, subadditive |
+| Provisional child-weighted rate | 14.52% |
+| Out-of-fold ROC-AUC (unweighted / weighted) | 0.8398 / 0.8520 |
+| Raw-risk observed OOS captured | 332 of 641 (51.8%) |
+| Raw-risk selected share aged < 13 | 0.14% (1 child) |
+| Raw-risk selected share girls | 29.04% |
+| Young + girls interaction, unweighted objective | −5.740 (subadditive) |
 
-The objective is the sum of out-of-fold predicted out-of-school probabilities. Observed out-of-school capture is an evaluation metric, not the optimization target.
+Headline result: raw risk ranking reaches many out-of-school adolescents but almost excludes
+younger children, so age coverage is expensive; gender parity is comparatively cheap, and the
+two floors are subadditive in cost at the proportional corner (imposing one makes the other
+cheaper).
 
----
+## Reproducibility
 
-## Main result
+The integer programs were solved with SciPy's MILP interface (HiGHS) at relative MIP gap
+zero, so the reported allocations are proven optimal for the stated models. The young-floor
+cases were cross-checked against an independent exact greedy reference. The public site is
+generated from aggregate CSVs and figures only.
 
-The raw risk ranking is predictive but age-skewed:
+## Data-audit notes (kept for provenance)
 
-- it captures 332 of 641 observed out-of-school children;
-- but only 1 selected child is under age 13;
-- girls are under-selected relative to both the population share and the observed out-of-school pool;
-- poverty targeting is already strong, with 41.9% of selected children in the poorest quintile.
+The following were caught and corrected during the work, and are recorded here rather than
+hidden, because the correction trail is part of the result:
 
-The fairness analysis prices two coverage constraints:
+- A column originally named `books_missing` was verified to be a non-response indicator for
+  `PR3`, not a true no-books variable.
+- The early `FSWEIGHT` column was verified to contain raw `fshweight`, not raw `fsweight`
+  (see Weight handling above).
+- The first allocation score was not locally reproducible, so the score was rebuilt from raw
+  verified data before any fairness result was published.
+- An early claim that the age and gender floors were superadditive is withdrawn; on the
+  reproducible score the interaction is subadditive at the proportional corner.
 
-1. **Young-coverage floor:** minimum number of selected children aged under 13.
-2. **Girls-coverage floor:** minimum number of selected girls.
+## Public site and maintenance
 
-The young-coverage floor is the expensive constraint. The girls-coverage floor is much cheaper, especially once the young-coverage floor is already imposed.
+The live page is served from `docs/` by GitHub Pages. `docs/` is now maintained directly
+(the HTML, CSS, and client-side scripts live there); the script `src/build_public_site.py`
+produced the initial version and is kept for reference. Editing `docs/` directly is
+intentional and does not affect the reproducibility of the science, which rests on the
+committed scripts and aggregate outputs under `src/`, `reports/`, and `results/`.
 
-At the proportional corner:
+## Privacy
 
-```text
-cost of young floor alone       = 103.64
-cost of girls floor alone       =  12.91
-sum of separate costs           = 116.55
-cost of both floors together    = 110.81
-interaction                     =  -5.74
-```
+MICS microdata contain household and child identifiers. Raw `.sav` files and derived
+child-level CSV files are kept local and are never committed. This repository publishes only
+aggregate tables, aggregate curves, figures, code, and documentation. The repository
+`.gitignore` enforces this; the public tree contains no path under `data/` and no `.sav`
+file.
 
-The negative interaction means the two floors are **subadditive**: imposing both together costs less than the sum of imposing each separately.
-
-This replaces the older Phase 2 claim of superadditivity. The Phase 2 result was based on a risk score that was not locally reproducible and is superseded by the Phase 3 pipeline in this repository.
-
----
-
-## Method
-
-### Data and sample
-
-The analysis uses the Bangladesh MICS 2019 child file, `fs.sav`, locally.
-
-The sample is restricted to:
+## Repository layout (representative)
 
 ```text
-HH6 = 2       rural residence
-HH7 = 20      Chattogram division
-6 <= CB3 <= 17 ages 6–17
-CB7 in {1,2}  valid school-attendance response
-```
-
-This gives 4,891 children.
-
-The modeling-ready sample excludes 30 children:
-
-- 28 children have `FS17 = 4`, indicating an incomplete interview and zero child weight;
-- 2 children have a missing work indicator.
-
-The final modeling-ready sample contains 4,861 children.
-
-### Outcome
-
-The outcome is out-of-school status:
-
-```text
-Out_of_School = 1 if CB7 = 2
-Out_of_School = 0 if CB7 = 1
-```
-
-### Risk model
-
-The risk score is the predicted probability that a child is out of school.
-
-The model is a logistic regression with standardized covariates:
-
-- age;
-- female;
-- wealth quintile;
-- mother’s education level;
-- ethnic minority status;
-- functional difficulty;
-- child worked in the past week.
-
-The score used for optimization is an **out-of-fold prediction** from 5-fold grouped cross-validation, grouped by survey PSU. This avoids using in-sample fitted probabilities as if they were unseen predictions.
-
-The model is fitted without sample weights. Survey weights are used for evaluation.
-
-### Survey weights
-
-Two raw weight variables were inspected:
-
-- `fsweight`;
-- `fshweight`.
-
-The earlier Phase 2 column named `FSWEIGHT` was verified to contain raw `fshweight`, not raw `fsweight`. Phase 3 therefore keeps both:
-
-- `child_weight_fsweight`, provisionally treated as the child-level population weight;
-- `normalized_weight_fshweight`, used as a household-normalized sensitivity weight.
-
-The official MICS codebook confirmation for the primary child weight is still open. Weighted results are therefore reported as provisional. Unweighted results do not depend on this unresolved weight question.
-
-### Allocation model
-
-Let:
-
-```text
-x_i = 1 if child i is selected
-x_i = 0 otherwise
-r_i = out-of-fold risk score for child i
-```
-
-The baseline problem is:
-
-```text
-maximize sum_i r_i x_i
-subject to sum_i x_i = K
-x_i binary
-```
-
-Fairness versions add coverage floors:
-
-```text
-sum_{i: age_i <= 12} x_i >= y_min
-sum_{i: female_i = 1} x_i >= g_min
-```
-
-The integer programs were solved using SciPy’s MILP interface with HiGHS. The relative MIP gap was set to zero, so the reported solutions are proven optimal for the stated models. The single young-floor cases were also cross-checked against an independent exact greedy reference.
-
----
-
-## Important corrections from earlier drafts
-
-The current public results use the Phase 3 reproducible pipeline.
-
-The following older Phase 2 items are superseded:
-
-1. The old Phase 2 `risk_score` column was not locally reproducible.
-2. The old Phase 2 column named `FSWEIGHT` actually contained raw `fshweight`.
-3. The old Phase 2 column named `books_missing` was a nonresponse indicator for `PR3`, not a true “no books at home” variable.
-4. The old Phase 2 claim that age and gender floors were superadditive is withdrawn. On the reproducible Phase 3 score, the interaction is subadditive at the proportional corner.
-
----
-
-## Data privacy and repository policy
-
-Raw MICS `.sav` files and derived child-level CSV files are kept local and are not committed to this repository.
-
-The `.gitignore` file blocks:
-
-```text
-/data/
-*.sav
-*.dta
-*.parquet
-```
-
-and related local data patterns.
-
-The public repository contains only:
-
-- source code;
-- aggregate reports;
-- aggregate result tables;
-- figures;
-- the public site under `docs/`.
-
-No child-level microdata are published.
-
-Users who need the raw survey data should obtain it from the official MICS source and follow the applicable data-access terms.
-
----
-
-## Repository layout
-
-```text
-docs/                 Public project site, aggregate only
-reports/              Aggregate audit and analysis logs
-results/              Aggregate tables and figures
-src/                  Reproducible Python scripts
-data/                 Local only, ignored by Git
-```
-
-Important public files:
-
-```text
-docs/index.html
-docs/data/phase3_fairness_summary.csv
-docs/data/phase3_fairness_curves.csv
-docs/assets/phase3_fairness_curves_publication.png
-results/figures/phase3_fairness_curves_publication.pdf
-reports/phase3_fairness_summary.txt
-reports/phase3_objective_prices.txt
-reports/phase3_girls_curve_fine.txt
-```
-
----
-
-## Reproducing the public site
-
-The public site can be rebuilt from committed aggregate files:
-
-```powershell
-python src/build_public_site.py
-```
-
-Then open:
-
-```powershell
-Invoke-Item docs/index.html
-```
-
-The fairness figure can be rebuilt from the aggregate curve CSV:
-
-```powershell
-python src/make_phase3_fairness_figure_publication.py
-```
-
-The full raw-data pipeline requires the local MICS file `data/raw/fs.sav`, which is not published in this repository.
-
----
-
-## Full pipeline order, using local raw data
-
-If you have the raw MICS child file locally at:
-
-```text
-data/raw/fs.sav
-```
-
-then the Phase 3 pipeline is:
-
-```powershell
-python src/build_phase3_clean_input.py
-python src/build_phase3_risk_score.py
-python src/build_phase3_optimization_input.py
-python src/run_phase3_greedy_young_floor.py
-python src/run_phase3_fairness_grid.py
-python src/run_phase3_girls_curve_fine.py
-python src/summarize_phase3_fairness.py
-python src/make_phase3_fairness_figure_publication.py
-python src/build_public_site.py
-```
-
-Required Python packages include:
-
-```text
-pandas
-numpy
-scikit-learn
-scipy
-matplotlib
-seaborn
-pyreadstat
-```
-
----
-
-## Limitations
-
-1. The analysis is limited to rural Chattogram children aged 6–17. It is not a national estimate.
-2. The risk model uses complete core covariates only. The book-count variable was not used as a substantive predictor because the true no-books indicator is missing for many children.
-3. The primary child weight is provisionally treated as `fsweight`, but official MICS codebook confirmation is still pending. Weighted results are sensitivity results.
-4. The current budget is a count of service slots, not a monetary budget. Real costs, travel time, facility capacity, and implementation constraints are not yet modeled.
-5. Observed out-of-school capture is a survey-based evaluation metric. It does not measure the causal effect of an educational support program.
-6. The fairness floors are policy constraints. The project prices the trade-offs; it does not claim that one fairness level is uniquely correct.
-
----
-
-## AI use disclosure
-
-AI tools were used for code debugging, syntax generation, and structural suggestions. All methodological decisions, data verification, numerical checks, interpretations, and final wording are the responsibility of the author.
+.
+├── docs/                      # public site (served by GitHub Pages)
+│   ├── index.html
+│   ├── styles.css
+│   ├── app.js                 # client-side reveal + reading-zoom, no backend
+│   ├── ai-use-log.html        # styled AI-use record
+│   ├── AI_USE_LOG.md
+│   ├── assets/                # figures (PNG/PDF)
+│   ├── data/                  # aggregate CSVs used by the page
+│   └── .nojekyll
+├── src/                       # analysis and build scripts
+│   ├── build_phase3_risk_score.py
+│   ├── build_phase3_optimization_input.py
+│   ├── run_phase3_fairness_grid.py
+│   ├── make_phase3_fairness_figure_publication.py
+│   ├── build_phase2_policy_table_from_grid.py
+│   ├── build_public_site.py
+│   └── ...
+├── notebooks/
+├── reports/                   # validation and grid audit logs
+├── results/                   # aggregate result tables (no child-level rows)
+├── .gitignore
+├── requirements.txt
+└── README.md
