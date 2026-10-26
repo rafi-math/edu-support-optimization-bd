@@ -40,3 +40,9 @@ Thumbs.db
 .env.*
 
 results/private/
+
+# EquiReach/local safety additions
+/data/
+/results/private/
+parity_clients.csv
+/sweep_out.txt
