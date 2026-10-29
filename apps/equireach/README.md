@@ -37,7 +37,7 @@ Variables: `x_i` in {0, 1}.
 - `a_i = 1` if unweighted, else `weight_i`.
 - Objective: maximise sum `v_i x_i`.
 - Coverage: sum `x_i` = K (`exactly_K`) or <= K (`at_most_K`).
-- Each rule with group `G` and minimum fraction `f`: sum_{i in G} `a_i x_i` − `f` × sum_i `a_i x_i` >= 0. An optional cap uses the same expression with an upper bound.
+- Each rule with group `G` and minimum fraction `f`: sum_{i in G} `a_i x_i` - `f` * sum_i `a_i x_i` >= 0. An optional cap uses the same expression with an upper bound.
 - With `exactly_K` and unweighted this is the count floor `ceil(f * K - 1e-9)` used in the validated study.
 - Solver: `scipy.optimize.milp` (HiGHS), relative MIP gap 0, time limit `time_limit_s`.
 - Exact mode only when the client count is at most 20,000. Otherwise the heuristic runs and a warning is returned.
@@ -60,3 +60,7 @@ Mode A tests cover: exact K (or clamp), brute-force match on tiny instances, flo
 - There is no HTTP API, Docker image, login, or database in this folder.
 - Coordinates, if present, are unused in Mode A. Straight-line distance is not road or river distance.
 - Results come only from the submitted scenario. Nothing is invented.
+
+## Mode A parity validation
+
+See `docs/PARITY_VALIDATION.md`. All five published Phase 3 selection objectives were reproduced to 6 decimal places on the restricted local input, with `proven_optimal = True`.
