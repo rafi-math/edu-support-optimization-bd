@@ -34,10 +34,17 @@ def test_allocate_demo_is_proven_optimal():
     r = client.post("/api/allocate", json={"payload": payload})
     assert r.status_code == 200
     body = r.json()
+
+    assert body["status"] == "ok"
+    assert body["proven_optimal"] is True
+    assert body["served_count"] > 0
+    assert body["objective"] is not None
+
     summary = body["summary"]
     assert summary["status"] == "ok"
     assert summary["proven_optimal"] is True
     assert summary["served_count"] > 0
+    assert summary["total_priority_captured"] == body["objective"]
 
 
 def test_validate_demo_rows():
@@ -69,3 +76,8 @@ def test_price_sweep_with_one_rule():
 def test_siting_demo_not_implemented():
     r = client.get("/api/demo", params={"kind": "siting"})
     assert r.status_code == 501
+
+def test_root_redirects_to_docs():
+    r = client.get("/", follow_redirects=False)
+    assert r.status_code in (302, 307)
+    assert r.headers["location"] == "/docs"

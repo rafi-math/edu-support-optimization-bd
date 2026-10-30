@@ -6,6 +6,7 @@ from typing import Any
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
+from fastapi.responses import RedirectResponse
 
 from equireach import allocate, run_sweep, validate_clients
 from equireach.synthetic import generate_selection_demo
@@ -30,6 +31,9 @@ app.add_middleware(
 
 MAX_CLIENTS = 20000
 
+@app.get("/", include_in_schema=False)
+def root() -> RedirectResponse:
+    return RedirectResponse(url="/docs")
 
 @app.get("/health")
 def health() -> dict[str, Any]:
@@ -92,10 +96,25 @@ def allocate_endpoint(req: AllocateRequest) -> dict[str, Any]:
         raise HTTPException(status_code=413, detail="Too many clients")
 
     try:
-        return allocate(payload)
+        result = allocate(payload)
     except Exception as exc:
         raise HTTPException(status_code=400, detail=f"Allocation failed: {exc}") from exc
 
+    if isinstance(result, dict):
+        summary = result.get("summary")
+
+        if isinstance(summary, dict):
+            if "objective" not in result and "total_priority_captured" in summary:
+                result["objective"] = summary["total_priority_captured"]
+
+            if "served_count" not in result and "served_count" in summary:
+                result["served_count"] = summary["served_count"]
+
+            for key in ("status", "proven_optimal", "solver"):
+                if key not in result and key in summary:
+                    result[key] = summary[key]
+
+    return result
 
 class SweepRequest(BaseModel):
     payload: dict[str, Any]
