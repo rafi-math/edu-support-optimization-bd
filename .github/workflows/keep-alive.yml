@@ -1,4 +1,4 @@
-﻿name: keep-equireach-awake
+name: keep-equireach-awake
 on:
   schedule:
     - cron: "*/10 * * * *"
