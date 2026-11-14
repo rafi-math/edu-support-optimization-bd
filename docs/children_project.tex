@@ -2,7 +2,7 @@
 
 \usepackage{float}
 \usepackage{fontspec}
-\setmainfont{Times New Roman}
+\setmainfont{TeX Gyre Termes}
 
 \usepackage{xcolor}
 \definecolor{eqteal}{RGB}{14,124,107}
@@ -95,6 +95,8 @@ Department of Mathematics, University of Chittagong\\[3pt]
 \href{https://rafi-math.github.io/edu-support-optimization-bd/}{Project site}
 \enspace\textbullet\enspace
 \href{https://rafi-math.github.io/edu-support-optimization-bd/equireach.html}{Live dashboard}
+\enspace\textbullet\enspace
+\href{https://colab.research.google.com/github/rafi-math/edu-support-optimization-bd/blob/main/docs/phase3_reproduce_demo.ipynb}{Colab demo}
 \end{center}
 
 \vspace{4pt}
@@ -310,7 +312,7 @@ A real run needs, per child: \texttt{client\_id}, \texttt{priority\_score}, \tex
 % ── 6. Reproducibility, privacy, limits ───────────────────────
 \section{Reproducibility, Privacy and Limits}
 
-The repository publishes aggregate tables, aggregate curves, figures, code, and documentation only. Raw \texttt{.sav} files and derived child-level CSVs are kept local and never committed; the \texttt{.gitignore} enforces this, and the public tree contains no path under \texttt{data/} and no \texttt{.sav} file. The science rebuilds from the committed scripts and aggregate outputs under \texttt{src/}, \texttt{reports/}, and \texttt{results/}. The \texttt{docs/} folder is maintained directly for the public site and dashboard, and editing it does not affect reproducibility. A Google Colab demo that regenerates the figure and policy table from the aggregate CSVs, and a working-paper draft, are in preparation; neither is published yet, so no link is given.
+The repository publishes aggregate tables, aggregate curves, figures, code, and documentation only. Raw \texttt{.sav} files and derived child-level CSVs are kept local and never committed; the \texttt{.gitignore} enforces this, and the public tree contains no path under \texttt{data/} and no \texttt{.sav} file. The science rebuilds from the committed scripts and aggregate outputs under \texttt{src/}, \texttt{reports/}, and \texttt{results/}. The \texttt{docs/} folder is maintained directly for the public site and dashboard, and editing it does not affect reproducibility. A Google Colab demo that regenerates the figure and policy table from the aggregate CSVs is published and linked above; this document is the working paper.
 
 Three limits are worth stating plainly.
 
