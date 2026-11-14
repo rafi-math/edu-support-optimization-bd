@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EquiReach — decide who receives support, and what fairness costs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF6EF; --surface:#FFFFFF; --border:#EBE3D7; --hair:#EFE7DB;
+  --ink:#1E2A2E; --body:#3A464A; --muted:#7C7468;
+  --teal:#0E7C6B; --teal-h:#0B6355; --teal-soft:#E4F1EE;
+  --clay:#C2703D; --clay-soft:#F6E9DF; --grid:#E7DFD2; --axis:#8A8175;
+  --shadow:0 1px 2px rgba(31,42,46,.04),0 8px 24px rgba(31,42,46,.05);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--body);font-family:"Instrument Sans",system-ui,sans-serif;line-height:1.55;font-size:16px;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.025;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+h1,h2,h3,.serif,.big{font-family:"Fraunces",Georgia,serif;color:var(--ink);font-weight:600;letter-spacing:-.01em}
+h1{font-size:clamp(28px,5vw,46px);line-height:1.12;margin:18px 0 8px}
+h2{font-size:22px;margin:0 0 4px}
+h3{font-size:17px;margin:0 0 6px}
+p{margin:6px 0}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+header.top{position:sticky;top:0;background:rgba(250,246,239,.92);backdrop-filter:saturate(1.1) blur(6px);border-bottom:1px solid var(--hair);z-index:5}
+.bar{display:flex;align-items:center;gap:14px;padding:14px 0;flex-wrap:wrap}
+.wordmark{font-family:"Fraunces",serif;font-size:22px;color:var(--ink);font-weight:600}
+.tag{color:var(--muted);font-size:13px}
+.spacer{flex:1}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--muted);display:inline-block;vertical-align:middle;margin-right:6px}
+.dot.online{background:var(--teal)}.dot.waking{background:var(--clay)}.dot.offline{background:#b3402f}
+.pill{border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13px;display:inline-flex;align-items:center;box-shadow:var(--shadow)}
+.btn{font:inherit;border:1px solid var(--border);background:var(--surface);color:var(--ink);padding:9px 14px;border-radius:10px;cursor:pointer;box-shadow:var(--shadow);transition:transform .12s ease,box-shadow .12s ease,background .12s}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.primary:hover{background:var(--teal-h)}
+.btn.ghost{background:transparent;box-shadow:none}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow);margin:14px 0}
+.layout{display:grid;grid-template-columns:200px 1fr;gap:22px;align-items:start}
+@media(max-width:760px){.layout{grid-template-columns:1fr}}
+nav.steps{position:sticky;top:74px}
+nav.steps ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+nav.steps li{padding:8px 10px;border-radius:10px;color:var(--muted);font-size:14px;cursor:default}
+nav.steps li.active{background:var(--teal-soft);color:var(--ink);font-weight:600}
+nav.steps li.done{color:var(--teal)}
+nav.steps li.locked{opacity:.5}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:end}
+.field{display:flex;flex-direction:column;gap:4px;min-width:160px;flex:1}
+label{font-size:13px;color:var(--ink);font-weight:600}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:9px 10px;width:100%}
+textarea{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;min-height:120px;resize:vertical}
+.help{font-size:12px;color:var(--muted)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.chip{border:1px solid var(--border);background:var(--paper);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
+.chip.on{background:var(--teal-soft);border-color:var(--teal);color:var(--teal-h);font-weight:600}
+.promise{border:1px solid var(--hair);border-radius:12px;padding:12px;margin:8px 0;background:var(--paper)}
+.promise .line{font-family:"Fraunces",serif;font-size:16px;color:var(--ink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.grid2{grid-template-columns:1fr}}
+.stat{border:1px solid var(--hair);border-radius:14px;padding:14px;background:var(--surface)}
+.big{font-size:34px;line-height:1;font-variant-numeric:lining-nums tabular-nums}
+.badge{display:inline-block;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px}
+.badge.ok{background:var(--teal-soft);color:var(--teal-h)}
+.badge.warn{background:var(--clay-soft);color:var(--clay)}
+.badge.neutral{background:#eee;color:#555}
+.bar-track{height:8px;background:var(--grid);border-radius:999px;overflow:hidden;margin:8px 0;position:relative}
+.bar-fill{height:100%;background:var(--teal)}
+.tick{position:absolute;top:-3px;width:2px;height:14px;background:var(--clay)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--hair);font-variant-numeric:lining-nums tabular-nums}
+th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.note{background:var(--clay-soft);border:1px solid #ecd9c6;border-radius:12px;padding:12px;color:#7a4520;font-size:14px}
+.note.ok{background:var(--teal-soft);border-color:#cfe6e0;color:var(--teal-h)}
+svg.line{width:100%;height:200px;display:block}
+.collapsible>summary{cursor:pointer;color:var(--ink);font-weight:600;padding:6px 0}
+footer.about{border-top:1px solid var(--hair);margin-top:30px;padding:24px 0 60px;color:var(--muted);font-size:14px}
+footer.about a{color:var(--teal-h)}
+.hidden{display:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.rise{animation:rise .45s ease-out both}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap bar">
+  <span class="wordmark">EquiReach</span>
+  <span class="tag">Optimizing Resources. Advancing Fairness.</span>
+  <span class="spacer"></span>
+  <button class="btn ghost" id="viewToggle" type="button">Use your own data</button>
+  <span class="pill" id="connPill" tabindex="0" aria-label="connection status"><span class="dot" id="connDot"></span><span id="connText">checking…</span></span>
+  <button class="btn ghost" id="advBtn" type="button" aria-expanded="false">Advanced</button>
+</div></header>
+
+<div class="wrap">
+  <div id="advPanel" class="card hidden" aria-live="polite">
+    <h3>Advanced / for reviewers</h3>
+    <div class="row">
+      <div class="field"><label>API base</label><input id="advBase" readonly></div>
+      <div class="field"><label>Last status</label><input id="advStatus" readonly></div>
+      <div class="field"><label>Last error</label><input id="advError" readonly></div>
+      <div class="field"><label>Attempts</label><input id="advAttempts" readonly></div>
+    </div>
+    <p class="small muted">Solver engine, raw flags, rule ids and full summary appear here after a run. The public demo is synthetic-only; real child data is never sent to this server.</p>
+    <pre id="advRaw" class="small" style="white-space:pre-wrap;word-break:break-word;max-height:240px;overflow:auto;background:var(--paper);border:1px solid var(--hair);border-radius:10px;padding:10px"></pre>
+    <button class="btn" id="retryConn" type="button">Retry connection</button>
+  </div>
+
+  <!-- DEMO VIEW -->
+  <section id="demoView">
+    <p class="eyebrow rise">Mode A · client selection</p>
+    <h1 class="rise">Decide who receives limited support — and see what fairness costs.</h1>
+    <p class="muted rise">A small guided tool. No optimization knowledge needed. Everything below uses fictional children; no real records are used or uploaded.</p>
+
+    <div class="layout">
+      <nav class="steps" aria-label="steps"><ol id="stepList">
+        <li data-s="1">1 Pick a sample</li>
+        <li data-s="2">2 How many get help?</li>
+        <li data-s="3">3 Fairness promises</li>
+        <li data-s="4">4 See the plan</li>
+        <li data-s="5">5 Explore the trade‑off</li>
+      </ol></nav>
+
+      <div id="stepBody">
+        <!-- step 1 -->
+        <div class="card rise" data-step="1">
+          <p class="eyebrow">Step 1 of 5</p><h2>Pick a sample</h2>
+          <p class="muted">Start with a group of fictional children to plan for.</p>
+          <div class="row">
+            <div class="field"><label for="inN">Children in the sample</label><input id="inN" type="number" min="10" max="1000" value="80"><span class="help">Whole number, 10–1,000. Bigger samples use a fast method and are labelled as not proven optimal.</span></div>
+            <div class="field"><label for="inSeed">Random seed</label><input id="inSeed" type="number" min="0" max="2147483647" value="20261018"><span class="help">Same seed + same size = the same fictional children, every time.</span></div>
+          </div>
+          <p class="small muted">These are fictional children generated for the demo — no real records are used.</p>
+          <div class="chips"><button class="chip" id="useExample" type="button">Use the example sample</button></div>
+          <div class="row"><button class="btn primary" id="createSample" type="button">Create sample</button><span id="sampleMsg" class="small muted"></span></div>
+        </div>
+
+        <!-- step 2 -->
+        <div class="card hidden" data-step="2">
+          <p class="eyebrow">Step 2 of 5</p><h2>How many get help?</h2>
+          <p class="muted">This is your budget — the number of support packages available.</p>
+          <div class="field"><label for="inK">Support packages</label><input id="inK" type="range" min="1" max="80" value="16"><div class="row" style="align-items:center"><input id="inKNum" type="number" min="1" style="max-width:120px"><span id="kReadout" class="muted"></span></div><span class="help">A small budget shows the trade‑off best; helping almost everyone leaves nothing to choose.</span></div>
+          <div class="row">
+            <div class="field"><label for="inCov">Coverage mode</label><select id="inCov"><option value="exactly_K">exactly_K</option><option value="at_most_K">at_most_K</option></select><span class="help">exactly_K = select exactly K. at_most_K = no more than K.</span></div>
+            <div class="field"><label for="inW">Weighting</label><select id="inW"><option value="unweighted">unweighted</option><option value="weighted">weighted</option></select></div>
+            <div class="field"><label for="inT">Time limit (s)</label><input id="inT" type="number" min="1" max="120" value="20"></div>
+          </div>
+          <label class="small"><input id="inExact" type="checkbox" checked style="width:auto"> Exact solver (proves optimality when it finishes in time)</label>
+          <div class="row"><button class="btn ghost" data-back="1" type="button">← Back</button><button class="btn primary" data-fwd="3" type="button">Next →</button></div>
+        </div>
+
+        <!-- step 3 -->
+        <div class="card hidden" data-step="3">
+          <p class="eyebrow">Step 3 of 5</p><h2>Add fairness promises (optional)</h2>
+          <p class="muted">A promise makes sure a group gets at least a fair share of the help.</p>
+          <div class="chips">
+            <button class="chip" data-preset="none" type="button">No promises</button>
+            <button class="chip" data-preset="girls" type="button">Include more girls</button>
+            <button class="chip" data-preset="young" type="button">Reach younger children</button>
+            <button class="chip" data-preset="both" type="button">Balance both</button>
+          </div>
+          <div id="promiseList"></div>
+          <button class="btn ghost" id="addPromise" type="button">+ Add another promise</button>
+          <div class="row" style="margin-top:10px"><button class="btn ghost" data-back="2" type="button">← Back</button><button class="btn primary" id="seePlan" type="button">See the plan</button></div>
+        </div>
+
+        <!-- step 4 -->
+        <div class="card hidden" data-step="4">
+          <p class="eyebrow">Step 4 of 5</p><h2>See the plan</h2>
+          <p class="muted">Who this plan reaches, and whether it keeps your promises.</p>
+          <div id="planBox"></div>
+          <div class="row"><button class="btn ghost" data-back="3" type="button">← Back to promises</button><button class="btn primary" data-fwd="5" type="button" id="toTrade">See what fairness costs →</button></div>
+        </div>
+
+        <!-- step 5 -->
+        <div class="card hidden" data-step="5">
+          <p class="eyebrow">Step 5 of 5</p><h2>Explore the trade‑off</h2>
+          <h3>What does fairness cost?</h3>
+          <p class="muted">As you promise more to a group, the total need you can reach usually falls a little. The gap is the cost of that promise.</p>
+          <div class="row">
+            <div class="field"><label for="sweepRule">Promise to test</label><select id="sweepRule"></select></div>
+            <div class="field" style="max-width:120px"><label for="sweepSteps">Steps</label><input id="sweepSteps" type="number" min="2" max="50" value="11"></div>
+            <button class="btn primary" id="runPrice" type="button">Show the cost</button>
+          </div>
+          <div id="priceBox"></div>
+          <hr style="border:none;border-top:1px solid var(--hair);margin:18px 0">
+          <h3>Do two promises clash?</h3>
+          <p class="muted">Compare the cost of each promise alone with the cost of keeping both.</p>
+          <button class="btn primary" id="runInter" type="button">Compare the promises</button>
+          <div id="interBox"></div>
+          <div class="row" style="margin-top:10px"><button class="btn ghost" data-back="4" type="button">← Back to the plan</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATA VIEW -->
+  <section id="dataView" class="hidden">
+    <p class="eyebrow">Local / private use only</p>
+    <h1>Use your own data</h1>
+    <p class="muted">Prepare a local allocation file from your own children data. Nothing is uploaded to this website’s server.</p>
+    <div class="card">
+      <h3>Before you start</h3>
+      <ul class="small" style="margin:6px 0 6px 18px">
+        <li>You have lawful authority to process the children’s data.</li>
+        <li>You are not uploading restricted MICS microdata or other protected survey records to this public site.</li>
+        <li>This page does not send your child‑level data to any server.</li>
+        <li>To get results, you run the open‑source solver locally or on your own private infrastructure.</li>
+        <li>The engine needs a validated priority score per child. Raw out‑of‑school labels are not enough on their own — first score with the project’s risk pipeline or your own approved model.</li>
+        <li>SPSS <code>.sav</code> microdata: do not paste here. Use the local run kit on an authorized machine.</li>
+      </ul>
+      <label class="small"><input id="agreeGate" type="checkbox" style="width:auto"> I understand this page only prepares a local file; it does not process real child data on the public server.</label>
+    </div>
+
+    <div id="dataBody" class="hidden">
+      <div class="card">
+        <h3>1. Add child rows</h3>
+        <p class="muted small">Paste below or choose a file. Parsing and validation happen entirely in your browser. Supported: CSV, TSV, JSON array, JSON Lines. (Excel: use “Save as CSV” first.)</p>
+        <div class="row">
+          <div class="field" style="max-width:180px"><label for="fmt">Format</label><select id="fmt"><option value="auto">Auto</option><option value="csv">CSV</option><option value="tsv">TSV</option><option value="json">JSON</option><option value="jsonl">JSON Lines</option></select></div>
+          <input id="fileIn" type="file" accept=".csv,.tsv,.txt,.json,.jsonl,.ndjson" style="flex:1">
+          <button class="btn ghost" id="loadExampleRows" type="button">Load 5‑row fictional example</button>
+          <button class="btn ghost" id="clearRows" type="button">Clear</button>
+        </div>
+        <textarea id="pasteArea" placeholder="client_id,priority_score,weight,age_band,gender,disability,wealth_quintile&#10;c1,0.82,1.4,6-12,female,no,q1"></textarea>
+        <button class="btn primary" id="parseBtn" type="button">Read rows</button>
+        <div id="parseMsg" class="small muted"></div>
+      </div>
+
+      <div class="card hidden" id="mapCard">
+        <h3>2. Match your columns</h3>
+        <p class="muted small">Pick which of your columns feeds each required field. Extra columns are ignored.</p>
+        <div id="mapFields" class="grid2"></div>
+        <label class="small"><input id="wOne" type="checkbox" style="width:auto"> Use weight = 1.0 for all children (only valid when weighting is unweighted).</label>
+        <button class="btn primary" id="mapBtn" type="button">Continue</button>
+        <div id="mapMsg" class="small muted"></div>
+      </div>
+
+      <div class="card hidden" id="normCard">
+        <h3>3. Confirm the values</h3>
+        <p class="muted small">For each group field, map your codes to the engine’s words. We never guess ambiguous codes silently.</p>
+        <div id="normFields"></div>
+        <button class="btn primary" id="normBtn" type="button">Validate</button>
+        <div id="valMsg"></div>
+      </div>
+
+      <div class="card hidden" id="prevCard">
+        <h3>4. Preview (counts only)</h3>
+        <div id="prevBox" class="grid2"></div>
+        <h3 style="margin-top:14px">5. Budget and promises</h3>
+        <div class="row">
+          <div class="field" style="max-width:140px"><label for="dK">Support packages K</label><input id="dK" type="number" min="1"></div>
+          <div class="field"><label for="dCov">Coverage mode</label><select id="dCov"><option value="exactly_K">exactly_K</option><option value="at_most_K">at_most_K</option></select></div>
+          <div class="field"><label for="dW">Weighting</label><select id="dW"><option value="unweighted">unweighted</option><option value="weighted">weighted</option></select></div>
+          <div class="field" style="max-width:140px"><label for="dT">Time limit (s)</label><input id="dT" type="number" min="1" max="600" value="120"></div>
+        </div>
+        <label class="small"><input id="dExact" type="checkbox" checked style="width:auto"> Exact solver</label>
+        <div id="dPromiseList"></div>
+        <button class="btn ghost" id="dAddPromise" type="button">+ Add promise</button>
+      </div>
+
+      <div class="card hidden" id="dlCard">
+        <h3>6. Download and run locally</h3>
+        <p class="muted small">Both downloads are created in your browser. No network request carries your child rows.</p>
+        <div class="row">
+          <button class="btn primary" id="dlPayload" type="button">Download payload.json</button>
+          <button class="btn" id="dlRun" type="button">Download run_local.py</button>
+          <button class="btn" id="dlReadme" type="button">Download README_LOCAL_RUN.txt</button>
+          <button class="btn ghost" id="dlSav" type="button">Download convert_sav_to_csv.py (local helper)</button>
+        </div>
+        <details class="collapsible"><summary>Can this be used with real data?</summary>
+          <p class="small">Yes, but only locally or on infrastructure you control. This page prepares a valid <code>payload.json</code> from real child‑level data if you have lawful authority. The public demo server will not run real child data. A validated priority score is required; raw attributes plus an out‑of‑school label are not enough without first running the risk pipeline or an approved model. For restricted <code>.sav</code> microdata, use the local kit on an authorized machine, not this browser.</p>
+        </details>
+        <details class="collapsible"><summary>If you want a hosted web app for your organization</summary>
+          <p class="small">Deploy the same backend behind authentication on infrastructure you control, with consent capture, encrypted storage if data is retained, and a retention/deletion policy. Never use the free public endpoint for real child data. The front end can point to a private API base URL via an environment variable as a separate deployment.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <footer class="about">
+    <p><strong>About.</strong> This tool helps decide <em>who</em> receives support under a fixed budget. Deciding <em>where</em> to build centers is a separate question and is not part of this demo.</p>
+    <p><strong>The real study.</strong> In the published study on real rural Chattogram data (Bangladesh MICS 2019; 4,861 children, support budget 730), reaching younger children proved expensive — the no‑floor plan selected only about 0.14% young children — while gender parity was comparatively cheap (no‑floor 29.04% girls), and the two coverage floors were subadditive in cost (interaction −5.740). This live demo uses fictional, deliberately balanced children, so its numbers differ from the real study (here the two floors come out additive).</p>
+    <p>Built by <strong>Md. Ali Arman Rafi</strong>. <span class="muted">Mathematics, University of Chittagong.</span></p>
+    <p><strong>Your privacy.</strong> This public demo uses fictional data only. Restricted survey data is never accepted, and no individual records are shown or uploaded.</p>
+    <p><a href="https://github.com/rafi-math/edu-support-optimization-bd/blob/main/apps/equireach/docs/PARITY_VALIDATION.md">View Parity Validation Report</a> · <a href="https://rafi-math.github.io/edu-support-optimization-bd/">Public study site</a> · <a href="https://github.com/rafi-math/edu-support-optimization-bd">Source code</a></p>
+  </footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var BASE="https://equireach-api.onrender.com";
+var $=function(s,r){return (r||document).querySelector(s);};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+var conn={phase:"idle",statusCode:null,error:null,attempts:0,lastCheckedAt:null};
+var scenario=null;            // {params,clients,rules,flags}
+var floors=[];                // [{id,attribute,level,type,value}]
+var rid=0;
+var dataRows=null, dataCols=[], mapping={}, normMaps={}, dFloors=[];
+
+var ALLOW={age_band:["6-12","13-17"],gender:["male","female"],disability:["yes","no"],wealth_quintile:["q1","q2","q3","q4","q5"]};
+var REQ=["client_id","priority_score","weight","age_band","gender","disability","wealth_quintile"];
+var ALIAS={client_id:["id","child_id","caseid","respondent_id","unique_id"],priority_score:["priority","risk_score","predicted_risk","oos_risk","score"],weight:["weight","fsweight","child_weight","analysis_weight"],age_band:["age_group","age_category","age"],gender:["sex","gender_code"],disability:["disability_status","disabled","diff"],wealth_quintile:["wealth","wealth_index","quintile","q"],need_flag:["oos","out_of_school","school_status"]};
+
+function setConn(p,code,err){conn.phase=p;conn.statusCode=code==null?conn.statusCode:code;conn.error=err===undefined?conn.error:err;if(p==="online"){conn.attempts=0;conn.error=null;}renderConn();}
+function renderConn(){
+  var d=$("#connDot"),t=$("#connText");
+  d.className="dot "+(conn.phase==="online"?"online":conn.phase==="waking"?"waking":conn.phase==="offline"?"offline":"");
+  if(conn.phase==="online")t.textContent="API online";
+  else if(conn.phase==="waking")t.textContent="waking up the solver… ("+conn.attempts+"/12)";
+  else if(conn.phase==="offline")t.textContent="offline";
+  else t.textContent="checking…";
+  $("#advBase").value=BASE;$("#advStatus").value=conn.statusCode==null?"-":String(conn.statusCode);
+  $("#advError").value=conn.error||"-";$("#advAttempts").value=String(conn.attempts);
+}
+function isCold(errOrStatus){if(errOrStatus instanceof TypeError)return true;var s=errOrStatus;return s===502||s===503;}
+async function raw(path,opts){
+  var ctrl=new AbortController();var to=setTimeout(function(){ctrl.abort();},180000);
+  opts=opts||{};opts.signal=ctrl.signal;opts.credentials="omit";opts.mode="cors";opts.cache="no-store";
+  if(!opts.headers)opts.headers={};
+  if(opts.body&&!opts.headers["Content-Type"])opts.headers["Content-Type"]="application/json";
+  try{var r=await fetch(BASE+path,opts);clearTimeout(to);return r;}catch(e){clearTimeout(to);throw e;}
+}
+async function call(path,opts,wakeBtn){
+  var r;try{r=await raw(path,opts);}catch(e){
+    if(wakeBtn){wakeBtn.dataset.label=wakeBtn.textContent;wakeBtn.textContent="Waking solver…";wakeBtn.disabled=true;}
+    await sleep(10000);
+    try{r=await raw(path,opts);}catch(e2){if(wakeBtn){wakeBtn.textContent=wakeBtn.dataset.label;wakeBtn.disabled=false;}throw e2;}
+    if(wakeBtn){wakeBtn.textContent=wakeBtn.dataset.label;wakeBtn.disabled=false;}
+    if(isCold(r.status))throw new Error("cold");
+    return r;
+  }
+  if(isCold(r.status)){ // retry once for cold
+    if(wakeBtn){wakeBtn.dataset.label=wakeBtn.textContent;wakeBtn.textContent="Waking solver…";wakeBtn.disabled=true;}
+    await sleep(10000);r=await raw(path,opts);
+    if(wakeBtn){wakeBtn.textContent=wakeBtn.dataset.label;wakeBtn.disabled=false;}
+  }
+  return r;
+}
+function sleep(ms){return new Promise(function(res){setTimeout(res,ms);});}
+function okJson(r){return r.json();}
+
+var healthTimer=null,healthAttempts=0,healthStopped=false;
+async function healthLoop(){
+  healthAttempts=0;healthStopped=false;
+  async function tick(){
+    if(healthStopped)return;
+    healthAttempts++;
+    try{var r=await raw("/health",{});if(r.status===200){var j=await okJson(r);if(j&&j.ok){setConn("online",200,null);return;}}}catch(e){}
+    if(conn.phase!=="online")setConn("waking",conn.statusCode,"Failed to fetch");
+    if(healthAttempts>=12){setConn("offline",conn.statusCode,"offline after 12 attempts");return;}
+    setTimeout(tick,10000);
+  }
+  tick();
+  if(healthTimer)clearInterval(healthTimer);
+  healthTimer=setInterval(async function(){try{var r=await raw("/health",{});if(r.status===200){var j=await okJson(r);if(j&&j.ok)setConn("online",200,null);}}catch(e){if(conn.phase==="online")setConn("waking",conn.statusCode,"transient");}},30000);
+}
+
+/* ---------- view toggle ---------- */
+$("#viewToggle").addEventListener("click",function(){
+  var demo=!$("#demoView").classList.contains("hidden");
+  $("#demoView").classList.toggle("hidden",demo);
+  $("#dataView").classList.toggle("hidden",!demo);
+  this.textContent=demo?"Back to the demo":"Use your own data";
+});
+$("#advBtn").addEventListener("click",function(){var p=$("#advPanel");var h=p.classList.toggle("hidden");this.setAttribute("aria-expanded",String(!h));});
+$("#retryConn").addEventListener("click",function(){healthLoop();});
+$("#agreeGate").addEventListener("change",function(){$("#dataBody").classList.toggle("hidden",!this.checked);});
+
+/* ---------- step nav ---------- */
+function showStep(n){
+  $$("#stepBody [data-step]").forEach(function(el){el.classList.toggle("hidden",+el.getAttribute("data-step")!==n);});
+  $$("#stepList li").forEach(function(li){var s=+li.getAttribute("data-s");li.classList.toggle("active",s===n);li.classList.toggle("done",s<n&&!!scenario);li.classList.toggle("locked",!scenario&&s>1);});
+}
+document.addEventListener("click",function(e){
+  var b=e.target.closest("[data-back],[data-fwd]");if(!b)return;
+  if(b.hasAttribute("data-back"))showStep(+b.getAttribute("data-back"));
+  if(b.hasAttribute("data-fwd"))showStep(+b.getAttribute("data-fwd"));
+});
+
+/* ---------- promises UI (shared) ---------- */
+function presetFloors(kind,list){
+  var arr=[];
+  if(kind==="girls")arr=[{attribute:"gender",level:"female",type:"min_share_pct",value:40}];
+  else if(kind==="young")arr=[{attribute:"age_band",level:"6-12",type:"min_share_pct",value:33}];
+  else if(kind==="both")arr=[{attribute:"gender",level:"female",type:"min_share_pct",value:40},{attribute:"age_band",level:"6-12",type:"min_share_pct",value:33}];
+  arr.forEach(function(f){f.id="r"+(++rid);list.push(f);});
+}
+function promiseRow(f,list,rerender){
+  var atts=["gender","age_band","wealth_quintile","disability"];
+  var el=document.createElement("div");el.className="promise";
+  var lvlOpts={gender:["female","male"],age_band:["6-12","13-17"],wealth_quintile:["q1","q2","q3","q4","q5"],disability:["yes","no"]};
+  el.innerHTML='<div class="line">'+promiseText(f)+'</div>'+
+    '<div class="row" style="margin-top:8px">'+
+    '<div class="field" style="max-width:160px"><label>Group</label><select class="pAtt">'+atts.map(function(a){return '<option '+(a===f.attribute?"selected":"")+'>'+a+'</option>';}).join("")+'</select></div>'+
+    '<div class="field" style="max-width:140px"><label>Level</label><select class="pLvl">'+(lvlOpts[f.attribute]||[]).map(function(v){return '<option '+(v===f.level?"selected":"")+'>'+v+'</option>';}).join("")+'</select></div>'+
+    '<div class="field" style="max-width:120px"><label>At least / at most</label><select class="pType"><option value="min_share_pct" '+(f.type==="min_share_pct"?"selected":"")+'>min %</option><option value="max_share_pct" '+(f.type==="max_share_pct"?"selected":"")+'>max %</option><option value="min_count" '+(f.type==="min_count"?"selected":"")+'>min count</option></select></div>'+
+    '<div class="field" style="max-width:100px"><label>Value</label><input class="pVal" type="number" min="0" value="'+f.value+'"></div>'+
+    '<button class="btn ghost pDel" type="button">Remove</button></div>';
+  el.querySelector(".pAtt").addEventListener("change",function(){f.attribute=this.value;var lv=el.querySelector(".pLvl");lv.innerHTML=(lvlOpts[f.attribute]||[]).map(function(v){return '<option>'+v+'</option>';}).join("");f.level=lv.value;rerender();});
+  el.querySelector(".pLvl").addEventListener("change",function(){f.level=this.value;rerender();});
+  el.querySelector(".pType").addEventListener("change",function(){f.type=this.value;rerender();});
+  el.querySelector(".pVal").addEventListener("input",function(){f.value=+this.value||0;rerender();});
+  el.querySelector(".pDel").addEventListener("click",function(){var i=list.indexOf(f);if(i>=0)list.splice(i,1);rerender();});
+  return el;
+}
+function promiseText(f){
+  var g={gender:{female:"girls",male:"boys"},age_band:{"6-12":"younger children (age 6–12)","13-17":"older children (age 13–17)"},wealth_quintile:{q1:"poorest children",q2:"q2",q3:"q3",q4:"q4",q5:"richest children"},disability:{yes:"children with a disability",no:"children without disability"}};
+  var grp=(g[f.attribute]&&g[f.attribute][f.level])||f.attribute+"="+f.level;
+  var verb=f.type==="max_share_pct"?"At most":(f.type==="min_count"?"At least":"At least");
+  var unit=f.type==="min_count"?"children":(f.type==="max_share_pct"||f.type==="min_share_pct"?"% of those helped":"");
+  return verb+" "+f.value+(f.type==="min_count"?" ":"% ")+"of those helped are "+grp;
+}
+function renderPromises(list,container,after){
+  container.innerHTML="";if(!list.length){container.innerHTML='<p class="small muted">No promises. The solver maximizes need reached alone.</p>';after();return;}
+  list.forEach(function(f){container.appendChild(promiseRow(f,list,function(){renderPromises(list,container,after);}));});after();
+}
+function rulesFrom(list){return list.map(function(f){var o={rule_id:f.id,attribute:f.attribute,level:f.level};o[f.type]=f.value;return o;});}
+
+/* ---------- demo: create sample ---------- */
+$("#useExample").addEventListener("click",function(){$("#inN").value=80;$("#inSeed").value=20261018;});
+$("#createSample").addEventListener("click",async function(){
+  var n=Math.max(10,Math.min(1000,+$("#inN").value||80));
+  var seed=Math.max(0,Math.min(2147483647,+$("#inSeed").value||20261018));
+  $("#sampleMsg").textContent="creating…";this.disabled=true;
+  try{
+    var r=await call("/api/demo?kind=selection&n="+n+"&seed="+seed,{method:"GET"},this);
+    if(r.status!==200)throw new Error("HTTP "+r.status);
+    scenario=await okJson(r);setConn("online",200,null);
+    var k=Math.min(scenario.clients.length,Math.max(1,Math.round(scenario.clients.length*0.2)));
+    $("#inK").max=scenario.clients.length;$("#inK").value=k;$("#inKNum").max=scenario.clients.length;$("#inKNum").value=k;updateK();
+    $("#sampleMsg").textContent=scenario.clients.length+" fictional children ready.";
+    floors=[];rid=0;renderPromises(floors,$("#promiseList"),syncSweepRule);
+    showStep(2);
+  }catch(e){$("#sampleMsg").textContent="could not reach the solver: "+(e.message||e);setConn(conn.phase==="online"?"waking":"offline",null,String(e.message||e));}
+  this.disabled=false;
+});
+function updateK(){var v=+$("#inKNum").value||1;$("#inK").value=v;$("#kReadout").textContent=v+" of "+(scenario?scenario.clients.length:0)+" children ("+(scenario?Math.round(100*v/scenario.clients.length):0)+"%)";}
+$("#inK").addEventListener("input",function(){$("#inKNum").value=this.value;updateK();});
+$("#inKNum").addEventListener("input",function(){var m=+this.max||80;this.value=Math.max(1,Math.min(m,+this.value||1));$("#inK").value=this.value;updateK();});
+$$("#stepBody [data-preset]").forEach(function(c){c.addEventListener("click",function(){$$("#stepBody [data-preset]").forEach(function(x){x.classList.remove("on");});this.classList.add("on");floors=[];rid=0;presetFloors(this.getAttribute("data-preset"),floors);renderPromises(floors,$("#promiseList"),syncSweepRule);});});
+$("#addPromise").addEventListener("click",function(){floors.push({id:"r"+(++rid),attribute:"gender",level:"female",type:"min_share_pct",value:40});renderPromises(floors,$("#promiseList"),syncSweepRule);});
+function syncSweepRule(){var s=$("#sweepRule");s.innerHTML=floors.map(function(f){return '<option value="'+f.id+'">'+promiseText(f)+" ("+f.id+")</option>";}).join("")||'<option value="">(add a promise first)</option>';$("#runPrice").disabled=floors.length<1;$("#runInter").disabled=floors.length<2;}
+
+function buildParams(){return{mode:"selection",coverage_mode:$("#inCov").value,coverage_target:{type:"count",value:+$("#inKNum").value||1},objective_weighting:$("#inW").value,exact:$("#inExact").checked,time_limit_s:Math.max(1,Math.min(120,+$("#inT").value||20)),source:"synthetic",seed:+$("#inSeed").value||20261018};}
+function currentPayload(){return{params:buildParams(),clients:scenario.clients,centers:[],rules:rulesFrom(floors),flags:{compare_baseline:false}};}
+
+$("#seePlan").addEventListener("click",async function(){
+  if(!scenario)return;this.disabled=true;$("#planBox").innerHTML='<p class="muted">solving…</p>';showStep(4);
+  try{
+    var r=await call("/api/allocate",{method:"POST",body:JSON.stringify(currentPayload())},this);
+    var j=await okJson(r);setConn("online",r.status,null);renderPlan(j);$("#advRaw").textContent=JSON.stringify(j,null,2);
+  }catch(e){$("#planBox").innerHTML='<div class="note">could not solve: '+(e.message||e)+'</div>';}
+  this.disabled=false;
+});
+function gv(j,k){if(j[k]!=null)return j[k];var s=j.summary||{};return s[k];}
+function renderPlan(j){
+  var served=+gv(j,"served_count")||0,proven=gv(j,"proven_optimal"),status=gv(j,"status"),obj=gv(j,"objective");
+  if(obj==null)obj=(j.summary||{}).total_priority_captured;
+  var mean=(j.summary||{}).mean_priority_served,cov=(j.summary||{}).coverage_pct,need=(j.summary||{}).need_capture_pct;
+  var chip,badgeClass;
+  if(served>0&&proven===true){chip="Best possible plan";badgeClass="ok";}
+  else if(served>0&&proven===false){chip="A good plan — the best was not proven in the time allowed";badgeClass="warn";}
+  else{chip="No plan could be found for a sample this size in the time allowed";badgeClass="warn";}
+  var eq=(j.summary||{}).equity_compliance;
+  var html='<div class="grid2"><div class="stat"><div class="big">'+served+'</div><div class="muted small">children helped, of '+(scenario?scenario.clients.length:"?")+'</div></div>'+
+    '<div class="stat"><div class="big">'+(obj!=null?Number(obj).toFixed(4):"—")+'</div><div class="muted small">need score captured <span title="Higher means the plan reaches children with greater estimated out-of-school risk.">?</span></div></div></div>'+
+    '<p style="margin:12px 0"><span class="badge '+badgeClass+'">'+(proven===true&&served>0?"✓ ":"")+chip+'</span> <span class="small muted">'+(status||"")+(gv(j,"solver")?" · "+gv(j,"solver"):"")+'</span></p>';
+  if(served===0)html+='<div class="note">The exact solver could not finish a plan this large in the time given. Try a smaller sample (for example 80), or turn on the fast method in Advanced.</div>';
+  if(mean!=null)html+='<p class="small muted">Mean priority per helped child: '+Number(mean).toFixed(4)+' · coverage '+(cov!=null?cov+"%":"—")+' · need captured '+(need!=null?need+"%":"—")+'</p>';
+  if(served>0&&eq&&eq.length){html+='<h3 style="margin-top:14px">Promises</h3>';eq.forEach(function(e){var met=e.status==="met"||e.met===true;html+='<div class="stat" style="margin:8px 0"><div class="row" style="justify-content:space-between"><strong>'+(e.label||e.rule_id||"")+'</strong><span class="badge '+(met?"ok":"warn")+'">'+(met?"kept":"not kept")+'</span></div><div class="bar-track"><div class="bar-fill" style="width:'+Math.min(100,e.achieved_pct||0)+'%"></div><span class="tick" style="left:'+Math.min(100,e.required_pct||0)+'%"></span></div><div class="small muted">promised ≥'+(e.required_pct!=null?e.required_pct:e.required)+"% · delivered "+(e.achieved_pct!=null?e.achieved_pct:e.achieved)+"%</div></div>";});}
+  else if(served>0&&!floors.length){html+='<p class="small muted">No promises in this run.</p>';}
+  $("#planBox").innerHTML=html;
+  $("#toTrade").disabled=floors.length<1;
+}
+
+$("#runPrice").addEventListener("click",async function(){
+  if(!floors.length)return;var rule=$("#sweepRule").value;var steps=Math.max(2,Math.min(50,+$("#sweepSteps").value||11));
+  this.disabled=true;$("#priceBox").innerHTML='<p class="muted">sweeping…</p>';
+  try{var p=currentPayload();var r=await call("/api/sweep",{method:"POST",body:JSON.stringify({payload:p,kind:"price",rule_id:rule,steps:steps,others:"off"})},this);var j=await okJson(r);setConn("online",r.status,null);renderPrice(j,rule);$("#advRaw").textContent=JSON.stringify(j,null,2);}
+  catch(e){$("#priceBox").innerHTML='<div class="note">sweep failed: '+(e.message||e)+'</div>';}
+  this.disabled=false;
+});
+function renderPrice(j,rule){
+  var pf=j.price_of_fairness||[];if(!pf.length){$("#priceBox").innerHTML='<div class="note">no sweep rows returned</div>';return;}
+  var base=pf[0].objective;var f=floors.filter(function(x){return x.id===rule;})[0];
+  var w=600,h=180,pad=30;var xs=pf.map(function(_,i){return pad+i*(w-2*pad)/(pf.length-1||1);});
+  var minY=Math.min.apply(null,pf.map(function(r){return r.objective;})),maxY=base;
+  var ys=pf.map(function(r){return h-pad-(r.objective-minY)/((maxY-minY)||1)*(h-2*pad);});
+  var pts=xs.map(function(x,i){return x+","+ys[i];}).join(" ");
+  var svg='<svg class="line" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none"><line x1="'+pad+'" y1="'+(h-pad-(base-minY)/((maxY-minY)||1)*(h-2*pad))+'" x2="'+(w-pad)+'" y2="'+(h-pad-(base-minY)/((maxY-minY)||1)*(h-2*pad))+'" stroke="#0E7C6B" stroke-dasharray="4 4"/><polyline points="'+pts+'" fill="none" stroke="#C2703D" stroke-width="2.5"/></svg>';
+  var rows=pf.map(function(r){var cost=base-r.objective;return '<tr><td>'+r.floor_pct+'%</td><td>'+Number(r.objective).toFixed(4)+'</td><td>'+(Math.abs(cost)<1e-9?"no loss in need reached":Number(cost).toFixed(4))+'</td><td>'+(r.achieved_pct!=null?r.achieved_pct+"%":"—")+'</td><td>'+(r.status||"ok")+'</td></tr>';}).join("");
+  $("#priceBox").innerHTML='<p class="small muted">Swept promise: '+(f?promiseText(f):rule)+' · no‑floor baseline '+Number(base).toFixed(4)+'</p>'+svg+'<table><thead><tr><th>Floor %</th><th>Need score</th><th>Cost vs baseline</th><th>Achieved</th><th>Status</th></tr></thead><tbody>'+rows+'</tbody></table>';
+}
+$("#runInter").addEventListener("click",async function(){
+  if(floors.length<2)return;this.disabled=true;$("#interBox").innerHTML='<p class="muted">comparing…</p>';
+  try{var p=currentPayload();var r=await call("/api/sweep",{method:"POST",body:JSON.stringify({payload:p,kind:"interaction",steps:Math.max(2,Math.min(50,+$("#sweepSteps").value||11)),others:"off"})},this);var j=await okJson(r);setConn("online",r.status,null);renderInter(j);$("#advRaw").textContent=JSON.stringify(j,null,2);}
+  catch(e){$("#interBox").innerHTML='<div class="note">interaction failed: '+(e.message||e)+'</div>';}
+  this.disabled=false;
+});
+function renderInter(j){
+  var ir=j.interaction_readout||{};var a=floors[0],b=floors[1];
+  var lab=ir.label||ir.interaction_label;var val=ir.interaction;
+  var narr=lab==="subadditive"?"the two promises actually help each other (subadditive)":lab==="superadditive"?"together they cost more than separately (superadditive)":lab==="additive"?"they don’t interfere with each other (additive)":(val!=null?"interaction as computed by the solver: "+Number(val).toFixed(4):"label not returned by the solver");
+  $("#interBox").innerHTML='<div class="stat"><p><strong>'+promiseText(a)+'</strong> alone: '+(ir.cost_a_alone!=null?Number(ir.cost_a_alone).toFixed(4):"—")+' &nbsp;·&nbsp; <strong>'+promiseText(b)+'</strong> alone: '+(ir.cost_b_alone!=null?Number(ir.cost_b_alone).toFixed(4):"—")+'</p><p>Both together: '+(ir.cost_combined!=null?Number(ir.cost_combined).toFixed(4):"—")+' &nbsp;·&nbsp; interaction: '+(val!=null?Number(val).toFixed(4):"—")+' &nbsp;·&nbsp; tolerance ε '+(ir.tolerance!=null?ir.tolerance:"—")+'</p><p><span class="badge '+(lab==="subadditive"?"ok":lab==="superadditive"?"warn":"neutral")+'">'+narr+'</span></p><p class="small muted">On this fictional sample the relationship can differ from the published real‑data result.</p></div>';
+}
+
+/* ---------- DATA view ---------- */
+$("#loadExampleRows").addEventListener("click",function(){$("#pasteArea").value="client_id,priority_score,weight,age_band,gender,disability,wealth_quintile,need_flag\nc1,0.82,1.4,6-12,female,no,q1,1\nc2,0.44,0.97,6-12,male,no,q3,0\nc3,0.63,1.11,6-12,female,yes,q2,1\nc4,0.52,0.88,13-17,male,no,q4,0\nc5,0.75,1.02,13-17,female,no,q1,1";$("#fmt").value="csv";});
+$("#clearRows").addEventListener("click",function(){$("#pasteArea").value="";$("#parseMsg").textContent="";dataRows=null;$("#mapCard").classList.add("hidden");$("#normCard").classList.add("hidden");$("#prevCard").classList.add("hidden");$("#dlCard").classList.add("hidden");});
+$("#fileIn").addEventListener("change",function(){var f=this.files[0];if(!f)return;var fr=new FileReader();fr.onload=function(){$("#pasteArea").value=fr.result;var e=f.name.toLowerCase();$("#fmt").value=e.endsWith(".json")?"json":(e.endsWith(".jsonl")||e.endsWith(".ndjson"))?"jsonl":(e.endsWith(".tsv"))?"tsv":"csv";};fr.readAsText(f);});
+function detectFmt(txt){var t=txt.trim();if(t[0]==="["||t[0]==="{")return t[0]==="["?"json":(t.indexOf("\n")>=0&&t.split("\n")[0].trim()[0]==="{"?"jsonl":"json");var first=t.split("\n")[0];return first.indexOf("\t")>=0?"tsv":"csv";}
+function parseCSV(txt,delim){var rows=[],row=[],cur="",q=false;for(var i=0;i<txt.length;i++){var c=txt[i];if(q){if(c==='"'){if(txt[i+1]==='"'){cur+='"';i++;}else q=false;}else cur+=c;}else{if(c==='"')q=true;else if(c===delim){row.push(cur);cur="";}else if(c==="\n"){row.push(cur);rows.push(row);row=[];cur="";}else if(c==="\r"){}else cur+=c;}}if(cur!==""||row.length){row.push(cur);rows.push(row);}return rows.filter(function(r){return r.some(function(x){return x.trim()!=="";});});}
+function parseAny(txt,fmt){fmt=fmt==="auto"?detectFmt(txt):fmt;
+  if(fmt==="json"){var o=JSON.parse(txt);var arr=Array.isArray(o)?o:(o.clients||[]);return arr.map(function(r){var a=[];REQ.concat(["need_flag"]).forEach(function(k){a.push(r[k]);});a.headers=REQ.concat(["need_flag"]).filter(function(k){return r[k]!==undefined;});return a;});}
+  if(fmt==="jsonl"){return txt.trim().split(/\r?\n/).filter(Boolean).map(function(l){return JSON.parse(l);}).map(function(r){var a=[];var ks=Object.keys(r);a.headers=ks;ks.forEach(function(k){a.push(r[k]);});return a;});}
+  var delim=fmt==="tsv"?"\t":",";var rows=parseCSV(txt,delim);var head=rows.shift().map(function(h){return h.trim();});rows.forEach(function(r){r.headers=head;});return rows;}
+$("#parseBtn").addEventListener("click",function(){
+  var txt=$("#pasteArea").value;if(!txt.trim()){$("#parseMsg").textContent="paste or choose data first";return;}
+  try{var rows=parseAny(txt,$("#fmt").value);if(!rows.length)throw new Error("no rows");
+    dataCols=rows[0].headers||[];dataRows=rows.map(function(r){var o={};(r.headers||dataCols).forEach(function(h,i){o[h]=r[i];});return o;});
+    buildMapping();$("#mapCard").classList.remove("hidden");$("#parseMsg").textContent=dataRows.length+" rows read (in memory only).";
+  }catch(e){$("#parseMsg").textContent="parse error: "+(e.message||e);}
+});
+function guessCol(target){var lc=dataCols.map(function(c){return c.toLowerCase();});for(var i=0;i<lc.length;i++){if(lc[i]===target)return dataCols[i];}var al=ALIAS[target]||[];for(var j=0;j<al.length;j++){var idx=lc.indexOf(al[j]);if(idx>=0)return dataCols[idx];}return "";}
+function buildMapping(){var box=$("#mapFields");box.innerHTML="";REQ.forEach(function(t){var sel=document.createElement("select");sel.setAttribute("data-target",t);sel.innerHTML='<option value="">(choose)</option>'+dataCols.map(function(c){return '<option value="'+c.replace(/"/g,'&quot;')+'" '+(guessCol(t)===c?"selected":"")+'>'+c+'</option>';}).join("");var f=document.createElement("div");f.className="field";f.innerHTML="<label>"+t+(t==="need_flag"?" (optional)":"")+"</label>";f.appendChild(sel);box.appendChild(f);});}
+$("#mapBtn").addEventListener("click",function(){
+  mapping={};$$("#mapFields select").forEach(function(s){mapping[s.getAttribute("data-target")]=s.value;});
+  if(!mapping.client_id||!mapping.priority_score||!mapping.age_band||!mapping.gender||!mapping.disability||!mapping.wealth_quintile){$("#mapMsg").textContent="fill all required columns (weight may use the 1.0 checkbox).";return;}
+  if(!mapping.weight&&!$("#wOne").checked){$("#mapMsg").textContent="map a weight column, or tick ‘use weight = 1.0’.";return;}
+  buildNorm();$("#normCard").classList.remove("hidden");$("#mapMsg").textContent="";
+});
+function distinct(field){var set={};dataRows.forEach(function(r){var v=String(r[field]==null?"":r[field]).trim();set[v]=(set[v]||0)+1;});return Object.keys(set);}
+function autoNorm(field,val){var v=val.toLowerCase();if(field==="gender"){if(v==="f"||v==="girl"||v==="female"||v==="1")return"female";if(v==="m"||v==="boy"||v==="male"||v==="2")return"male";}if(field==="age_band"){if(v==="6-12"||v==="6–12"||v==="young"||v==="under13"||v==="under 13")return"6-12";if(v==="13-17"||v==="13–17"||v==="older"||v==="13plus"||v==="13 plus")return"13-17";}if(field==="disability"){if(v==="yes"||v==="y"||v==="1"||v==="true"||v==="has disability")return"yes";if(v==="no"||v==="n"||v==="0"||v==="false"||v==="no disability")return"no";}if(field==="wealth_quintile"){var m=v.match(/^q?([1-5])$/);if(m)return"q"+m[1];}return null;}
+function buildNorm(){var box=$("#normFields");box.innerHTML="";normMaps={};["age_band","gender","disability","wealth_quintile"].forEach(function(t){var col=mapping[t];var vals=distinct(col);var need=vals.some(function(v){return ALLOW[t].indexOf(v.toLowerCase())<0&&autoNorm(t,v)==null;});var sel=document.createElement("div");sel.className="promise";var head="<div class='line'>"+t+" — column <code>"+col+"</code></div>";var body="";if(!need){body="<div class='small muted'>values already match the engine: "+vals.join(", ")+"</div>";normMaps[t]={};vals.forEach(function(v){normMaps[t][v]=v.toLowerCase();});}else{body="<div class='grid2'>";vals.forEach(function(v){var g=autoNorm(t,v)||ALLOW[t][0];normMaps[t]=normMaps[t]||{};normMaps[t][v]=g;body+="<div class='field'><label>'"+v+"' maps to</label><select data-f='"+t+"' data-v='"+v.replace(/'/g,"&#39;")+"'>"+ALLOW[t].map(function(a){return '<option '+(a===g?"selected":"")+'>'+a+'</option>';}).join("")+"</select></div>";});body+="</div>";}
+  sel.innerHTML=head+body;box.appendChild(sel);});
+  $$("#normFields select").forEach(function(s){s.addEventListener("change",function(){normMaps[this.getAttribute("data-f")][this.getAttribute("data-v")]=this.value;});});
+}
+$("#normBtn").addEventListener("click",function(){
+  var errs=[];var ids={};var seenFlagNoScore=false;
+  dataRows.forEach(function(r,i){
+    var cid=String(r[mapping.client_id]==null?"":r[mapping.client_id]).trim();
+    if(!cid){errs.push("row "+(i+1)+": empty client_id");return;}
+    if(ids[cid])errs.push("row "+(i+1)+": duplicate client_id '"+cid+"'");ids[cid]=1;
+    var ps=parseFloat(r[mapping.priority_score]);if(!isFinite(ps))errs.push("row "+(i+1)+" ("+cid+"): priority_score not a number");
+    if(mapping.weight){var wt=parseFloat(r[mapping.weight]);if(!$("#wOne").checked&&!(wt>0))errs.push("row "+(i+1)+" ("+cid+"): weight must be positive");}
+    ["age_band","gender","disability","wealth_quintile"].forEach(function(t){var raw=String(r[mapping[t]]==null?"":r[mapping[t]]).trim();var nv=(normMaps[t]&&normMaps[t][raw])||autoNorm(t,raw)||raw.toLowerCase();if(ALLOW[t].indexOf(nv)<0)errs.push("row "+(i+1)+" ("+cid+"): "+t+" value '"+raw+"' not recognized");});
+  });
+  if(!mapping.priority_score&&mapping.need_flag)seenFlagNoScore=true;
+  var vm=$("#valMsg");
+  if(errs.length){vm.innerHTML='<div class="note">'+errs.slice(0,12).map(function(e){return "• "+e;}).join("<br>")+(errs.length>12?"<br>… "+(errs.length-12)+" more":"")+'</div>';return;}
+  if(seenFlagNoScore)vm.innerHTML='<div class="note">You mapped an out‑of‑school / need column but no priority_score. The engine needs a validated priority score; raw labels are not enough. Add a priority_score column or run the risk pipeline first.</div>';else vm.innerHTML='<div class="note ok">Rows look valid. Counts only are shown below — no individual records leave this page.</div>';
+  buildPreview();$("#prevCard").classList.remove("hidden");$("#dlCard").classList.remove("hidden");
+  var k=Math.max(1,Math.min(dataRows.length,Math.round(dataRows.length*0.2)));$("#dK").max=dataRows.length;$("#dK").value=k;
+  dFloors=[];rid=0;renderPromises(dFloors,$("#dPromiseList"),function(){});
+});
+function buildPreview(){
+  var n=dataRows.length,g=0,y=0,d=0,q={q1:0,q2:0,q3:0,q4:0,q5:0},sum=0,wsum=0,flag=0;
+  dataRows.forEach(function(r){var gv2=function(t){return (normMaps[t]&&normMaps[t][String(r[mapping[t]]).trim()])||autoNorm(t,String(r[mapping[t]]))||String(r[mapping[t]]).toLowerCase();};if(gv2("gender")==="female")g++;if(gv2("age_band")==="6-12")y++;if(gv2("disability")==="yes")d++;var qq=gv2("wealth_quintile");if(q[qq]!=null)q[qq]++;sum+=parseFloat(r[mapping.priority_score])||0;wsum+=$("#wOne").checked?1:(parseFloat(r[mapping.weight])||0);if(mapping.need_flag&&+r[mapping.need_flag]===1)flag++;});
+  $("#prevBox").innerHTML=
+    stat("children",n)+stat("girls",g)+stat("younger (6–12)",y)+stat("with disability",d)+
+    stat("mean priority",(sum/n).toFixed(4))+stat("total weight",wsum.toFixed(2))+
+    (mapping.need_flag?stat("need_flag = 1",flag):"")+
+    '<div class="stat"><div class="small muted">by wealth quintile</div><div class="small">'+Object.keys(q).map(function(k){return k+": "+q[k];}).join(" · ")+'</div></div>';
+}
+function stat(l,v){return '<div class="stat"><div class="big" style="font-size:24px">'+v+'</div><div class="muted small">'+l+'</div></div>';}
+$("#dAddPromise").addEventListener("click",function(){dFloors.push({id:"r"+(++rid),attribute:"gender",level:"female",type:"min_share_pct",value:40});renderPromises(dFloors,$("#dPromiseList"),function(){});});
+function buildDataPayload(){
+  var clients=dataRows.map(function(r){var gv2=function(t){return (normMaps[t]&&normMaps[t][String(r[mapping[t]]).trim()])||autoNorm(t,String(r[mapping[t]]))||String(r[mapping[t]]).toLowerCase();};var c={client_id:String(r[mapping.client_id]).trim(),priority_score:parseFloat(r[mapping.priority_score]),weight:$("#wOne").checked?1.0:parseFloat(r[mapping.weight]),attributes:{age_band:gv2("age_band"),gender:gv2("gender"),disability:gv2("disability"),wealth_quintile:gv2("wealth_quintile")}};if(mapping.need_flag)c.need_flag=+r[mapping.need_flag]?1:0;return c;});
+  return{params:{mode:"selection",coverage_mode:$("#dCov").value,coverage_target:{type:"count",value:Math.max(1,Math.min(dataRows.length,+$("#dK").value||1))},objective_weighting:$("#dW").value,exact:$("#dExact").checked,time_limit_s:Math.max(1,Math.min(600,+$("#dT").value||120))},clients:clients,centers:[],rules:rulesFrom(dFloors),flags:{compare_baseline:false}};
+}
+function dl(name,text,type){var b=new Blob([text],{type:type||"text/plain;charset=utf-8"});var u=URL.createObjectURL(b);var a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(u);},1500);}
+$("#dlPayload").addEventListener("click",function(){dl("payload.json",JSON.stringify(buildDataPayload(),null,2),"application/json");});
+var RUN_PY='import json\nfrom equireach import allocate, run_sweep, validate_clients\n\ndef main():\n    with open("payload.json","r",encoding="utf-8") as f:\n        payload=json.load(f)\n    v=validate_clients(payload.get("clients",[]),mode="selection",start_row=1)\n    if not v.get("ok",False):\n        print("Validation failed:");print(v);return\n    res=allocate(payload)\n    s=res.get("summary",{})\n    print("Status:",s.get("status"))\n    print("Served count:",s.get("served_count"))\n    print("Objective / total priority captured:",s.get("total_priority_captured"))\n    print("Proven optimal:",s.get("proven_optimal"))\n    print("Solver:",s.get("solver"))\n    print("Selected client_ids:")\n    for a in res.get("assignments",[]):print(" ",a.get("client_id"))\n    with open("result.json","w",encoding="utf-8") as f:json.dump(res,f,indent=2)\n    with open("selected_clients.csv","w",encoding="utf-8") as f:\n        f.write("client_id\\n")\n        for a in res.get("assignments",[]):f.write(str(a.get("client_id"))+"\\n")\n\nif __name__=="__main__":\n    main()\n# If the import above fails, open apps/equireach/docs/01_engine_spec.md for the exact entry point.\n';
+var README_KIT='EquiReach local run kit\n=======================\nThis kit is for LOCAL or PRIVATE use only. Do NOT upload restricted child-level data to the public EquiReach demo.\n\n1. Clone the public repository:\n   https://github.com/rafi-math/edu-support-optimization-bd\n\n2. Create an environment and install dependencies from the repository requirements.txt\n   (Windows:  python -m venv .venv  then  .venv\\Scripts\\activate  then  pip install -r requirements.txt ).\n\n3. Put payload.json next to run_local.py, then run:\n   python run_local.py\n\n4. SPSS .sav microdata: do NOT paste into the browser. Convert locally on an authorized machine:\n   pip install pandas pyreadstat\n   python convert_sav_to_csv.py your_file.sav children.csv\n   then import children.csv (or its JSON export) in the “Use your own data” page to build payload.json.\n\n5. Excel: use “Save as CSV” first; the browser importer reads CSV/TSV/JSON/JSON Lines only.\n\nThe public web API is synthetic-only and never runs real child data. A real deployment should record, for auditability: data source, model version, weight definition (this study uses fsweight as the primary child weight, with fshweight as a normalized sensitivity weight), budget, fairness floors, solver settings, and timestamp. Integer programs are solved with SciPy MILP (HiGHS); a plan is reported proven optimal only when the relative MIP gap closes to zero within the time limit.\n';
+var SAV_PY='import sys\nimport pandas as pd\nfrom pyreadstat import read_sav\n# Local helper only. Not run by the website. Requires: pip install pandas pyreadstat\n# Usage: python convert_sav_to_csv.py input.sav output.csv\nif len(sys.argv)!=3:\n    print("usage: python convert_sav_to_csv.py input.sav output.csv");sys.exit(1)\ndf,meta=read_sav(sys.argv[1])\ndf.to_csv(sys.argv[2],index=False)\nprint("wrote",sys.argv[2],"rows",len(df))\n';
+$("#dlRun").addEventListener("click",function(){dl("run_local.py",RUN_PY,"text/x-python");});
+$("#dlReadme").addEventListener("click",function(){dl("README_LOCAL_RUN.txt",README_KIT);});
+$("#dlSav").addEventListener("click",function(){dl("convert_sav_to_csv.py",SAV_PY,"text/x-python");});
+
+/* ---------- boot ---------- */
+renderConn();showStep(1);syncSweepRule();healthLoop();
+})();
+</script>
+</body>
+</html>
