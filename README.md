@@ -123,6 +123,24 @@ The dashboard's "Use your own data" page lets you load a CSV, TSV, JSON, or JSON
 
 A real deployment should record, for auditability: data source, model version, weight definition (this study uses `fsweight` as the primary child weight, with `fshweight` retained as a normalized sensitivity weight), budget, fairness floors, solver settings, and timestamp. Integer programs are solved with SciPy's MILP interface (HiGHS); a plan is reported as proven optimal only when the solver closes the relative MIP gap to zero within the time limit.
 
+
+## Interactive dashboard (live)
+
+The decision-support tool described above is also available as a working web app at
+https://rafi-math.github.io/edu-support-optimization-bd/equireach.html. It runs the
+same validated Mode A selection engine through a small FastAPI service. The guided
+demo uses fictional children only. The "Use your own data" path reads a CSV, TSV, JSON,
+or JSON Lines file in the browser and either prepares a `payload.json` plus a local run
+kit to solve on your own machine, or, with an explicit consent step, runs one calculation
+on the public service without storing anything. Restricted or third-party identifiable
+records, and very large lists, should use the local download rather than the public
+service.
+
+The public service is CORS-locked to this site's origin and is held warm by a scheduled
+GitHub Actions ping. Neither affects the science. Reproducibility still rests on the
+committed scripts and aggregate outputs under `src/`, `reports/`, and `results/`, and the
+figures and tables on the study site are unchanged by the dashboard.
+
 ## Repository layout (representative)
 
 ```text
