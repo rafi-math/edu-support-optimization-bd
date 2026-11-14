@@ -307,27 +307,31 @@ footer.about a{color:var(--teal-h)}
 var BASE="https://equireach-api.onrender.com";
 var $=function(s,r){return (r||document).querySelector(s);};
 var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
-var conn={phase:"idle",statusCode:null,error:null,attempts:0,lastCheckedAt:null};
+var conn={phase:"idle",statusCode:null,error:null,attempts:0,bgFails:0,lastCheckedAt:null};
 var scenario=null;
 var floors=[];
 var rid=0;
 var dataRows=null, dataCols=[], mapping={}, normMaps={}, dFloors=[];
+var bgTimer=null;
 
 var ALLOW={age_band:["6-12","13-17"],gender:["male","female"],disability:["yes","no"],wealth_quintile:["q1","q2","q3","q4","q5"]};
 var REQ=["client_id","priority_score","weight","age_band","gender","disability","wealth_quintile"];
 var ALIAS={client_id:["id","child_id","caseid","respondent_id","unique_id"],priority_score:["priority","risk_score","predicted_risk","oos_risk","score"],weight:["weight","fsweight","child_weight","analysis_weight"],age_band:["age_group","age_category","age"],gender:["sex","gender_code"],disability:["disability_status","disabled","diff"],wealth_quintile:["wealth","wealth_index","quintile","q"],need_flag:["oos","out_of_school","school_status"]};
 
-function setConn(p,code,err){conn.phase=p;conn.statusCode=code==null?conn.statusCode:code;conn.error=err===undefined?conn.error:err;if(p==="online"){conn.attempts=0;conn.error=null;}renderConn();}
 function renderConn(){
   var d=$("#connDot"),t=$("#connText");
   d.className="dot "+(conn.phase==="online"?"online":conn.phase==="waking"?"waking":conn.phase==="offline"?"offline":"");
   if(conn.phase==="online")t.textContent="API online";
-  else if(conn.phase==="waking")t.textContent="waking up the solver… ("+Math.max(1,conn.attempts)+"/12)";
+  else if(conn.phase==="waking")t.textContent=conn.attempts>0?("waking up the solver… ("+conn.attempts+"/12)"):"reconnecting…";
   else if(conn.phase==="offline")t.textContent="offline";
   else t.textContent="checking…";
   $("#advBase").value=BASE;$("#advStatus").value=conn.statusCode==null?"-":String(conn.statusCode);
   $("#advError").value=conn.error||"-";$("#advAttempts").value=String(conn.attempts);
 }
+function setOnline(code){conn.phase="online";conn.statusCode=code==null?conn.statusCode:code;conn.error=null;conn.attempts=0;conn.bgFails=0;conn.lastCheckedAt=new Date().toISOString();renderConn();}
+function setWaking(){if(conn.phase!=="online"){conn.phase="waking";renderConn();}}
+function setOffline(err){conn.phase="offline";conn.error=err||"offline";renderConn();}
+
 function isCold(errOrStatus){if(errOrStatus instanceof TypeError)return true;var s=errOrStatus;return s===502||s===503;}
 async function raw(path,opts){
   var ctrl=new AbortController();var to=setTimeout(function(){ctrl.abort();},180000);
@@ -355,20 +359,25 @@ async function call(path,opts,wakeBtn){
 function sleep(ms){return new Promise(function(res){setTimeout(res,ms);});}
 function okJson(r){return r.json();}
 
-var healthTimer=null,healthAttempts=0,healthStopped=false;
-async function healthLoop(){
-  healthAttempts=0;healthStopped=false;
-  async function tick(){
-    if(healthStopped)return;
-    healthAttempts++;
-    try{var r=await raw("/health",{});if(r.status===200){var j=await okJson(r);if(j&&j.ok){setConn("online",200,null);return;}}}catch(e){}
-    if(conn.phase!=="online")setConn("waking",conn.statusCode,"Failed to fetch");
-    if(healthAttempts>=12){setConn("offline",conn.statusCode,"offline after 12 attempts");return;}
-    setTimeout(tick,10000);
+async function bootProbe(){
+  conn.attempts=0;conn.bgFails=0;
+  for(var i=1;i<=12;i++){
+    conn.attempts=i;renderConn();
+    try{var r=await raw("/health",{});if(r.status===200){var j=await okJson(r);if(j&&j.ok){setOnline(200);startBackground();return;}}}catch(e){}
+    if(i<12)await sleep(10000);
   }
-  tick();
-  if(healthTimer)clearInterval(healthTimer);
-  healthTimer=setInterval(async function(){try{var r=await raw("/health",{});if(r.status===200){var j=await okJson(r);if(j&&j.ok)setConn("online",200,null);}}catch(e){if(conn.phase==="online")setConn("waking",conn.statusCode,"transient");}},30000);
+  setOffline("offline after 12 attempts");
+  startBackground();
+}
+function startBackground(){
+  if(bgTimer)clearInterval(bgTimer);
+  bgTimer=setInterval(async function(){
+    try{var r=await raw("/health",{});if(r.status===200){var j=await okJson(r);if(j&&j.ok){conn.bgFails=0;if(conn.phase!=="online")setOnline(200);else renderConn();return;}}}catch(e){}
+    conn.bgFails++;
+    if(conn.phase==="online"&&conn.bgFails>=2){conn.phase="waking";conn.attempts=0;conn.error="transient";renderConn();}
+    else if(conn.phase!=="online"&&conn.bgFails>=12){setOffline("offline after background misses");}
+    else{renderConn();}
+  },30000);
 }
 
 $("#viewToggle").addEventListener("click",function(){
@@ -378,7 +387,7 @@ $("#viewToggle").addEventListener("click",function(){
   this.textContent=demo?"Back to the demo":"Use your own data";
 });
 $("#advBtn").addEventListener("click",function(){var p=$("#advPanel");var h=p.classList.toggle("hidden");this.setAttribute("aria-expanded",String(!h));});
-$("#retryConn").addEventListener("click",function(){healthLoop();});
+$("#retryConn").addEventListener("click",function(){bootProbe();});
 $("#agreeGate").addEventListener("change",function(){$("#dataBody").classList.toggle("hidden",!this.checked);});
 
 function showStep(n){
@@ -436,13 +445,13 @@ $("#createSample").addEventListener("click",async function(){
   try{
     var r=await call("/api/demo?kind=selection&n="+n+"&seed="+seed,{method:"GET"},this);
     if(r.status!==200)throw new Error("HTTP "+r.status);
-    scenario=await okJson(r);setConn("online",200,null);
+    scenario=await okJson(r);setOnline(200);
     var k=Math.min(scenario.clients.length,Math.max(1,Math.round(scenario.clients.length*0.2)));
     $("#inK").max=scenario.clients.length;$("#inK").value=k;$("#inKNum").max=scenario.clients.length;$("#inKNum").value=k;updateK();
     $("#sampleMsg").textContent=scenario.clients.length+" fictional children ready.";
     floors=[];rid=0;renderPromises(floors,$("#promiseList"),syncSweepRule);
     showStep(2);
-  }catch(e){$("#sampleMsg").textContent="could not reach the solver: "+(e.message||e);setConn(conn.phase==="online"?"waking":"offline",null,String(e.message||e));}
+  }catch(e){$("#sampleMsg").textContent="could not reach the solver: "+(e.message||e);}
   this.disabled=false;
 });
 function updateK(){var v=+$("#inKNum").value||1;$("#inK").value=v;$("#kReadout").textContent=v+" of "+(scenario?scenario.clients.length:0)+" children ("+(scenario?Math.round(100*v/scenario.clients.length):0)+"%)";}
@@ -459,7 +468,7 @@ $("#seePlan").addEventListener("click",async function(){
   if(!scenario)return;this.disabled=true;$("#planBox").innerHTML='<p class="muted">solving…</p>';showStep(4);
   try{
     var r=await call("/api/allocate",{method:"POST",body:JSON.stringify({payload:currentPayload()})},this);
-    var j=await okJson(r);setConn("online",r.status,null);renderPlan(j);$("#advRaw").textContent=JSON.stringify(j,null,2);
+    var j=await okJson(r);setOnline(r.status);renderPlan(j);$("#advRaw").textContent=JSON.stringify(j,null,2);
   }catch(e){$("#planBox").innerHTML='<div class="note">could not solve: '+(e.message||e)+'</div>';}
   this.disabled=false;
 });
@@ -487,7 +496,7 @@ function renderPlan(j){
 $("#runPrice").addEventListener("click",async function(){
   if(!floors.length)return;var rule=$("#sweepRule").value;var steps=Math.max(2,Math.min(50,+$("#sweepSteps").value||11));
   this.disabled=true;$("#priceBox").innerHTML='<p class="muted">sweeping…</p>';
-  try{var p=currentPayload();var r=await call("/api/sweep",{method:"POST",body:JSON.stringify({payload:p,kind:"price",rule_id:rule,steps:steps})},this);var j=await okJson(r);setConn("online",r.status,null);renderPrice(j,rule);$("#advRaw").textContent=JSON.stringify(j,null,2);}
+  try{var p=currentPayload();var r=await call("/api/sweep",{method:"POST",body:JSON.stringify({payload:p,kind:"price",rule_id:rule,steps:steps})},this);var j=await okJson(r);setOnline(r.status);renderPrice(j,rule);$("#advRaw").textContent=JSON.stringify(j,null,2);}
   catch(e){$("#priceBox").innerHTML='<div class="note">sweep failed: '+(e.message||e)+'</div>';}
   this.disabled=false;
 });
@@ -504,7 +513,7 @@ function renderPrice(j,rule){
 }
 $("#runInter").addEventListener("click",async function(){
   if(floors.length<2)return;this.disabled=true;$("#interBox").innerHTML='<p class="muted">comparing…</p>';
-  try{var p=currentPayload();var r=await call("/api/sweep",{method:"POST",body:JSON.stringify({payload:p,kind:"interaction",steps:Math.max(2,Math.min(50,+$("#sweepSteps").value||11))})},this);var j=await okJson(r);setConn("online",r.status,null);renderInter(j);$("#advRaw").textContent=JSON.stringify(j,null,2);}
+  try{var p=currentPayload();var r=await call("/api/sweep",{method:"POST",body:JSON.stringify({payload:p,kind:"interaction",steps:Math.max(2,Math.min(50,+$("#sweepSteps").value||11))})},this);var j=await okJson(r);setOnline(r.status);renderInter(j);$("#advRaw").textContent=JSON.stringify(j,null,2);}
   catch(e){$("#interBox").innerHTML='<div class="note">interaction failed: '+(e.message||e)+'</div>';}
   this.disabled=false;
 });
@@ -597,7 +606,7 @@ $("#calcReal").addEventListener("click",async function(){
   try{
     var payload=buildDataPayload();
     var r=await call("/api/allocate",{method:"POST",body:JSON.stringify({payload:payload})},this);
-    var j=await okJson(r);setConn("online",r.status,null);
+    var j=await okJson(r);setOnline(r.status);
     var s=j.summary||{};var served=s.served_count,obj=s.total_priority_captured,prov=s.proven_optimal,st=s.status;
     var ids=(j.assignments||[]).map(function(a){return a.client_id;});
     var html='<div class="note ok" style="margin:8px 0">Plan calculated on the server. Your rows were not stored.</div>';
@@ -611,7 +620,7 @@ $("#calcReal").addEventListener("click",async function(){
   this.textContent=lbl;this.disabled=!$("#consentSend").checked;
 });
 
-renderConn();showStep(1);syncSweepRule();healthLoop();
+renderConn();showStep(1);syncSweepRule();bootProbe();
 })();
 </script>
 </body>
