@@ -285,13 +285,14 @@ footer.about a{color:var(--teal-h)}
     </div>
   </section>
 
-  <footer class="about">
-    <p><strong>About.</strong> This tool helps decide <em>who</em> receives support under a fixed budget. Deciding <em>where</em> to build centers is a separate question and is not part of this demo.</p>
-    <p><strong>The real study.</strong> In the published study on real rural Chattogram data (Bangladesh MICS 2019; 4,861 children, support budget 730), reaching younger children proved expensive — the no‑floor plan selected only about 0.14% young children — while gender parity was comparatively cheap (no‑floor 29.04% girls), and the two coverage floors were subadditive in cost (interaction −5.740). This live demo uses fictional, deliberately balanced children, so its numbers differ from the real study (here the two floors come out additive).</p>
-    <p>Built by <strong>Md. Ali Arman Rafi</strong>. <span class="muted">Mathematics, University of Chittagong.</span></p>
-    <p><strong>Your privacy.</strong> This public demo uses fictional data only. Restricted survey data is never accepted, and no individual records are shown or uploaded.</p>
-    <p><a href="https://github.com/rafi-math/edu-support-optimization-bd/blob/main/apps/equireach/docs/PARITY_VALIDATION.md">View Parity Validation Report</a> · <a href="https://rafi-math.github.io/edu-support-optimization-bd/">Public study site</a> · <a href="https://github.com/rafi-math/edu-support-optimization-bd">Source code</a></p>
-  </footer>
+<footer class="about">
+    <p>EquiReach decides <em>which</em> children receive help when there are only a limited number of support packages. It doesn't decide <em>where</em> to build centers. That is a separate question, and this demo doesn't try to answer it.</p>
+    <p><strong>The real study.</strong> The method was built and checked on real data from rural Chattogram, using the Bangladesh MICS 2019 children's file: 4,861 children and a budget of 730 packages. When children are ranked by predicted out-of-school risk, the plan reaches many out-of-school older children but very few young ones. In that no-rule run, just 1 child under 13 was selected, about 0.14% of the helped group. So a rule to include young children is costly in reach. A rule to include girls is far cheaper: the no-rule plan already held 29.04% girls. Applying both rules together costs less than the two separate costs added up. The technical name for that is subadditive, and the measured interaction was −5.740.</p>
+    <p>The children in this demo are made up, not real records. They are spread fairly even across groups on purpose, so the trade-offs look gentler here than in the real data. With these fictional children the two rules come out additive rather than subadditive. That gap is expected; it is not an error.</p>
+    <p>Made by <strong>Md. Ali Arman Rafi</strong>, <span class="muted">Mathematics, University of Chittagong.</span></p>
+    <p><strong>Your privacy.</strong> This page works only with fictional children. It never accepts restricted survey data, and it never shows or uploads any single real child's record.</p>
+    <p><a href="https://github.com/rafi-math/edu-support-optimization-bd/blob/main/apps/equireach/docs/PARITY_VALIDATION.md">Parity validation report</a> · <a href="https://rafi-math.github.io/edu-support-optimization-bd/">Public study site</a> · <a href="https://github.com/rafi-math/edu-support-optimization-bd">Source code</a></p>
+</footer>
 </div>
 
 <script>
