@@ -1,21 +1,22 @@
 name: Build working paper PDF
+
 on:
   workflow_dispatch:
+
 permissions:
   contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: texlive/texlive:latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Compile manuscript
+
+      - name: Compile manuscript in TeX Live container
         run: |
-          mkdir -p build
-          xelatex -interaction=nonstopmode -halt-on-error -output-directory=build docs/children_project.tex
-          xelatex -interaction=nonstopmode -halt-on-error -output-directory=build docs/children_project.tex
-          cp build/children_project.pdf docs/children_project.pdf
+          docker run --rm -v "${PWD}:/work" -w /work texlive/texlive:latest sh -c 'mkdir -p build && xelatex -interaction=nonstopmode -halt-on-error -output-directory=build docs/children_project.tex && xelatex -interaction=nonstopmode -halt-on-error -output-directory=build docs/children_project.tex && cp build/children_project.pdf docs/children_project.pdf'
+
       - name: Commit compiled PDF
         run: |
           git config user.name "github-actions[bot]"
