@@ -108,7 +108,7 @@ footer.about a{color:var(--teal-h)}
       <div class="field"><label>Last error</label><input id="advError" readonly></div>
       <div class="field"><label>Attempts</label><input id="advAttempts" readonly></div>
     </div>
-    <p class="small muted">Solver engine, raw flags, rule ids and full summary appear here after a run. The public demo is synthetic-only; real child data is never sent to this server.</p>
+    <p class="small muted">Solver engine, raw flags, rule ids and full summary appear here after a run. The demo is synthetic-only; on the "Use your own data" page your rows are sent to the server only when you press "Calculate the plan here", and nothing is stored.</p>
     <pre id="advRaw" class="small" style="white-space:pre-wrap;word-break:break-word;max-height:240px;overflow:auto;background:var(--paper);border:1px solid var(--hair);border-radius:10px;padding:10px"></pre>
     <button class="btn" id="retryConn" type="button">Retry connection</button>
   </div>
@@ -203,20 +203,19 @@ footer.about a{color:var(--teal-h)}
 
   <!-- DATA VIEW -->
   <section id="dataView" class="hidden">
-    <p class="eyebrow">Local / private use only</p>
+    <p class="eyebrow">Local / private use, or calculate here</p>
     <h1>Use your own data</h1>
-    <p class="muted">Prepare a local allocation file from your own children data. Nothing is uploaded to this website’s server.</p>
+    <p class="muted">Load your own children data and either get the plan right here, or prepare a file to run on your own machine. Nothing about your rows is stored by this site.</p>
     <div class="card">
       <h3>Before you start</h3>
       <ul class="small" style="margin:6px 0 6px 18px">
         <li>You have lawful authority to process the children’s data.</li>
-        <li>You are not uploading restricted MICS microdata or other protected survey records to this public site.</li>
-        <li>This page does not send your child‑level data to any server.</li>
-        <li>To get results, you run the open‑source solver locally or on your own private infrastructure.</li>
         <li>The engine needs a validated priority score per child. Raw out‑of‑school labels are not enough on their own — first score with the project’s risk pipeline or your own approved model.</li>
+        <li>You can press “Calculate the plan here” to send your rows to this public server for one calculation only (nothing is stored), or download the file and run the open‑source solver locally / on your own infrastructure.</li>
+        <li>Restricted or third‑party identifiable records, and very large lists, should use the downloads and run locally, not this public server.</li>
         <li>SPSS <code>.sav</code> microdata: do not paste here. Use the local run kit on an authorized machine.</li>
       </ul>
-      <label class="small"><input id="agreeGate" type="checkbox" style="width:auto"> I understand this page only prepares a local file; it does not process real child data on the public server.</label>
+      <label class="small"><input id="agreeGate" type="checkbox" style="width:auto"> I understand: my rows stay in this browser unless I press “Calculate the plan here”, which sends them to the public server for one calculation only (not stored). For restricted or third‑party data, use the downloads and run locally instead.</label>
     </div>
 
     <div id="dataBody" class="hidden">
@@ -267,8 +266,15 @@ footer.about a{color:var(--teal-h)}
       </div>
 
       <div class="card hidden" id="dlCard">
-        <h3>6. Download and run locally</h3>
-        <p class="muted small">Both downloads are created in your browser. No network request carries your child rows.</p>
+        <h3>6. Get the plan</h3>
+        <label class="small" style="display:block;margin:10px 0 4px"><input id="consentSend" type="checkbox" style="width:auto"> I own or am authorized to process these rows, and I accept sending them to this public server for one calculation only. The server does not store them. For restricted or third‑party identifiable data, use the downloads below and run locally instead.</label>
+        <div class="row">
+          <button class="btn primary" id="calcReal" type="button" disabled>Calculate the plan here</button>
+          <span id="sizeNote" class="small muted"></span>
+        </div>
+        <div id="realResult"></div>
+        <hr style="border:none;border-top:1px solid var(--hair);margin:14px 0">
+        <p class="muted small">Or download and run locally. Both downloads are created in your browser. No network request carries your child rows.</p>
         <div class="row">
           <button class="btn primary" id="dlPayload" type="button">Download payload.json</button>
           <button class="btn" id="dlRun" type="button">Download run_local.py</button>
@@ -276,23 +282,23 @@ footer.about a{color:var(--teal-h)}
           <button class="btn ghost" id="dlSav" type="button">Download convert_sav_to_csv.py (local helper)</button>
         </div>
         <details class="collapsible"><summary>Can this be used with real data?</summary>
-          <p class="small">Yes, but only locally or on infrastructure you control. This page prepares a valid <code>payload.json</code> from real child‑level data if you have lawful authority. The public demo server will not run real child data. A validated priority score is required; raw attributes plus an out‑of‑school label are not enough without first running the risk pipeline or an approved model. For restricted <code>.sav</code> microdata, use the local kit on an authorized machine, not this browser.</p>
+          <p class="small">Yes. This page prepares a valid <code>payload.json</code> from real child‑level data if you have lawful authority, and “Calculate the plan here” runs it on the public server for one calculation without storing anything. Very large lists may time out on the free host — use the downloads and run locally for those. A validated priority score is required; raw attributes plus an out‑of‑school label are not enough without first running the risk pipeline or an approved model. For restricted <code>.sav</code> microdata, use the local kit on an authorized machine, not this browser.</p>
         </details>
         <details class="collapsible"><summary>If you want a hosted web app for your organization</summary>
-          <p class="small">Deploy the same backend behind authentication on infrastructure you control, with consent capture, encrypted storage if data is retained, and a retention/deletion policy. Never use the free public endpoint for real child data. The front end can point to a private API base URL via an environment variable as a separate deployment.</p>
+          <p class="small">Deploy the same backend behind authentication on infrastructure you control, with consent capture, encrypted storage if data is retained, and a retention/deletion policy. Never use the free public endpoint for real child data at scale. The front end can point to a private API base URL via an environment variable as a separate deployment.</p>
         </details>
       </div>
     </div>
   </section>
 
-<footer class="about">
-    <p>EquiReach decides <em>which</em> children receive help when there are only a limited number of support packages. It doesn't decide <em>where</em> to build centers. That is a separate question, and this demo doesn't try to answer it.</p>
-    <p><strong>The real study.</strong> The method was built and checked on real data from rural Chattogram, using the Bangladesh MICS 2019 children's file: 4,861 children and a budget of 730 packages. When children are ranked by predicted out-of-school risk, the plan reaches many out-of-school older children but very few young ones. In that no-rule run, just 1 child under 13 was selected, about 0.14% of the helped group. So a rule to include young children is costly in reach. A rule to include girls is far cheaper: the no-rule plan already held 29.04% girls. Applying both rules together costs less than the two separate costs added up. The technical name for that is subadditive, and the measured interaction was −5.740.</p>
+  <footer class="about">
+    <p>EquiReach decides <em>which</em> children receive help when there are only a limited number of support packages.</p>
+    <p><strong>The real study.</strong> The method was built and checked on real data from rural Chattogram, using the Bangladesh MICS 2019 children’s file: 4,861 children and a budget of 730 packages. When children are ranked by predicted out-of-school risk, the plan reaches many out-of-school older children but very few young ones. In that no-rule run, just 1 child under 13 was selected, about 0.14% of the helped group. So a rule to include young children is costly in reach. A rule to include girls is far cheaper: the no-rule plan already held 29.04% girls. Applying both rules together costs less than the two separate costs added up. The technical name for that is subadditive, and the measured interaction was −5.740.</p>
     <p>The children in this demo are made up, not real records. They are spread fairly even across groups on purpose, so the trade-offs look gentler here than in the real data. With these fictional children the two rules come out additive rather than subadditive. That gap is expected; it is not an error.</p>
     <p>Made by <strong>Md. Ali Arman Rafi</strong>, <span class="muted">Mathematics, University of Chittagong.</span></p>
-        <p><strong>Your privacy.</strong> The demo runs on fictional children. On the "Use your own data" page you can load your own rows, but they are read only inside your browser and are never sent to this server; to get the list of children, you download the file and run the solver on your own machine. Restricted survey microdata should never be pasted here.</p>
+    <p><strong>Your privacy.</strong> The demo runs on fictional children. On the “Use your own data” page you can load your own rows. They stay in your browser unless you press “Calculate the plan here”, which sends them to this public server for one calculation only and stores nothing; or you can download the file and run the solver on your own machine. Restricted or third‑party identifiable records should use the local download, not this server.</p>
     <p><a href="https://github.com/rafi-math/edu-support-optimization-bd/blob/main/apps/equireach/docs/PARITY_VALIDATION.md">Parity validation report</a> · <a href="https://rafi-math.github.io/edu-support-optimization-bd/">Public study site</a> · <a href="https://github.com/rafi-math/edu-support-optimization-bd">Source code</a></p>
-</footer>
+  </footer>
 </div>
 
 <script>
@@ -302,8 +308,8 @@ var BASE="https://equireach-api.onrender.com";
 var $=function(s,r){return (r||document).querySelector(s);};
 var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
 var conn={phase:"idle",statusCode:null,error:null,attempts:0,lastCheckedAt:null};
-var scenario=null;            // {params,clients,rules,flags}
-var floors=[];                // [{id,attribute,level,type,value}]
+var scenario=null;
+var floors=[];
 var rid=0;
 var dataRows=null, dataCols=[], mapping={}, normMaps={}, dFloors=[];
 
@@ -316,7 +322,7 @@ function renderConn(){
   var d=$("#connDot"),t=$("#connText");
   d.className="dot "+(conn.phase==="online"?"online":conn.phase==="waking"?"waking":conn.phase==="offline"?"offline":"");
   if(conn.phase==="online")t.textContent="API online";
-  else if(conn.phase==="waking")t.textContent="waking up the solver… ("+conn.attempts+"/12)";
+  else if(conn.phase==="waking")t.textContent="waking up the solver… ("+Math.max(1,conn.attempts)+"/12)";
   else if(conn.phase==="offline")t.textContent="offline";
   else t.textContent="checking…";
   $("#advBase").value=BASE;$("#advStatus").value=conn.statusCode==null?"-":String(conn.statusCode);
@@ -339,7 +345,7 @@ async function call(path,opts,wakeBtn){
     if(isCold(r.status))throw new Error("cold");
     return r;
   }
-  if(isCold(r.status)){ // retry once for cold
+  if(isCold(r.status)){
     if(wakeBtn){wakeBtn.dataset.label=wakeBtn.textContent;wakeBtn.textContent="Waking solver…";wakeBtn.disabled=true;}
     await sleep(10000);r=await raw(path,opts);
     if(wakeBtn){wakeBtn.textContent=wakeBtn.dataset.label;wakeBtn.disabled=false;}
@@ -365,7 +371,6 @@ async function healthLoop(){
   healthTimer=setInterval(async function(){try{var r=await raw("/health",{});if(r.status===200){var j=await okJson(r);if(j&&j.ok)setConn("online",200,null);}}catch(e){if(conn.phase==="online")setConn("waking",conn.statusCode,"transient");}},30000);
 }
 
-/* ---------- view toggle ---------- */
 $("#viewToggle").addEventListener("click",function(){
   var demo=!$("#demoView").classList.contains("hidden");
   $("#demoView").classList.toggle("hidden",demo);
@@ -376,7 +381,6 @@ $("#advBtn").addEventListener("click",function(){var p=$("#advPanel");var h=p.cl
 $("#retryConn").addEventListener("click",function(){healthLoop();});
 $("#agreeGate").addEventListener("change",function(){$("#dataBody").classList.toggle("hidden",!this.checked);});
 
-/* ---------- step nav ---------- */
 function showStep(n){
   $$("#stepBody [data-step]").forEach(function(el){el.classList.toggle("hidden",+el.getAttribute("data-step")!==n);});
   $$("#stepList li").forEach(function(li){var s=+li.getAttribute("data-s");li.classList.toggle("active",s===n);li.classList.toggle("done",s<n&&!!scenario);li.classList.toggle("locked",!scenario&&s>1);});
@@ -387,7 +391,6 @@ document.addEventListener("click",function(e){
   if(b.hasAttribute("data-fwd"))showStep(+b.getAttribute("data-fwd"));
 });
 
-/* ---------- promises UI (shared) ---------- */
 function presetFloors(kind,list){
   var arr=[];
   if(kind==="girls")arr=[{attribute:"gender",level:"female",type:"min_share_pct",value:40}];
@@ -416,8 +419,7 @@ function promiseRow(f,list,rerender){
 function promiseText(f){
   var g={gender:{female:"girls",male:"boys"},age_band:{"6-12":"younger children (age 6–12)","13-17":"older children (age 13–17)"},wealth_quintile:{q1:"poorest children",q2:"q2",q3:"q3",q4:"q4",q5:"richest children"},disability:{yes:"children with a disability",no:"children without disability"}};
   var grp=(g[f.attribute]&&g[f.attribute][f.level])||f.attribute+"="+f.level;
-  var verb=f.type==="max_share_pct"?"At most":(f.type==="min_count"?"At least":"At least");
-  var unit=f.type==="min_count"?"children":(f.type==="max_share_pct"||f.type==="min_share_pct"?"% of those helped":"");
+  var verb=f.type==="max_share_pct"?"At most":"At least";
   return verb+" "+f.value+(f.type==="min_count"?" ":"% ")+"of those helped are "+grp;
 }
 function renderPromises(list,container,after){
@@ -426,7 +428,6 @@ function renderPromises(list,container,after){
 }
 function rulesFrom(list){return list.map(function(f){var o={rule_id:f.id,attribute:f.attribute,level:f.level};o[f.type]=f.value;return o;});}
 
-/* ---------- demo: create sample ---------- */
 $("#useExample").addEventListener("click",function(){$("#inN").value=80;$("#inSeed").value=20261018;});
 $("#createSample").addEventListener("click",async function(){
   var n=Math.max(10,Math.min(1000,+$("#inN").value||80));
@@ -457,7 +458,7 @@ function currentPayload(){return{params:buildParams(),clients:scenario.clients,c
 $("#seePlan").addEventListener("click",async function(){
   if(!scenario)return;this.disabled=true;$("#planBox").innerHTML='<p class="muted">solving…</p>';showStep(4);
   try{
-    var r=await call("/api/allocate",{method:"POST",body:JSON.stringify(currentPayload())},this);
+    var r=await call("/api/allocate",{method:"POST",body:JSON.stringify({payload:currentPayload()})},this);
     var j=await okJson(r);setConn("online",r.status,null);renderPlan(j);$("#advRaw").textContent=JSON.stringify(j,null,2);
   }catch(e){$("#planBox").innerHTML='<div class="note">could not solve: '+(e.message||e)+'</div>';}
   this.disabled=false;
@@ -486,7 +487,7 @@ function renderPlan(j){
 $("#runPrice").addEventListener("click",async function(){
   if(!floors.length)return;var rule=$("#sweepRule").value;var steps=Math.max(2,Math.min(50,+$("#sweepSteps").value||11));
   this.disabled=true;$("#priceBox").innerHTML='<p class="muted">sweeping…</p>';
-  try{var p=currentPayload();var r=await call("/api/sweep",{method:"POST",body:JSON.stringify({payload:p,kind:"price",rule_id:rule,steps:steps,others:"off"})},this);var j=await okJson(r);setConn("online",r.status,null);renderPrice(j,rule);$("#advRaw").textContent=JSON.stringify(j,null,2);}
+  try{var p=currentPayload();var r=await call("/api/sweep",{method:"POST",body:JSON.stringify({payload:p,kind:"price",rule_id:rule,steps:steps})},this);var j=await okJson(r);setConn("online",r.status,null);renderPrice(j,rule);$("#advRaw").textContent=JSON.stringify(j,null,2);}
   catch(e){$("#priceBox").innerHTML='<div class="note">sweep failed: '+(e.message||e)+'</div>';}
   this.disabled=false;
 });
@@ -503,7 +504,7 @@ function renderPrice(j,rule){
 }
 $("#runInter").addEventListener("click",async function(){
   if(floors.length<2)return;this.disabled=true;$("#interBox").innerHTML='<p class="muted">comparing…</p>';
-  try{var p=currentPayload();var r=await call("/api/sweep",{method:"POST",body:JSON.stringify({payload:p,kind:"interaction",steps:Math.max(2,Math.min(50,+$("#sweepSteps").value||11)),others:"off"})},this);var j=await okJson(r);setConn("online",r.status,null);renderInter(j);$("#advRaw").textContent=JSON.stringify(j,null,2);}
+  try{var p=currentPayload();var r=await call("/api/sweep",{method:"POST",body:JSON.stringify({payload:p,kind:"interaction",steps:Math.max(2,Math.min(50,+$("#sweepSteps").value||11))})},this);var j=await okJson(r);setConn("online",r.status,null);renderInter(j);$("#advRaw").textContent=JSON.stringify(j,null,2);}
   catch(e){$("#interBox").innerHTML='<div class="note">interaction failed: '+(e.message||e)+'</div>';}
   this.disabled=false;
 });
@@ -514,9 +515,8 @@ function renderInter(j){
   $("#interBox").innerHTML='<div class="stat"><p><strong>'+promiseText(a)+'</strong> alone: '+(ir.cost_a_alone!=null?Number(ir.cost_a_alone).toFixed(4):"—")+' &nbsp;·&nbsp; <strong>'+promiseText(b)+'</strong> alone: '+(ir.cost_b_alone!=null?Number(ir.cost_b_alone).toFixed(4):"—")+'</p><p>Both together: '+(ir.cost_combined!=null?Number(ir.cost_combined).toFixed(4):"—")+' &nbsp;·&nbsp; interaction: '+(val!=null?Number(val).toFixed(4):"—")+' &nbsp;·&nbsp; tolerance ε '+(ir.tolerance!=null?ir.tolerance:"—")+'</p><p><span class="badge '+(lab==="subadditive"?"ok":lab==="superadditive"?"warn":"neutral")+'">'+narr+'</span></p><p class="small muted">On this fictional sample the relationship can differ from the published real‑data result.</p></div>';
 }
 
-/* ---------- DATA view ---------- */
 $("#loadExampleRows").addEventListener("click",function(){$("#pasteArea").value="client_id,priority_score,weight,age_band,gender,disability,wealth_quintile,need_flag\nc1,0.82,1.4,6-12,female,no,q1,1\nc2,0.44,0.97,6-12,male,no,q3,0\nc3,0.63,1.11,6-12,female,yes,q2,1\nc4,0.52,0.88,13-17,male,no,q4,0\nc5,0.75,1.02,13-17,female,no,q1,1";$("#fmt").value="csv";});
-$("#clearRows").addEventListener("click",function(){$("#pasteArea").value="";$("#parseMsg").textContent="";dataRows=null;$("#mapCard").classList.add("hidden");$("#normCard").classList.add("hidden");$("#prevCard").classList.add("hidden");$("#dlCard").classList.add("hidden");});
+$("#clearRows").addEventListener("click",function(){$("#pasteArea").value="";$("#parseMsg").textContent="";dataRows=null;$("#mapCard").classList.add("hidden");$("#normCard").classList.add("hidden");$("#prevCard").classList.add("hidden");$("#dlCard").classList.add("hidden");$("#realResult").innerHTML="";});
 $("#fileIn").addEventListener("change",function(){var f=this.files[0];if(!f)return;var fr=new FileReader();fr.onload=function(){$("#pasteArea").value=fr.result;var e=f.name.toLowerCase();$("#fmt").value=e.endsWith(".json")?"json":(e.endsWith(".jsonl")||e.endsWith(".ndjson"))?"jsonl":(e.endsWith(".tsv"))?"tsv":"csv";};fr.readAsText(f);});
 function detectFmt(txt){var t=txt.trim();if(t[0]==="["||t[0]==="{")return t[0]==="["?"json":(t.indexOf("\n")>=0&&t.split("\n")[0].trim()[0]==="{"?"jsonl":"json");var first=t.split("\n")[0];return first.indexOf("\t")>=0?"tsv":"csv";}
 function parseCSV(txt,delim){var rows=[],row=[],cur="",q=false;for(var i=0;i<txt.length;i++){var c=txt[i];if(q){if(c==='"'){if(txt[i+1]==='"'){cur+='"';i++;}else q=false;}else cur+=c;}else{if(c==='"')q=true;else if(c===delim){row.push(cur);cur="";}else if(c==="\n"){row.push(cur);rows.push(row);row=[];cur="";}else if(c==="\r"){}else cur+=c;}}if(cur!==""||row.length){row.push(cur);rows.push(row);}return rows.filter(function(r){return r.some(function(x){return x.trim()!=="";});});}
@@ -532,7 +532,7 @@ $("#parseBtn").addEventListener("click",function(){
   }catch(e){$("#parseMsg").textContent="parse error: "+(e.message||e);}
 });
 function guessCol(target){var lc=dataCols.map(function(c){return c.toLowerCase();});for(var i=0;i<lc.length;i++){if(lc[i]===target)return dataCols[i];}var al=ALIAS[target]||[];for(var j=0;j<al.length;j++){var idx=lc.indexOf(al[j]);if(idx>=0)return dataCols[idx];}return "";}
-function buildMapping(){var box=$("#mapFields");box.innerHTML="";REQ.forEach(function(t){var sel=document.createElement("select");sel.setAttribute("data-target",t);sel.innerHTML='<option value="">(choose)</option>'+dataCols.map(function(c){return '<option value="'+c.replace(/"/g,'&quot;')+'" '+(guessCol(t)===c?"selected":"")+'>'+c+'</option>';}).join("");var f=document.createElement("div");f.className="field";f.innerHTML="<label>"+t+(t==="need_flag"?" (optional)":"")+"</label>";f.appendChild(sel);box.appendChild(f);});}
+function buildMapping(){var box=$("#mapFields");box.innerHTML="";REQ.forEach(function(t){var sel=document.createElement("select");sel.setAttribute("data-target",t);sel.innerHTML='<option value="">(choose)</option>'+dataCols.map(function(c){return '<option value="'+c.replace(/"/g,'&quot;')+'" '+(guessCol(t)===c?"selected":"")+'>'+c+'</option>';}).join("");var f=document.createElement("div");f.className="field";f.innerHTML="<label>"+t+"</label>";f.appendChild(sel);box.appendChild(f);});}
 $("#mapBtn").addEventListener("click",function(){
   mapping={};$$("#mapFields select").forEach(function(s){mapping[s.getAttribute("data-target")]=s.value;});
   if(!mapping.client_id||!mapping.priority_score||!mapping.age_band||!mapping.gender||!mapping.disability||!mapping.wealth_quintile){$("#mapMsg").textContent="fill all required columns (weight may use the 1.0 checkbox).";return;}
@@ -558,7 +558,7 @@ $("#normBtn").addEventListener("click",function(){
   if(!mapping.priority_score&&mapping.need_flag)seenFlagNoScore=true;
   var vm=$("#valMsg");
   if(errs.length){vm.innerHTML='<div class="note">'+errs.slice(0,12).map(function(e){return "• "+e;}).join("<br>")+(errs.length>12?"<br>… "+(errs.length-12)+" more":"")+'</div>';return;}
-  if(seenFlagNoScore)vm.innerHTML='<div class="note">You mapped an out‑of‑school / need column but no priority_score. The engine needs a validated priority score; raw labels are not enough. Add a priority_score column or run the risk pipeline first.</div>';else vm.innerHTML='<div class="note ok">Rows look valid. Counts only are shown below — no individual records leave this page.</div>';
+  if(seenFlagNoScore)vm.innerHTML='<div class="note">You mapped an out‑of‑school / need column but no priority_score. The engine needs a validated priority score; raw labels are not enough. Add a priority_score column or run the risk pipeline first.</div>';else vm.innerHTML='<div class="note ok">Rows look valid. Counts only are shown below — no individual records leave this page until you choose to calculate or download.</div>';
   buildPreview();$("#prevCard").classList.remove("hidden");$("#dlCard").classList.remove("hidden");
   var k=Math.max(1,Math.min(dataRows.length,Math.round(dataRows.length*0.2)));$("#dK").max=dataRows.length;$("#dK").value=k;
   dFloors=[];rid=0;renderPromises(dFloors,$("#dPromiseList"),function(){});
@@ -587,7 +587,30 @@ $("#dlRun").addEventListener("click",function(){dl("run_local.py",RUN_PY,"text/x
 $("#dlReadme").addEventListener("click",function(){dl("README_LOCAL_RUN.txt",README_KIT);});
 $("#dlSav").addEventListener("click",function(){dl("convert_sav_to_csv.py",SAV_PY,"text/x-python");});
 
-/* ---------- boot ---------- */
+$("#consentSend").addEventListener("change",function(){$("#calcReal").disabled=!this.checked;});
+$("#calcReal").addEventListener("click",async function(){
+  if(!dataRows||!$("#consentSend").checked)return;
+  var n=dataRows.length;
+  $("#sizeNote").textContent=n>1500?("Large list ("+n+" rows): the free server may take a while or time out. If it fails, use the downloads and run locally."):(n+" rows ready.");
+  this.disabled=true;var lbl=this.textContent;this.textContent="Calculating…";
+  $("#realResult").innerHTML='<p class="muted small">sending to solver…</p>';
+  try{
+    var payload=buildDataPayload();
+    var r=await call("/api/allocate",{method:"POST",body:JSON.stringify({payload:payload})},this);
+    var j=await okJson(r);setConn("online",r.status,null);
+    var s=j.summary||{};var served=s.served_count,obj=s.total_priority_captured,prov=s.proven_optimal,st=s.status;
+    var ids=(j.assignments||[]).map(function(a){return a.client_id;});
+    var html='<div class="note ok" style="margin:8px 0">Plan calculated on the server. Your rows were not stored.</div>';
+    html+='<div class="grid2"><div class="stat"><div class="big" style="font-size:26px">'+(served!=null?served:"—")+'</div><div class="muted small">children selected</div></div><div class="stat"><div class="big" style="font-size:26px">'+(obj!=null?Number(obj).toFixed(4):"—")+'</div><div class="muted small">need score captured</div></div></div>';
+    html+='<p class="small muted">status: '+(st||"—")+' · proven optimal: '+(prov===true?"yes":prov===false?"no (time limit reached)":"—")+' · solver: '+(s.solver||"—")+'</p>';
+    if(ids.length){html+='<h3 style="margin-top:10px">Children who should get help ('+ids.length+')</h3><p class="small" style="word-break:break-word">'+ids.map(function(x){return '<code>'+String(x).replace(/</g,"&lt;")+'</code>';}).join(", ")+'</p>';}
+    else{html+='<div class="note">No plan returned. Try a smaller list, or use the downloads and run locally.</div>';}
+    $("#realResult").innerHTML=html;
+    $("#advRaw").textContent=JSON.stringify(j,null,2);
+  }catch(e){$("#realResult").innerHTML='<div class="note">could not calculate here: '+(e.message||e)+'. Use the downloads below and run locally.</div>';}
+  this.textContent=lbl;this.disabled=!$("#consentSend").checked;
+});
+
 renderConn();showStep(1);syncSweepRule();healthLoop();
 })();
 </script>
