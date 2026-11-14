@@ -110,6 +110,19 @@ aggregate tables, aggregate curves, figures, code, and documentation. The reposi
 `.gitignore` enforces this; the public tree contains no path under `data/` and no `.sav`
 file.
 
+
+## Using EquiReach on your own data
+
+The public dashboard is a teaching window: it runs on fictional, deliberately balanced children and never receives real records. The allocation method is open source and can run on real data, but only where that data is authorized, on your own machine or your own private infrastructure.
+
+EquiReach decides *which* children receive a fixed number of support packages (Mode A selection). It does not decide *where* to build centers (Mode B siting); the source survey contains no household coordinates, school or upazila identifiers, travel distances, construction costs, or capacities, so no such claim is made. Any distance, cost, capacity, or budget in a run is an analyst- or policy-chosen scenario parameter, not an observed MICS variable.
+
+To run on your own data you need, per child: a unique `client_id`, a validated `priority_score` (higher = higher priority), a positive `weight`, and the attributes `age_band`, `gender`, `disability`, `wealth_quintile` (optional `need_flag` for evaluation). The engine needs a priority score; raw out-of-school labels are not sufficient on their own, so first produce a validated score with the project's out-of-fold risk pipeline (5-fold CV grouped by PSU) or your own approved model. The public web API does not train a risk model and does not accept child-level rows at scale.
+
+The dashboard's "Use your own data" page lets you load a CSV, TSV, JSON, or JSON Lines export and either press "Calculate the plan here" to run it on the public server for one calculation only (nothing is stored), or download a `payload.json` plus a local run kit and solve on your own machine. Very large lists, and any restricted or third-party identifiable records, should use the download-and-run-locally path rather than the public server.
+
+A real deployment should record, for auditability: data source, model version, weight definition (this study uses `fsweight` as the primary child weight, with `fshweight` retained as a normalized sensitivity weight), budget, fairness floors, solver settings, and timestamp. Integer programs are solved with SciPy's MILP interface (HiGHS); a plan is reported as proven optimal only when the solver closes the relative MIP gap to zero within the time limit.
+
 ## Repository layout (representative)
 
 ```text
